@@ -10,6 +10,8 @@ import { MARKETPLACE } from '@/data/site';
 import { useLeadCapture } from '@/hooks/useLeadCapture';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { hasWalletConnectProjectId } from '@/lib/wagmi';
+import { hasNftContract } from '@/lib/nft';
+import MintFlow from '@/components/w3bb/MintFlow';
 import HoneypotField from '@/components/HoneypotField';
 import ConsentCheckbox from '@/components/ConsentCheckbox';
 
@@ -98,68 +100,72 @@ const Mint: React.FC = () => {
                   <ConnectButton showBalance={false} />
                 </div>
 
-                <div className="relative mt-10 border-t border-white/10 pt-8">
-                  <h3 className="font-display text-lg font-semibold text-white">
-                    Step 2 — Join the mint waitlist
-                  </h3>
-                  <p className="mt-1 text-sm text-white/60">
-                    The Franchise Bundle minting contract is finishing certification. Connect your
-                    wallet and leave an email so we can notify you the moment it opens.
-                  </p>
-
-                  {!isConnected ? (
-                    <p className="mt-5 rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white/50">
-                      Connect a wallet above to continue.
+                {hasNftContract ? (
+                  <MintFlow />
+                ) : (
+                  <div className="relative mt-10 border-t border-white/10 pt-8">
+                    <h3 className="font-display text-lg font-semibold text-white">
+                      Step 2 — Join the mint waitlist
+                    </h3>
+                    <p className="mt-1 text-sm text-white/60">
+                      The Franchise Bundle minting contract is finishing certification. Connect your
+                      wallet and leave an email so we can notify you the moment it opens.
                     </p>
-                  ) : status === 'success' ? (
-                    <div className="mt-5 flex items-start gap-3 rounded-lg border border-cyan/30 bg-cyan/[0.06] px-4 py-3.5">
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-cyan" strokeWidth={1.5} aria-hidden="true" />
-                      <p className="text-sm text-white/85">
-                        You're on the list. We'll email {email} and reach out to wallet{' '}
-                        <span className="font-mono text-xs text-white/60">
-                          {address?.slice(0, 6)}…{address?.slice(-4)}
-                        </span>{' '}
-                        as soon as minting opens.
+
+                    {!isConnected ? (
+                      <p className="mt-5 rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white/50">
+                        Connect a wallet above to continue.
                       </p>
-                    </div>
-                  ) : (
-                    <form onSubmit={handleNotify} className="mt-5 space-y-3">
-                      <HoneypotField value={honeypot} onChange={setHoneypot} />
-                      <div className="flex flex-col gap-3 sm:flex-row">
-                        <input
-                          type="email"
-                          required
-                          autoComplete="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="you@company.com"
-                          className={fieldClass}
-                        />
-                        <button
-                          type="submit"
-                          disabled={status === 'loading'}
-                          className="cta-primary group inline-flex shrink-0 items-center justify-center gap-2 rounded-full px-6 py-3.5 font-display text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-70"
-                        >
-                          {status === 'loading' ? (
-                            <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
-                          ) : (
-                            <>
-                              Notify Me
-                              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
-                            </>
-                          )}
-                        </button>
+                    ) : status === 'success' ? (
+                      <div className="mt-5 flex items-start gap-3 rounded-lg border border-cyan/30 bg-cyan/[0.06] px-4 py-3.5">
+                        <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-cyan" strokeWidth={1.5} aria-hidden="true" />
+                        <p className="text-sm text-white/85">
+                          You're on the list. We'll email {email} and reach out to wallet{' '}
+                          <span className="font-mono text-xs text-white/60">
+                            {address?.slice(0, 6)}…{address?.slice(-4)}
+                          </span>{' '}
+                          as soon as minting opens.
+                        </p>
                       </div>
-                      <ConsentCheckbox id="mint-consent" checked={consent} onChange={setConsent} />
-                    </form>
-                  )}
+                    ) : (
+                      <form onSubmit={handleNotify} className="mt-5 space-y-3">
+                        <HoneypotField value={honeypot} onChange={setHoneypot} />
+                        <div className="flex flex-col gap-3 sm:flex-row">
+                          <input
+                            type="email"
+                            required
+                            autoComplete="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="you@company.com"
+                            className={fieldClass}
+                          />
+                          <button
+                            type="submit"
+                            disabled={status === 'loading'}
+                            className="cta-primary group inline-flex shrink-0 items-center justify-center gap-2 rounded-full px-6 py-3.5 font-display text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-70"
+                          >
+                            {status === 'loading' ? (
+                              <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+                            ) : (
+                              <>
+                                Notify Me
+                                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+                              </>
+                            )}
+                          </button>
+                        </div>
+                        <ConsentCheckbox id="mint-consent" checked={consent} onChange={setConsent} />
+                      </form>
+                    )}
 
-                  {status === 'error' ? (
-                    <p role="alert" className="mt-3 text-sm text-red-300">
-                      {error}
-                    </p>
-                  ) : null}
-                </div>
+                    {status === 'error' ? (
+                      <p role="alert" className="mt-3 text-sm text-red-300">
+                        {error}
+                      </p>
+                    ) : null}
+                  </div>
+                )}
               </div>
             </Reveal>
           </div>

@@ -1,0 +1,12 @@
+{
+  "name": "W3BB Franchise Bundle",
+  "description": "A fully packaged W3BB Worldwide business bundle: brand identity, product catalog, operational system, marketing materials, AI workflows, revenue model, and launch instructions. Trust-Approved by the Webb Family Dynasty Trust.",
+  "image": "https://d38kszyerljeoa.cloudfront.net/posts/scb_bf9e3c4cfa65a677c023043d/f851838e3cd849dc.webp",
+  "external_url": "https://w3bbworldwide.com/mint",
+  "attributes": [
+    { "trait_type": "Standard", "value": "W3BB-721" },
+    { "trait_type": "Royalty", "value": "8% perpetual" },
+    { "trait_type": "Status", "value": "Trust-Approved" },
+    { "trait_type": "Asset Modules", "value": "7" }
+  ]
+}
