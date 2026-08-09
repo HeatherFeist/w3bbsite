@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { FINAL_CTA, IMAGES } from '@/data/site';
-import { scrollToId } from '@/hooks/useScrollSpy';
 import Reveal from '@/components/w3bb/Reveal';
 
 export const FinalCta: React.FC = () => (
@@ -39,8 +39,8 @@ export const FinalCta: React.FC = () => (
             </h2>
 
             <Reveal delay={380}>
-              <button
-                type="button"
+              <Link
+                to="/build"
                 onClick={() => {
                   try {
                     window.supercool?.track?.('cta_click', {
@@ -50,7 +50,6 @@ export const FinalCta: React.FC = () => (
                   } catch {
                     /* no-op */
                   }
-                  scrollToId('contact');
                 }}
                 className="cta-primary group mt-12 inline-flex items-center gap-2.5 rounded-full px-10 py-5 font-display text-lg font-semibold text-white"
               >
@@ -59,7 +58,7 @@ export const FinalCta: React.FC = () => (
                   className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
                   aria-hidden="true"
                 />
-              </button>
+              </Link>
             </Reveal>
 
             <Reveal delay={460}>

@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Linkedin, Twitter, Github, Youtube, Mail } from 'lucide-react';
 import { SITE, FOOTER_COLUMNS } from '@/data/site';
+import { PROGRAMS } from '@/data/partnerships';
 import { scrollToId } from '@/hooks/useScrollSpy';
 import { Wordmark } from '@/components/w3bb/Navbar';
 
@@ -11,16 +13,28 @@ const SOCIALS = [
   { label: 'W3BB Worldwide on GitHub', Icon: Github, href: 'https://github.com/w3bbworldwide' },
 ];
 
-export const Footer: React.FC = () => (
+export const Footer: React.FC = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const go = (id: string) => {
+    if (location.pathname !== '/') {
+      navigate(`/#${id}`);
+      return;
+    }
+    scrollToId(id);
+  };
+
+  return (
   <footer className="relative border-t border-white/10 bg-[#07080C]/80 pt-16 pb-10">
     <div className="container">
-      <div className="grid gap-12 lg:grid-cols-[1.4fr_2fr]">
+      <div className="grid gap-12 lg:grid-cols-[1.1fr_2.4fr]">
         <div>
           <a
             href="#hero"
             onClick={(e) => {
               e.preventDefault();
-              scrollToId('hero');
+              go('hero');
             }}
             className="inline-flex items-center gap-2.5 rounded-lg"
             aria-label="W3BB Worldwide — back to top"
@@ -48,7 +62,7 @@ export const Footer: React.FC = () => (
           </a>
         </div>
 
-        <nav className="grid gap-8 sm:grid-cols-3" aria-label="Footer">
+        <nav className="grid grid-cols-2 gap-8 sm:grid-cols-4" aria-label="Footer">
           {FOOTER_COLUMNS.map((column) => (
             <div key={column.title}>
               <h2 className="micro-label text-white/40">{column.title}</h2>
@@ -59,7 +73,7 @@ export const Footer: React.FC = () => (
                       href={`#${link.id}`}
                       onClick={(e) => {
                         e.preventDefault();
-                        scrollToId(link.id);
+                        go(link.id);
                       }}
                       className="text-sm text-white/60 transition-colors duration-300 hover:text-white"
                     >
@@ -70,6 +84,23 @@ export const Footer: React.FC = () => (
               </ul>
             </div>
           ))}
+          <div>
+            <h2 className="micro-label text-white/40">Programs</h2>
+            <ul className="mt-5 space-y-3">
+              {PROGRAMS.slice(0, 4).map((program) => (
+                <li key={program.to}>
+                  <Link to={program.to} className="text-sm text-white/60 transition-colors duration-300 hover:text-white">
+                    {program.title}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link to="/choose-your-path" className="text-sm font-semibold text-cyan transition-colors duration-300 hover:text-cyan/80">
+                  Choose Your Path →
+                </Link>
+              </li>
+            </ul>
+          </div>
         </nav>
       </div>
 
@@ -77,7 +108,10 @@ export const Footer: React.FC = () => (
 
       <div className="mt-8 flex flex-col-reverse items-center justify-between gap-6 sm:flex-row">
         <p className="text-center text-xs text-white/45 sm:text-left">
-          {SITE.copyright} · {SITE.domain}
+          {SITE.copyright} · {SITE.domain} ·{' '}
+          <Link to="/privacy" className="transition-colors hover:text-white/70">
+            Privacy Policy
+          </Link>
         </p>
         <ul className="flex items-center gap-3">
           {SOCIALS.map(({ label, Icon: SocialIcon, href }) => (
@@ -97,6 +131,7 @@ export const Footer: React.FC = () => (
       </div>
     </div>
   </footer>
-);
+  );
+};
 
 export default Footer;

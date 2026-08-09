@@ -1,5 +1,6 @@
 import React from 'react';
-import { Hexagon } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Hexagon } from 'lucide-react';
 import { BUILD } from '@/data/site';
 import Icon from '@/components/w3bb/Icon';
 import Reveal from '@/components/w3bb/Reveal';
@@ -53,6 +54,16 @@ export const WhatYouCanBuild: React.FC = () => (
             </p>
           </div>
         </div>
+      </Reveal>
+
+      <Reveal delay={160} className="mt-10 flex justify-center">
+        <Link
+          to="/build"
+          className="cta-primary group inline-flex items-center gap-2 rounded-full px-8 py-4 font-display text-base font-semibold text-white"
+        >
+          Start Building
+          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+        </Link>
       </Reveal>
     </div>
   </section>

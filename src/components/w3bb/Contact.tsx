@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { ArrowRight, CheckCircle2, Loader2, Mail } from 'lucide-react';
-import { db } from '@/lib/db';
 import { CONTACT, SITE } from '@/data/site';
+import { useLeadCapture } from '@/hooks/useLeadCapture';
+import HoneypotField from '@/components/HoneypotField';
+import ConsentCheckbox from '@/components/ConsentCheckbox';
 import Reveal from '@/components/w3bb/Reveal';
 import SectionHeading from '@/components/w3bb/SectionHeading';
-
-type Status = 'idle' | 'loading' | 'success' | 'error';
 
 const fieldClass =
   'w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-base text-white placeholder:text-white/35 transition-colors duration-300 hover:border-white/20 focus:border-violet focus:bg-white/[0.06] focus:outline-none';
@@ -13,8 +13,9 @@ const fieldClass =
 const labelClass = 'block font-display text-sm font-medium text-white/75';
 
 export const Contact: React.FC = () => {
-  const [status, setStatus] = useState<Status>('idle');
-  const [error, setError] = useState<string>('');
+  const { status, error, submit, reset } = useLeadCapture();
+  const [honeypot, setHoneypot] = useState('');
+  const [consent, setConsent] = useState(false);
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -30,50 +31,15 @@ export const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (status === 'loading') return;
-    setStatus('loading');
-    setError('');
-
-    try {
-      // 1. Capture the lead in the CRM so the owner can segment and follow up.
-      const { error: crmError } = await db.rpc('crm_submit_contact', {
-        p_email: form.email.trim(),
-        p_name: form.name.trim(),
-        p_phone: null,
-        p_sms_opt_in: false,
-        p_source: 'w3bb-contact-section',
-        p_metadata: {
-          organization: form.organization.trim(),
-          interest: form.interest,
-          message: form.message.trim(),
-        },
-      });
-      if (crmError) throw crmError;
-
-      // 2. Keep a full copy of the enquiry with its message body.
-      await db.from('w3bb_enquiries').insert({
-        name: form.name.trim(),
-        email: form.email.trim(),
-        organization: form.organization.trim() || null,
-        interest: form.interest,
-        message: form.message.trim() || null,
-      });
-
-      try {
-        window.supercool?.track?.('form_submit', {
-          form: 'contact',
-          interest: form.interest,
-        });
-      } catch {
-        /* no-op */
-      }
-
-      setStatus('success');
-    } catch (err) {
-      const message =
-        err instanceof Error ? err.message : 'Something went wrong. Please try again.';
-      setError(message);
-      setStatus('error');
-    }
+    await submit({
+      name: form.name,
+      email: form.email,
+      organization: form.organization,
+      interest: form.interest,
+      message: form.message,
+      source: 'w3bb-contact-section',
+      honeypot,
+    });
   };
 
   return (
@@ -113,7 +79,8 @@ export const Contact: React.FC = () => {
                       interest: CONTACT.interests[0],
                       message: '',
                     });
-                    setStatus('idle');
+                    setConsent(false);
+                    reset();
                   }}
                   className="glass-soft mt-8 rounded-full px-6 py-3 font-display text-sm font-semibold text-white/80 transition-colors hover:bg-white/[0.08] hover:text-white"
                 >
@@ -122,6 +89,7 @@ export const Contact: React.FC = () => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="relative space-y-5" noValidate={false}>
+                <HoneypotField value={honeypot} onChange={setHoneypot} />
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
                     <label htmlFor="contact-name" className={labelClass}>
@@ -217,6 +185,8 @@ export const Contact: React.FC = () => {
                     {error}
                   </p>
                 ) : null}
+
+                <ConsentCheckbox id="contact-consent" checked={consent} onChange={setConsent} />
 
                 <div className="flex flex-col items-center justify-between gap-4 pt-1 sm:flex-row">
                   <p className="flex items-center gap-2 text-sm text-white/50">

@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { NAV_LINKS, SECTION_IDS } from '@/data/site';
+import { PROGRAMS } from '@/data/partnerships';
 import { useScrollSpy, scrollToId } from '@/hooks/useScrollSpy';
 
 export const Wordmark: React.FC<{ className?: string }> = ({ className }) => (
@@ -19,7 +21,11 @@ export const Wordmark: React.FC<{ className?: string }> = ({ className }) => (
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [programsOpen, setProgramsOpen] = useState(false);
+  const programsRef = useRef<HTMLDivElement>(null);
   const active = useScrollSpy(SECTION_IDS);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -35,8 +41,24 @@ export const Navbar: React.FC = () => {
     };
   }, [open]);
 
+  useEffect(() => {
+    if (!programsOpen) return;
+    const onClickAway = (e: MouseEvent) => {
+      if (programsRef.current && !programsRef.current.contains(e.target as Node)) {
+        setProgramsOpen(false);
+      }
+    };
+    document.addEventListener('click', onClickAway);
+    return () => document.removeEventListener('click', onClickAway);
+  }, [programsOpen]);
+
   const go = (id: string) => {
     setOpen(false);
+    if (location.pathname !== '/') {
+      // Jump back to the home page first, then land on the section.
+      navigate(`/#${id}`);
+      return;
+    }
     // Let the mobile sheet close before scrolling.
     window.setTimeout(() => scrollToId(id), open ? 120 : 0);
   };
@@ -100,17 +122,61 @@ export const Navbar: React.FC = () => {
               </li>
             );
           })}
+          <li ref={programsRef} className="relative">
+            <button
+              type="button"
+              onClick={() => setProgramsOpen((v) => !v)}
+              aria-expanded={programsOpen}
+              className="flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium text-white/60 transition-colors duration-300 hover:text-white"
+            >
+              Programs
+              <ChevronDown className={cn('h-3.5 w-3.5 transition-transform duration-300', programsOpen && 'rotate-180')} aria-hidden="true" />
+            </button>
+            <div
+              className={cn(
+                'absolute left-0 top-full mt-3 w-72 origin-top-left rounded-2xl border border-white/10 bg-[#0B0D14]/95 p-2 shadow-2xl backdrop-blur-xl transition-all duration-200',
+                programsOpen ? 'visible scale-100 opacity-100' : 'invisible scale-95 opacity-0',
+              )}
+            >
+              {PROGRAMS.map((program) => (
+                <Link
+                  key={program.to}
+                  to={program.to}
+                  onClick={() => setProgramsOpen(false)}
+                  className="flex items-start gap-3 rounded-xl px-3 py-2.5 text-sm text-white/70 transition-colors hover:bg-white/[0.06] hover:text-white"
+                >
+                  <program.icon className="mt-0.5 h-4 w-4 shrink-0 text-cyan" strokeWidth={1.5} aria-hidden="true" />
+                  {program.title}
+                </Link>
+              ))}
+              <div className="my-1.5 border-t border-white/10" />
+              <Link
+                to="/partner-services"
+                onClick={() => setProgramsOpen(false)}
+                className="block rounded-xl px-3 py-2.5 text-sm font-semibold text-white/85 transition-colors hover:bg-white/[0.06] hover:text-white"
+              >
+                U.S. Business Partner Services
+              </Link>
+              <Link
+                to="/choose-your-path"
+                onClick={() => setProgramsOpen(false)}
+                className="block rounded-xl px-3 py-2.5 text-sm font-semibold text-cyan transition-colors hover:bg-white/[0.06]"
+              >
+                Choose Your Path →
+              </Link>
+            </div>
+          </li>
         </ul>
 
         <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => go('contact')}
+          <Link
+            to="/build"
+            onClick={() => setOpen(false)}
             className="cta-primary hidden rounded-full px-5 py-2.5 text-sm font-semibold text-white sm:inline-flex items-center gap-2"
           >
             Start Creating
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </button>
+          </Link>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
@@ -152,14 +218,39 @@ export const Navbar: React.FC = () => {
               </a>
             </li>
           ))}
+          <li className="mt-3 px-4">
+            <span className="micro-label text-white/35">Programs</span>
+          </li>
+          {PROGRAMS.map((program) => (
+            <li key={program.to}>
+              <Link
+                to={program.to}
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-3 rounded-xl px-4 py-3 text-base font-medium text-white/70 transition-colors hover:bg-white/[0.04] hover:text-white"
+              >
+                <program.icon className="h-4 w-4 shrink-0 text-cyan" strokeWidth={1.5} aria-hidden="true" />
+                {program.title}
+              </Link>
+            </li>
+          ))}
+          <li>
+            <Link
+              to="/partner-services"
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-between rounded-xl px-4 py-3 font-display text-lg font-medium text-white/70 transition-colors hover:bg-white/[0.04] hover:text-white"
+            >
+              U.S. Business Partner Services
+              <ArrowRight className="h-4 w-4 opacity-50" aria-hidden="true" />
+            </Link>
+          </li>
           <li className="mt-2">
-            <button
-              type="button"
-              onClick={() => go('contact')}
-              className="cta-primary w-full rounded-xl px-5 py-3.5 text-base font-semibold text-white"
+            <Link
+              to="/build"
+              onClick={() => setOpen(false)}
+              className="cta-primary flex w-full items-center justify-center rounded-xl px-5 py-3.5 text-base font-semibold text-white"
             >
               Start Creating
-            </button>
+            </Link>
           </li>
         </ul>
       </div>

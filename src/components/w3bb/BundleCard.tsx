@@ -1,10 +1,14 @@
 import React from 'react';
 import { MARKETPLACE } from '@/data/site';
 
+interface BundleCardProps {
+  statusLabel?: string;
+}
+
 /**
  * Stylized mock "Franchise Bundle NFT" card — pure CSS/SVG, no images.
  */
-export const BundleCard: React.FC = () => (
+export const BundleCard: React.FC<BundleCardProps> = ({ statusLabel = 'Minted' }) => (
   <div className="grad-border relative mx-auto w-full max-w-sm rounded-[1.75rem] p-[1.5px]">
     <div className="glass relative overflow-hidden rounded-[1.7rem] bg-[#0B0D14]/85 p-6 sm:p-7">
       <span
@@ -21,7 +25,7 @@ export const BundleCard: React.FC = () => (
         <span className="flex items-center gap-1.5 rounded-full border border-gold/40 bg-gold/10 px-2.5 py-1">
           <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
           <span className="font-display text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-gold">
-            Minted
+            {statusLabel}
           </span>
         </span>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { ENTERPRISE } from '@/data/site';
-import { scrollToId } from '@/hooks/useScrollSpy';
 import Icon from '@/components/w3bb/Icon';
 import Reveal from '@/components/w3bb/Reveal';
 import SectionHeading from '@/components/w3bb/SectionHeading';
@@ -48,8 +48,8 @@ export const Enterprise: React.FC = () => (
           <p className="max-w-2xl font-display text-xl font-medium text-white/85 sm:text-2xl">
             {ENTERPRISE.closing}
           </p>
-          <button
-            type="button"
+          <Link
+            to="/enterprise"
             onClick={() => {
               try {
                 window.supercool?.track?.('cta_click', {
@@ -59,7 +59,6 @@ export const Enterprise: React.FC = () => (
               } catch {
                 /* no-op */
               }
-              scrollToId('contact');
             }}
             className="cta-primary group inline-flex items-center gap-2 rounded-full px-8 py-4 font-display text-base font-semibold text-white"
           >
@@ -68,7 +67,7 @@ export const Enterprise: React.FC = () => (
               className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
               aria-hidden="true"
             />
-          </button>
+          </Link>
         </div>
       </Reveal>
     </div>

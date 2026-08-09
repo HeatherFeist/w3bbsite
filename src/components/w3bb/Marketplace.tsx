@@ -1,5 +1,6 @@
 import React from 'react';
-import { Check, Download, Repeat } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Check, Download, Repeat } from 'lucide-react';
 import { MARKETPLACE } from '@/data/site';
 import Reveal from '@/components/w3bb/Reveal';
 import SectionHeading from '@/components/w3bb/SectionHeading';
@@ -68,6 +69,16 @@ export const Marketplace: React.FC = () => (
           </Reveal>
         ))}
       </div>
+
+      <Reveal delay={220} className="mt-14 flex justify-center">
+        <Link
+          to="/mint"
+          className="cta-primary group inline-flex items-center gap-2 rounded-full px-8 py-4 font-display text-base font-semibold text-white"
+        >
+          Mint a Franchise Bundle
+          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+        </Link>
+      </Reveal>
     </div>
   </section>
 );

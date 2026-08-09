@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import { BUILDER } from '@/data/site';
 import Reveal from '@/components/w3bb/Reveal';
 import SectionHeading from '@/components/w3bb/SectionHeading';
@@ -38,6 +40,16 @@ export const BusinessBuilder: React.FC = () => (
         <p className="mx-auto mt-16 max-w-3xl text-center text-base leading-relaxed text-white/70 sm:text-lg">
           {BUILDER.closing}
         </p>
+      </Reveal>
+
+      <Reveal delay={160} className="mt-10 flex justify-center">
+        <Link
+          to="/build"
+          className="cta-primary group inline-flex items-center gap-2 rounded-full px-8 py-4 font-display text-base font-semibold text-white"
+        >
+          Start Building
+          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+        </Link>
       </Reveal>
     </div>
   </section>

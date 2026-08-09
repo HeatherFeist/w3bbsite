@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowRight, Compass } from 'lucide-react';
 import { HERO, IMAGES } from '@/data/site';
-import { scrollToId } from '@/hooks/useScrollSpy';
 import Icon from '@/components/w3bb/Icon';
 import Reveal from '@/components/w3bb/Reveal';
 
@@ -78,12 +78,9 @@ export const Hero: React.FC = () => {
 
           <Reveal delay={700}>
             <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-              <button
-                type="button"
-                onClick={() => {
-                  track('cta_click', { cta: HERO.primaryCta, location: 'hero' });
-                  scrollToId('contact');
-                }}
+              <Link
+                to="/build"
+                onClick={() => track('cta_click', { cta: HERO.primaryCta, location: 'hero' })}
                 className="cta-primary group inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 font-display text-base font-semibold text-white sm:w-auto"
               >
                 {HERO.primaryCta}
@@ -92,13 +89,10 @@ export const Hero: React.FC = () => {
                   aria-hidden="true"
 
                 />
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  track('cta_click', { cta: HERO.secondaryCta, location: 'hero' });
-                  scrollToId('marketplace');
-                }}
+              </Link>
+              <Link
+                to="/mint"
+                onClick={() => track('cta_click', { cta: HERO.secondaryCta, location: 'hero' })}
                 className="glass-soft group inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 font-display text-base font-semibold text-white/85 transition-all duration-300 hover:border-cyan/50 hover:bg-white/[0.07] hover:text-white sm:w-auto"
               >
                 <Compass
@@ -108,7 +102,7 @@ export const Hero: React.FC = () => {
                   strokeWidth={1.5}
                 />
                 {HERO.secondaryCta}
-              </button>
+              </Link>
             </div>
           </Reveal>
 
