@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, Loader2 } from 'lucide-react';
 import PageShell from '@/components/PageShell';
 import HoneypotField from '@/components/HoneypotField';
 import ConsentCheckbox from '@/components/ConsentCheckbox';
+import Icon from '@/components/w3bb/Icon';
 import Reveal from '@/components/w3bb/Reveal';
 import SectionHeading from '@/components/w3bb/SectionHeading';
 import { BUILDER, BUILD } from '@/data/site';
@@ -27,10 +28,17 @@ const fieldClass =
 const labelClass = 'block font-display text-sm font-medium text-white/75';
 
 const Build: React.FC = () => {
-  usePageMeta(
-    'Start Building Your Business',
-    'Kick off the W3BB Business Builder — name your brand, describe what you want to build, and our team sets up your workspace.',
-  );
+  const { category } = useParams<{ category?: string }>();
+  const activeItem = BUILD.items.find((item) => item.slug === category);
+
+  const heading = activeItem ? `Start Building Your ${activeItem.title}` : 'Start Building Your Business';
+  const intro = activeItem ? activeItem.description : BUILDER.intro;
+  const metaTitle = activeItem ? `Start Building: ${activeItem.title}` : 'Start Building Your Business';
+  const metaDescription = activeItem
+    ? `${activeItem.description} Tell us what you want to build and our team sets up your workspace.`
+    : 'Kick off the W3BB Business Builder — name your brand, describe what you want to build, and our team sets up your workspace.';
+
+  usePageMeta(metaTitle, metaDescription);
   const { status, error, submit, reset } = useLeadCapture();
   const [honeypot, setHoneypot] = useState('');
   const [consent, setConsent] = useState(false);
@@ -53,10 +61,10 @@ const Build: React.FC = () => {
       name: form.name,
       email: form.email,
       organization: form.businessName,
-      interest: 'Building a business',
+      interest: activeItem ? activeItem.title : 'Building a business',
       source: 'w3bb-build-page',
       message: `Industry: ${form.industry}\n\n${form.description.trim()}`,
-      metadata: { businessName: form.businessName, industry: form.industry },
+      metadata: { businessName: form.businessName, industry: form.industry, category: activeItem?.slug ?? null },
       honeypot,
     });
   };
@@ -65,11 +73,16 @@ const Build: React.FC = () => {
     <PageShell>
       <section className="relative scroll-mt-24 py-28 pt-36 sm:py-32 sm:pt-40">
         <div className="container">
-          <SectionHeading
-            label={BUILDER.label}
-            heading="Start Building Your Business"
-            intro={BUILDER.intro}
-          />
+          {activeItem ? (
+            <Reveal className="mx-auto mb-6 flex max-w-4xl justify-center">
+              <span className="glass-soft inline-flex items-center gap-2.5 rounded-full px-4 py-2">
+                <Icon name={activeItem.icon} className="h-4 w-4 text-cyan" />
+                <span className="micro-label text-white/75">{activeItem.title}</span>
+              </span>
+            </Reveal>
+          ) : null}
+
+          <SectionHeading label={BUILDER.label} heading={heading} intro={intro} />
 
           <ol className="relative mx-auto mt-16 max-w-4xl">
             <span
