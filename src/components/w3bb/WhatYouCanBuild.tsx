@@ -14,7 +14,10 @@ export const WhatYouCanBuild: React.FC = () => (
       <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {BUILD.items.map((item, i) => (
           <Reveal as="li" key={item.title} delay={(i % 4) * 80}>
-            <article className="glass glass-lift group relative h-full overflow-hidden p-6">
+            <Link
+              to={`/build/${item.slug}`}
+              className="glass glass-lift group relative block h-full overflow-hidden p-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/60"
+            >
               <span
                 className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-violet/25 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
                 aria-hidden="true"
@@ -30,7 +33,11 @@ export const WhatYouCanBuild: React.FC = () => (
               <h3 className="relative mt-6 font-display text-base font-semibold leading-snug text-white sm:text-lg">
                 {item.title}
               </h3>
-            </article>
+              <span className="relative mt-3 inline-flex items-center gap-1.5 font-display text-xs font-semibold text-cyan opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                Start building
+                <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+              </span>
+            </Link>
           </Reveal>
         ))}
       </ul>

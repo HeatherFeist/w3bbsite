@@ -114,14 +114,56 @@ export const BUILD = {
   heading: 'Your Business. Your Blueprint. Your Legacy.',
   intro: 'Inside W3BB Worldwide, you can create:',
   items: [
-    { title: 'Complete business identities', icon: 'fingerprint' as IconName },
-    { title: 'Brand kits and visual systems', icon: 'palette' as IconName },
-    { title: 'Product catalogs', icon: 'package' as IconName },
-    { title: 'Operational workflows', icon: 'workflow' as IconName },
-    { title: 'Marketing assets', icon: 'megaphone' as IconName },
-    { title: 'AI-powered multimedia content', icon: 'clapperboard' as IconName },
-    { title: 'Customer experience flows', icon: 'route' as IconName },
-    { title: 'Revenue models', icon: 'coins' as IconName },
+    {
+      slug: 'business-identity',
+      title: 'Complete business identities',
+      icon: 'fingerprint' as IconName,
+      description:
+        'Name, story, positioning, and legal-ready foundations packaged into one cohesive business identity.',
+    },
+    {
+      slug: 'brand-kit',
+      title: 'Brand kits and visual systems',
+      icon: 'palette' as IconName,
+      description:
+        'Logos, color palettes, typography, and a full visual system so your brand looks consistent everywhere.',
+    },
+    {
+      slug: 'product-catalog',
+      title: 'Product catalogs',
+      icon: 'package' as IconName,
+      description: 'Structured product and service listings ready to sell, sync, and scale.',
+    },
+    {
+      slug: 'operational-workflows',
+      title: 'Operational workflows',
+      icon: 'workflow' as IconName,
+      description: 'The day-to-day processes and systems that keep your business running smoothly.',
+    },
+    {
+      slug: 'marketing-assets',
+      title: 'Marketing assets',
+      icon: 'megaphone' as IconName,
+      description: 'Campaign-ready copy, graphics, and materials to promote your business from day one.',
+    },
+    {
+      slug: 'multimedia-content',
+      title: 'AI-powered multimedia content',
+      icon: 'clapperboard' as IconName,
+      description: 'Photos, video, and audio generated with AI to bring your brand to life across every channel.',
+    },
+    {
+      slug: 'customer-experience',
+      title: 'Customer experience flows',
+      icon: 'route' as IconName,
+      description: 'The journeys your customers take, from first touch to loyal repeat business.',
+    },
+    {
+      slug: 'revenue-models',
+      title: 'Revenue models',
+      icon: 'coins' as IconName,
+      description: 'Pricing, packaging, and monetization strategies built to fit how your business earns.',
+    },
   ],
   callout:
     'Every business you build can be minted as a Business NFT, packaged into a Franchise Bundle, and listed on the W3BB Marketplace.',
