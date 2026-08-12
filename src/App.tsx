@@ -12,6 +12,7 @@ import { wagmiConfig } from "@/lib/wagmi";
 import Index from "./pages/Index";
 import Build from "./pages/Build";
 import Mint from "./pages/Mint";
+import AdminMint from "./pages/AdminMint";
 import CertificationPage from "./pages/CertificationPage";
 import EnterprisePage from "./pages/EnterprisePage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -47,6 +48,7 @@ const App = () => (
                 <Route path="/build" element={<Build />} />
                 <Route path="/build/:category" element={<Build />} />
                 <Route path="/mint" element={<Mint />} />
+                <Route path="/admin/mint" element={<AdminMint />} />
                 <Route path="/certification" element={<CertificationPage />} />
                 <Route path="/enterprise" element={<EnterprisePage />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
