@@ -26,6 +26,8 @@ interface ProgramApplicationFormProps {
   /** Value stored as the lead's `source` in the CRM. */
   source: string;
   fields?: ProgramFormField[];
+  /** Pre-fill field values (e.g. pre-select a specific service). Pass a `key` on the component to reset state when these change. */
+  initialValues?: Record<string, string>;
   messageLabel?: string;
   messagePlaceholder?: string;
   submitLabel: string;
@@ -54,6 +56,7 @@ export const ProgramApplicationForm: React.FC<ProgramApplicationFormProps> = ({
   interest,
   source,
   fields = [],
+  initialValues,
   messageLabel = 'Tell us more',
   messagePlaceholder,
   submitLabel,
@@ -65,14 +68,15 @@ export const ProgramApplicationForm: React.FC<ProgramApplicationFormProps> = ({
   const [honeypot, setHoneypot] = useState('');
   const [consent, setConsent] = useState(false);
   const initialExtras = Object.fromEntries(fields.map((f) => [f.id, f.options?.[0] ?? '']));
-  const [form, setForm] = useState<Record<string, string>>({ name: '', email: '', message: '', ...initialExtras });
+  const defaultForm = { name: '', email: '', message: '', ...initialExtras, ...initialValues };
+  const [form, setForm] = useState<Record<string, string>>(defaultForm);
 
   const update = (key: string) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => setForm((prev) => ({ ...prev, [key]: e.target.value }));
 
   const resetForm = () => {
-    setForm({ name: '', email: '', message: '', ...initialExtras });
+    setForm(defaultForm);
     setConsent(false);
     reset();
   };

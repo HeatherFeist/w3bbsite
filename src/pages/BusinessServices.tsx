@@ -1,34 +1,77 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { Briefcase } from 'lucide-react';
 import PageShell from '@/components/PageShell';
 import ProgramHero from '@/components/w3bb/ProgramHero';
 import ProgramClosing from '@/components/w3bb/ProgramClosing';
 import ProgramApplicationForm from '@/components/w3bb/ProgramApplicationForm';
 import IconCardGrid from '@/components/w3bb/IconCardGrid';
-import { BUSINESS_SERVICES } from '@/data/partnerships';
+import Reveal from '@/components/w3bb/Reveal';
+import { BUSINESS_SERVICES, Check } from '@/data/partnerships';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { useHashScroll } from '@/hooks/useHashScroll';
 
 const BusinessServices: React.FC = () => {
-  usePageMeta('Business Services', BUSINESS_SERVICES.body);
+  const { service } = useParams<{ service?: string }>();
+  const activeService = BUSINESS_SERVICES.services.find((s) => s.slug === service);
+
+  usePageMeta(
+    activeService ? activeService.title : 'Business Services',
+    activeService ? activeService.description : BUSINESS_SERVICES.body,
+  );
   useHashScroll();
+
+  const heroHeading = activeService ? (
+    activeService.title
+  ) : (
+    <>Business <span className="gradient-text">Services</span></>
+  );
+  const heroSub = activeService ? activeService.description : BUSINESS_SERVICES.sub;
 
   return (
     <PageShell>
       <ProgramHero
-        icon={Briefcase}
+        icon={activeService ? activeService.icon : Briefcase}
         eyebrow={BUSINESS_SERVICES.eyebrow}
-        heading={<>Business <span className="gradient-text">Services</span></>}
-        sub={BUSINESS_SERVICES.sub}
+        heading={heroHeading}
+        sub={heroSub}
         body={BUSINESS_SERVICES.body}
         ctaLabel={BUSINESS_SERVICES.ctaLabel}
         ctaHref="#business-services-form"
       />
 
-      <IconCardGrid heading="Our Services" items={BUSINESS_SERVICES.services} tinted />
+      {activeService ? (
+        <section className="relative py-4 sm:py-6">
+          <div className="container">
+            <Reveal className="mx-auto max-w-3xl">
+              <div className="glass p-6 sm:p-8">
+                <p className="font-display text-sm font-semibold uppercase tracking-wide text-cyan">
+                  What's included
+                </p>
+                <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+                  {activeService.highlights.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-sm text-white/80">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-cyan" strokeWidth={2.5} aria-hidden="true" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      ) : null}
+
+      <IconCardGrid
+        heading="Our Services"
+        items={BUSINESS_SERVICES.services}
+        tinted
+        getHref={(item) => `/business-services/${item.slug}`}
+      />
       <IconCardGrid heading="Who We Serve" items={BUSINESS_SERVICES.whoWeServe} />
 
       <ProgramApplicationForm
+        key={service ?? 'general'}
         id="business-services-form"
         heading="Start a Project"
         intro="Tell us what you're building and our team will follow up to scope your project."
@@ -47,6 +90,7 @@ const BusinessServices: React.FC = () => {
             options: BUSINESS_SERVICES.services.map((s) => s.title),
           },
         ]}
+        initialValues={activeService ? { service: activeService.title } : undefined}
       />
 
       <ProgramClosing
