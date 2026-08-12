@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, CheckCircle2, Loader2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Loader2, Tag } from 'lucide-react';
 import Reveal from '@/components/w3bb/Reveal';
 import SectionHeading from '@/components/w3bb/SectionHeading';
 import HoneypotField from '@/components/HoneypotField';
@@ -124,6 +124,18 @@ export const ProgramApplicationForm: React.FC<ProgramApplicationFormProps> = ({
             ) : (
               <form onSubmit={handleSubmit} className="relative space-y-5">
                 <HoneypotField value={honeypot} onChange={setHoneypot} />
+
+                <div
+                  className={`inline-flex items-center gap-2 rounded-full px-4 py-2 font-display text-xs font-semibold uppercase tracking-wide ${
+                    accent === 'gold'
+                      ? 'bg-gold/10 text-gold ring-1 ring-inset ring-gold/30'
+                      : 'bg-cyan/10 text-cyan ring-1 ring-inset ring-cyan/30'
+                  }`}
+                >
+                  <Tag className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                  Applying for: {interest}
+                </div>
+
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
                     <label htmlFor={`${id}-name`} className={labelClass}>
