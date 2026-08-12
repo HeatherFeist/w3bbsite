@@ -3,14 +3,17 @@ import { Rocket } from 'lucide-react';
 import PageShell from '@/components/PageShell';
 import ProgramHero from '@/components/w3bb/ProgramHero';
 import ProgramClosing from '@/components/w3bb/ProgramClosing';
+import ProgramApplicationForm from '@/components/w3bb/ProgramApplicationForm';
 import IconCardGrid from '@/components/w3bb/IconCardGrid';
 import Reveal from '@/components/w3bb/Reveal';
 import SectionHeading from '@/components/w3bb/SectionHeading';
 import { LAUNCHPAD } from '@/data/partnerships';
 import { usePageMeta } from '@/hooks/usePageMeta';
+import { useHashScroll } from '@/hooks/useHashScroll';
 
 const Launchpad: React.FC = () => {
   usePageMeta('Entrepreneur Launchpad', LAUNCHPAD.body);
+  useHashScroll();
 
   return (
     <PageShell>
@@ -21,6 +24,7 @@ const Launchpad: React.FC = () => {
         sub={LAUNCHPAD.sub}
         body={LAUNCHPAD.body}
         ctaLabel={LAUNCHPAD.ctaLabel}
+        ctaHref="#launchpad-form"
       />
 
       <IconCardGrid heading="Who This Is For" items={LAUNCHPAD.whoFor} columns={2} tinted />
@@ -42,7 +46,25 @@ const Launchpad: React.FC = () => {
         </div>
       </section>
 
-      <ProgramClosing heading={LAUNCHPAD.closingHeading} body={LAUNCHPAD.closingBody} ctaLabel={LAUNCHPAD.ctaLabel} />
+      <ProgramApplicationForm
+        id="launchpad-form"
+        heading="Join the Launchpad"
+        intro="Tell us a bit about where you're starting from. Our team will follow up with your next steps to begin the Launchpad."
+        interest="Entrepreneur Launchpad"
+        source="w3bb-launchpad-page"
+        submitLabel={LAUNCHPAD.ctaLabel}
+        successHeading="You're in."
+        successBody="We'll follow up at {email} with your next steps to start building through the Launchpad."
+        messageLabel="What do you want to build?"
+        messagePlaceholder="A quick summary of the business idea you want to bring to life."
+      />
+
+      <ProgramClosing
+        heading={LAUNCHPAD.closingHeading}
+        body={LAUNCHPAD.closingBody}
+        ctaLabel={LAUNCHPAD.ctaLabel}
+        ctaHref="#launchpad-form"
+      />
     </PageShell>
   );
 };

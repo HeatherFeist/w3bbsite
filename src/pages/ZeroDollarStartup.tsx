@@ -3,13 +3,16 @@ import { Sprout, Check } from 'lucide-react';
 import PageShell from '@/components/PageShell';
 import ProgramHero from '@/components/w3bb/ProgramHero';
 import ProgramClosing from '@/components/w3bb/ProgramClosing';
+import ProgramApplicationForm from '@/components/w3bb/ProgramApplicationForm';
 import IconCardGrid from '@/components/w3bb/IconCardGrid';
 import Reveal from '@/components/w3bb/Reveal';
 import { ZERO_DOLLAR } from '@/data/partnerships';
 import { usePageMeta } from '@/hooks/usePageMeta';
+import { useHashScroll } from '@/hooks/useHashScroll';
 
 const ZeroDollarStartup: React.FC = () => {
   usePageMeta('Zero-Dollar Startup Path', ZERO_DOLLAR.body);
+  useHashScroll();
 
   return (
     <PageShell>
@@ -20,6 +23,7 @@ const ZeroDollarStartup: React.FC = () => {
         sub={ZERO_DOLLAR.sub}
         body={ZERO_DOLLAR.body}
         ctaLabel={ZERO_DOLLAR.ctaLabel}
+        ctaHref="#zero-dollar-form"
       />
 
       <IconCardGrid heading="What You'll Learn" items={ZERO_DOLLAR.whatYoullLearn} columns={2} tinted />
@@ -45,7 +49,25 @@ const ZeroDollarStartup: React.FC = () => {
         </div>
       </section>
 
-      <ProgramClosing heading={ZERO_DOLLAR.closingHeading} body={ZERO_DOLLAR.closingBody} ctaLabel={ZERO_DOLLAR.ctaLabel} />
+      <ProgramApplicationForm
+        id="zero-dollar-form"
+        heading="Get Started"
+        intro="No money, no LLC, no barriers. Tell us what you want to build and we'll walk you through the first step."
+        interest="Zero-Dollar Startup Path"
+        source="w3bb-zero-dollar-page"
+        submitLabel={ZERO_DOLLAR.ctaLabel}
+        successHeading="You're on the path."
+        successBody="We'll follow up at {email} with your first step on the Zero-Dollar Startup Path."
+        messageLabel="What do you want to build?"
+        messagePlaceholder="A quick summary of the business or offer you want to start with."
+      />
+
+      <ProgramClosing
+        heading={ZERO_DOLLAR.closingHeading}
+        body={ZERO_DOLLAR.closingBody}
+        ctaLabel={ZERO_DOLLAR.ctaLabel}
+        ctaHref="#zero-dollar-form"
+      />
     </PageShell>
   );
 };
