@@ -40,6 +40,12 @@ const BusinessServices: React.FC = () => {
         ctaHref="#business-services-form"
       />
 
+      <section className="border-y border-white/5 bg-white/[0.02] py-4">
+        <p className="mx-auto max-w-4xl px-4 text-center text-xs text-white/50">
+          {BUSINESS_SERVICES.disclosure}
+        </p>
+      </section>
+
       {activeService ? (
         <section className="relative py-4 sm:py-6">
           <div className="container">

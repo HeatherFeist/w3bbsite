@@ -280,6 +280,8 @@ export const BUSINESS_SERVICES = {
   heading: 'Business Services',
   sub: 'Professional branding, websites, and digital solutions for entrepreneurs and organizations.',
   body: 'Constructive Design LLC is the for-profit creative and development arm of W3BB Worldwide — offering premium services for businesses ready to grow.',
+  disclosure:
+    'Constructive Design LLC is a separate for-profit entity from CDI (Constructive Designs Inc.), the nonprofit arm of W3BB Worldwide.',
   ctaLabel: 'Start a Project',
   services: [
     {
