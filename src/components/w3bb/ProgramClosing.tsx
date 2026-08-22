@@ -7,17 +7,24 @@ interface ProgramClosingProps {
   heading: string;
   body: React.ReactNode;
   ctaLabel: string;
+  ctaHref?: string;
   accent?: 'cyan' | 'gold';
 }
 
-export const ProgramClosing: React.FC<ProgramClosingProps> = ({ heading, body, ctaLabel, accent = 'cyan' }) => (
+export const ProgramClosing: React.FC<ProgramClosingProps> = ({
+  heading,
+  body,
+  ctaLabel,
+  ctaHref = '/partner-services#contact',
+  accent = 'cyan',
+}) => (
   <section className="relative py-24 sm:py-32">
     <div className="container">
       <Reveal className="mx-auto max-w-2xl text-center">
         <h2 className="font-display text-3xl font-semibold text-white sm:text-4xl">{heading}</h2>
         <p className="mt-5 text-base leading-relaxed text-white/65 sm:text-lg">{body}</p>
         <Link
-          to="/partner-services#contact"
+          to={ctaHref}
           className={
             accent === 'gold'
               ? 'group mt-9 inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 font-display text-sm font-semibold text-[#07080C] transition-colors hover:bg-gold/90'

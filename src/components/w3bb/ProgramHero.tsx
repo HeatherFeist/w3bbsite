@@ -10,6 +10,7 @@ interface ProgramHeroProps {
   sub: string;
   body: string;
   ctaLabel: string;
+  ctaHref?: string;
   accent?: 'cyan' | 'gold';
 }
 
@@ -20,6 +21,7 @@ export const ProgramHero: React.FC<ProgramHeroProps> = ({
   sub,
   body,
   ctaLabel,
+  ctaHref = '/partner-services#contact',
   accent = 'cyan',
 }) => (
   <section className="relative scroll-mt-24 py-28 pt-36 sm:py-32 sm:pt-40">
@@ -45,7 +47,7 @@ export const ProgramHero: React.FC<ProgramHeroProps> = ({
         <Reveal delay={240}>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
-              to="/partner-services#contact"
+              to={ctaHref}
               className={
                 accent === 'gold'
                   ? 'group inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 font-display text-sm font-semibold text-[#07080C] transition-colors hover:bg-gold/90'

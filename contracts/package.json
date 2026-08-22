@@ -1,0 +1,27 @@
+{
+  "name": "w3bb-franchise-bundle-contracts",
+  "version": "1.0.0",
+  "description": "W3BB Franchise Bundle NFT smart contract (Polygon)",
+  "private": true,
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:amoy": "hardhat run scripts/deploy.ts --network polygonAmoy",
+    "deploy:polygon": "hardhat run scripts/deploy.ts --network polygon"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@types/node": "^26.2.0",
+    "dotenv": "^17.4.2",
+    "hardhat": "^2.29.0",
+    "solc": "^0.8.24",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.6.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.6.1"
+  }
+}

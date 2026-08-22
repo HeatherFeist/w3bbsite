@@ -3,6 +3,7 @@ import PageShell from '@/components/PageShell';
 import { useHashScroll } from '@/hooks/useHashScroll';
 import Hero from '@/components/w3bb/Hero';
 import About from '@/components/w3bb/About';
+import FeaturedBusinesses from '@/components/w3bb/FeaturedBusinesses';
 import WhatYouCanBuild from '@/components/w3bb/WhatYouCanBuild';
 import BusinessBuilder from '@/components/w3bb/BusinessBuilder';
 import Marketplace from '@/components/w3bb/Marketplace';
@@ -21,6 +22,7 @@ const AppLayout: React.FC = () => {
     <PageShell>
       <Hero />
       <About />
+      <FeaturedBusinesses />
       <WhatYouCanBuild />
       <BusinessBuilder />
       <Marketplace />

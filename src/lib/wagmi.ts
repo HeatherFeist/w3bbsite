@@ -15,3 +15,12 @@ export const wagmiConfig = getDefaultConfig({
 });
 
 export const hasWalletConnectProjectId = Boolean(projectId);
+
+// Registers our concrete config as wagmi's default type, so hooks like
+// useWriteContract resolve chain/account types correctly without needing
+// `config` passed to every call. See https://wagmi.sh/react/typescript
+declare module 'wagmi' {
+  interface Register {
+    config: typeof wagmiConfig;
+  }
+}

@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Linkedin, Twitter, Github, Youtube, Mail } from 'lucide-react';
 import { SITE, FOOTER_COLUMNS } from '@/data/site';
-import { PROGRAMS } from '@/data/partnerships';
 import { scrollToId } from '@/hooks/useScrollSpy';
 import { Wordmark } from '@/components/w3bb/Navbar';
 
@@ -69,38 +68,27 @@ export const Footer: React.FC = () => {
               <ul className="mt-5 space-y-3">
                 {column.links.map((link) => (
                   <li key={link.label}>
-                    <a
-                      href={`#${link.id}`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        go(link.id);
-                      }}
-                      className="text-sm text-white/60 transition-colors duration-300 hover:text-white"
-                    >
-                      {link.label}
-                    </a>
+                    {link.to ? (
+                      <Link to={link.to} className="text-sm text-white/60 transition-colors duration-300 hover:text-white">
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <a
+                        href={`#${link.id}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (link.id) go(link.id);
+                        }}
+                        className="text-sm text-white/60 transition-colors duration-300 hover:text-white"
+                      >
+                        {link.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
             </div>
           ))}
-          <div>
-            <h2 className="micro-label text-white/40">Programs</h2>
-            <ul className="mt-5 space-y-3">
-              {PROGRAMS.slice(0, 4).map((program) => (
-                <li key={program.to}>
-                  <Link to={program.to} className="text-sm text-white/60 transition-colors duration-300 hover:text-white">
-                    {program.title}
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <Link to="/choose-your-path" className="text-sm font-semibold text-cyan transition-colors duration-300 hover:text-cyan/80">
-                  Choose Your Path →
-                </Link>
-              </li>
-            </ul>
-          </div>
         </nav>
       </div>
 

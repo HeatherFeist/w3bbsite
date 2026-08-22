@@ -280,16 +280,102 @@ export const BUSINESS_SERVICES = {
   heading: 'Business Services',
   sub: 'Professional branding, websites, and digital solutions for entrepreneurs and organizations.',
   body: 'Constructive Design LLC is the for-profit creative and development arm of W3BB Worldwide — offering premium services for businesses ready to grow.',
+  disclosure:
+    'Constructive Design LLC is a separate for-profit entity from CDI (Constructive Designs Inc.), the nonprofit arm of W3BB Worldwide.',
   ctaLabel: 'Start a Project',
   services: [
-    { icon: LayoutTemplate, title: 'Website design & development' },
-    { icon: Palette, title: 'Branding & identity systems' },
-    { icon: Package, title: 'Digital product creation' },
-    { icon: Workflow, title: 'Business automation' },
-    { icon: Megaphone, title: 'Marketing systems' },
-    { icon: Lightbulb, title: 'Consulting & strategy' },
-    { icon: Puzzle, title: 'Custom solutions' },
-  ] as IconCard[],
+    {
+      slug: 'website-design',
+      icon: LayoutTemplate,
+      title: 'Website design & development',
+      description:
+        'Custom, conversion-focused websites built to represent your brand and turn visitors into customers — not another generic template.',
+      highlights: [
+        'Custom design, not a generic template',
+        'Mobile-first, fast-loading builds',
+        'E-commerce and booking integrations',
+        'Ongoing maintenance available',
+      ],
+    },
+    {
+      slug: 'branding',
+      icon: Palette,
+      title: 'Branding & identity systems',
+      description:
+        'A cohesive visual identity — logo, color palette, typography, and brand guidelines — so your business looks professional everywhere it shows up.',
+      highlights: [
+        'Logo design and brand mark',
+        'Color palette and typography system',
+        'Brand guidelines document',
+        'Social and print-ready assets',
+      ],
+    },
+    {
+      slug: 'digital-products',
+      icon: Package,
+      title: 'Digital product creation',
+      description:
+        'From ebooks and courses to templates and software, we help you package your expertise into a sellable digital product.',
+      highlights: [
+        'Product strategy and structure',
+        'Design and content production',
+        'Delivery and payment setup',
+        'Launch-ready packaging',
+      ],
+    },
+    {
+      slug: 'automation',
+      icon: Workflow,
+      title: 'Business automation',
+      description:
+        "Streamline the repetitive parts of running your business — onboarding, invoicing, follow-ups — with systems that work while you don't.",
+      highlights: [
+        'Workflow mapping and audit',
+        'CRM and email automation setup',
+        'Integrations between your existing tools',
+        'Documentation and training',
+      ],
+    },
+    {
+      slug: 'marketing-systems',
+      icon: Megaphone,
+      title: 'Marketing systems',
+      description:
+        'Repeatable marketing infrastructure — funnels, email sequences, content systems — built to bring in customers on a schedule, not by chance.',
+      highlights: [
+        'Funnel and landing page builds',
+        'Email/SMS sequence setup',
+        'Content and campaign planning',
+        'Analytics and tracking setup',
+      ],
+    },
+    {
+      slug: 'consulting',
+      icon: Lightbulb,
+      title: 'Consulting & strategy',
+      description:
+        'One-on-one strategic guidance to help you make the right calls on positioning, offers, and growth before you spend time or money building the wrong thing.',
+      highlights: [
+        'Business and offer strategy sessions',
+        'Positioning and pricing guidance',
+        'Growth roadmap development',
+        'Ongoing advisory available',
+      ],
+    },
+    {
+      slug: 'custom-solutions',
+      icon: Puzzle,
+      title: 'Custom solutions',
+      description:
+        "Have something that doesn't fit a neat category? We scope and build custom tools and systems tailored to exactly what your business needs.",
+      highlights: [
+        'Discovery and scoping session',
+        'Custom-built to your requirements',
+        'Integration with existing systems',
+        'Direct collaboration with our team',
+      ],
+    },
+  ] as (IconCard & { slug: string; description: string; highlights: string[] })[],
   whoWeServe: [
     { icon: Rocket, title: 'Startups' },
     { icon: Store, title: 'Small businesses' },

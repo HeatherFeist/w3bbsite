@@ -1,10 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react';
+import { Menu, X, ArrowRight, ChevronDown, Globe2, Store, Users2, BookOpen } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { NAV_LINKS, SECTION_IDS } from '@/data/site';
-import { PROGRAMS } from '@/data/partnerships';
 import { useScrollSpy, scrollToId } from '@/hooks/useScrollSpy';
+
+const ECOSYSTEM_MENU = [
+  { to: '/ecosystem', label: 'The Ecosystem', icon: Globe2 },
+  { to: '/businesses', label: 'Sponsored Businesses', icon: Store },
+  { to: '/community', label: 'Community', icon: Users2 },
+  { to: '/resources', label: 'Resources', icon: BookOpen },
+] as const;
 
 export const Wordmark: React.FC<{ className?: string }> = ({ className }) => (
   <span
@@ -129,7 +135,7 @@ export const Navbar: React.FC = () => {
               aria-expanded={programsOpen}
               className="flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium text-white/60 transition-colors duration-300 hover:text-white"
             >
-              Programs
+              Ecosystem
               <ChevronDown className={cn('h-3.5 w-3.5 transition-transform duration-300', programsOpen && 'rotate-180')} aria-hidden="true" />
             </button>
             <div
@@ -138,25 +144,18 @@ export const Navbar: React.FC = () => {
                 programsOpen ? 'visible scale-100 opacity-100' : 'invisible scale-95 opacity-0',
               )}
             >
-              {PROGRAMS.map((program) => (
+              {ECOSYSTEM_MENU.map((item) => (
                 <Link
-                  key={program.to}
-                  to={program.to}
+                  key={item.to}
+                  to={item.to}
                   onClick={() => setProgramsOpen(false)}
                   className="flex items-start gap-3 rounded-xl px-3 py-2.5 text-sm text-white/70 transition-colors hover:bg-white/[0.06] hover:text-white"
                 >
-                  <program.icon className="mt-0.5 h-4 w-4 shrink-0 text-cyan" strokeWidth={1.5} aria-hidden="true" />
-                  {program.title}
+                  <item.icon className="mt-0.5 h-4 w-4 shrink-0 text-cyan" strokeWidth={1.5} aria-hidden="true" />
+                  {item.label}
                 </Link>
               ))}
               <div className="my-1.5 border-t border-white/10" />
-              <Link
-                to="/partner-services"
-                onClick={() => setProgramsOpen(false)}
-                className="block rounded-xl px-3 py-2.5 text-sm font-semibold text-white/85 transition-colors hover:bg-white/[0.06] hover:text-white"
-              >
-                U.S. Business Partner Services
-              </Link>
               <Link
                 to="/choose-your-path"
                 onClick={() => setProgramsOpen(false)}
@@ -219,27 +218,27 @@ export const Navbar: React.FC = () => {
             </li>
           ))}
           <li className="mt-3 px-4">
-            <span className="micro-label text-white/35">Programs</span>
+            <span className="micro-label text-white/35">Ecosystem</span>
           </li>
-          {PROGRAMS.map((program) => (
-            <li key={program.to}>
+          {ECOSYSTEM_MENU.map((item) => (
+            <li key={item.to}>
               <Link
-                to={program.to}
+                to={item.to}
                 onClick={() => setOpen(false)}
                 className="flex items-center gap-3 rounded-xl px-4 py-3 text-base font-medium text-white/70 transition-colors hover:bg-white/[0.04] hover:text-white"
               >
-                <program.icon className="h-4 w-4 shrink-0 text-cyan" strokeWidth={1.5} aria-hidden="true" />
-                {program.title}
+                <item.icon className="h-4 w-4 shrink-0 text-cyan" strokeWidth={1.5} aria-hidden="true" />
+                {item.label}
               </Link>
             </li>
           ))}
           <li>
             <Link
-              to="/partner-services"
+              to="/choose-your-path"
               onClick={() => setOpen(false)}
               className="flex items-center justify-between rounded-xl px-4 py-3 font-display text-lg font-medium text-white/70 transition-colors hover:bg-white/[0.04] hover:text-white"
             >
-              U.S. Business Partner Services
+              Choose Your Path
               <ArrowRight className="h-4 w-4 opacity-50" aria-hidden="true" />
             </Link>
           </li>

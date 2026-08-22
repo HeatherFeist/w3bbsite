@@ -347,6 +347,10 @@ export const CONTACT = {
     'Buying a Franchise Bundle',
     'Enterprise & Organizations',
     'Trust Certification',
+    'Partnership Inquiries',
+    'Sponsorship Applications',
+    'Press',
+    'General Support',
   ],
   successTitle: "You're on the list.",
   successBody:
@@ -355,32 +359,51 @@ export const CONTACT = {
 
 /* --------------------------------- 13. FOOTER ------------------------------- */
 
-export const FOOTER_COLUMNS = [
+export interface FooterLink {
+  label: string;
+  /** Anchor id on the homepage — scrolls there, jumping home first if needed. */
+  id?: string;
+  /** A real route — takes priority over `id` when both would apply. */
+  to?: string;
+}
+
+export const FOOTER_COLUMNS: { title: string; links: FooterLink[] }[] = [
   {
     title: 'Platform',
     links: [
       { label: 'About', id: 'about' },
       { label: 'What You Can Build', id: 'build' },
       { label: 'Business Builder', id: 'builder' },
+      { label: 'Sponsored Businesses', to: '/businesses' },
     ],
   },
   {
     title: 'Ecosystem',
     links: [
+      { label: 'The Ecosystem', to: '/ecosystem' },
       { label: 'Marketplace', id: 'marketplace' },
       { label: 'Certification', id: 'certification' },
       { label: 'The W3BB Economy', id: 'economy' },
     ],
   },
   {
-    title: 'Company',
+    title: 'Community',
     links: [
+      { label: 'Community', to: '/community' },
+      { label: 'Resources', to: '/resources' },
       { label: 'Enterprise', id: 'enterprise' },
       { label: 'Social Mission', id: 'mission' },
-      { label: 'Contact', id: 'contact' },
     ],
   },
-] as const;
+  {
+    title: 'Company',
+    links: [
+      { label: 'Contact', id: 'contact' },
+      { label: 'Choose Your Path', to: '/choose-your-path' },
+      { label: 'Privacy Policy', to: '/privacy' },
+    ],
+  },
+];
 
 /* --------------------------------- IMAGERY ---------------------------------- */
 
@@ -396,6 +419,7 @@ export const IMAGES = {
 export const SECTION_IDS = [
   'hero',
   'about',
+  'businesses',
   'build',
   'builder',
   'marketplace',
