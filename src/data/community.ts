@@ -11,6 +11,7 @@ import {
   MessageSquareQuote,
   type LucideIcon,
 } from 'lucide-react';
+import { CDI_FULL_NAME } from '@/data/ecosystem';
 
 export interface CommunitySection {
   icon: LucideIcon;
@@ -51,7 +52,7 @@ export const COMMUNITY = {
     {
       icon: HandHeart,
       title: 'Volunteer Opportunities',
-      description: 'Ways to support entrepreneurs and community programs through CDI.',
+      description: `Ways to support entrepreneurs and community programs through CDI (${CDI_FULL_NAME}).`,
       href: '/community#volunteer',
       linkLabel: 'Volunteer with us',
     },

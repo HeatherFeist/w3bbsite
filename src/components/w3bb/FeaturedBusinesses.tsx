@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Heart } from 'lucide-react';
 import { SPONSORED_BUSINESSES } from '@/data/businesses';
+import { CDI_FULL_NAME } from '@/data/ecosystem';
 import Reveal from '@/components/w3bb/Reveal';
 import SectionHeading from '@/components/w3bb/SectionHeading';
 
@@ -11,7 +12,7 @@ export const FeaturedBusinesses: React.FC = () => (
       <SectionHeading
         label="THE W3BB NETWORK"
         heading="Sponsored Businesses"
-        intro="Every business here was built inside the W3BB ecosystem — supported by CDI, powered by the W3BB platform."
+        intro={`Every business here was built inside the W3BB ecosystem — supported by CDI (${CDI_FULL_NAME}), powered by the W3BB platform.`}
       />
 
       <ul className="mx-auto mt-14 grid max-w-4xl gap-5 sm:grid-cols-2">
@@ -36,7 +37,7 @@ export const FeaturedBusinesses: React.FC = () => (
       </ul>
 
       <Reveal delay={140} className="mt-12 flex flex-col items-center gap-6 text-center">
-        <span className="glass-soft inline-flex items-center gap-2.5 rounded-full px-4 py-2">
+        <span className="glass-soft inline-flex items-center gap-2.5 rounded-full px-4 py-2" title={CDI_FULL_NAME}>
           <Heart className="h-4 w-4 text-gold" strokeWidth={1.5} aria-hidden="true" />
           <span className="micro-label text-white/75">Powered by CDI</span>
         </span>

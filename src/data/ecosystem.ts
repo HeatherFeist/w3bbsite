@@ -4,6 +4,9 @@
  */
 import { Heart, Cpu, Store, type LucideIcon } from 'lucide-react';
 
+/** CDI's full legal name — spelled out on first mention, "CDI" everywhere after. */
+export const CDI_FULL_NAME = 'Constructive Designs Inc.';
+
 export interface EcosystemLayer {
   n: string;
   name: string;
@@ -25,7 +28,7 @@ export const ECOSYSTEM = {
       name: 'CDI',
       title: 'The Nonprofit Backbone',
       icon: Heart,
-      description: 'CDI empowers people who want to start businesses but need guidance, resources, or support.',
+      description: `CDI (${CDI_FULL_NAME}) empowers people who want to start businesses but need guidance, resources, or support.`,
       provides: [
         'Community support',
         'Volunteer programs',
