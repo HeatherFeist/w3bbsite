@@ -1,8 +1,10 @@
 import { createClient } from "@supabase/supabase-js";
 
-// SuperCool managed database (public url + anon key).
-const url = "https://prj19f5fdb52746a3787654.databasepad.com";
-const anonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjgxN2M3YjM5LWFjMDgtNDlmZC04YzM1LWUzMTliZTA4ZjAwOSJ9.eyJwcm9qZWN0SWQiOiJwcmoxOWY1ZmRiNTI3NDZhMzc4NzY1NCIsInJvbGUiOiJhbm9uIiwiaWF0IjoxNzg2MDkyNjAwLCJleHAiOjIxMDE0NTI2MDAsImlzcyI6ImZhbW91cy5kYXRhYmFzZXBhZCIsImF1ZCI6ImZhbW91cy5jbGllbnRzIn0.iYEhqcpo6qGP4JjJxn7ODW5_uX9JI_JQK2xj2Qrymtw";
+// W3BB-owned Supabase project (public url + publishable/anon key). Both are
+// safe to ship in the browser bundle -- every table this key can touch is
+// locked down with insert-only Row Level Security (see supabase/schema.sql).
+const url = "https://jpywgvrtjzcstzgrfkbg.supabase.co";
+const publishableKey = "sb_publishable_lZo1yg-veJofm4VpDCJB-w_-zQtpRrz";
 
-export const db = createClient(url, anonKey);
+export const db = createClient(url, publishableKey);
 export default db;
