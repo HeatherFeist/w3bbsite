@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { db } from '@/lib/db';
+import { sendWeb3FormsNotification } from '@/lib/web3forms';
 
 export type LeadStatus = 'idle' | 'loading' | 'success' | 'error';
 
@@ -20,8 +21,10 @@ export interface LeadInput {
 /**
  * Shared submit path for every lead-capture form on the site (contact,
  * build intake, certification application, enterprise inquiry, mint
- * waitlist). Writes to the CRM RPC and keeps a full copy in
- * w3bb_enquiries, same as the original contact form.
+ * waitlist, program applications, community volunteer signup). Writes to
+ * the CRM RPC and keeps a full copy in w3bb_enquiries (Supabase), then
+ * sends an email notification via Web3Forms so a new submission doesn't
+ * require checking the database to notice.
  */
 export function useLeadCapture() {
   const [status, setStatus] = useState<LeadStatus>('idle');
@@ -66,6 +69,20 @@ export function useLeadCapture() {
       } catch {
         /* analytics must never break the page */
       }
+
+      // Notify the site owner by email, and auto-reply to the submitter if
+      // that's enabled on the Web3Forms dashboard. Never blocks success —
+      // the CRM/enquiries rows above are already the durable record.
+      void sendWeb3FormsNotification({
+        subject: `New ${input.interest} — W3BB Worldwide`,
+        name: input.name.trim(),
+        email: input.email.trim(),
+        interest: input.interest,
+        source: input.source,
+        organization: input.organization?.trim(),
+        message: input.message?.trim(),
+        metadata: input.metadata,
+      });
 
       setStatus('success');
       return true;
