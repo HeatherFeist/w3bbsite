@@ -58,6 +58,25 @@ export const Navbar: React.FC = () => {
     return () => document.removeEventListener('click', onClickAway);
   }, [programsOpen]);
 
+  useEffect(() => {
+    setOpen(false);
+    setProgramsOpen(false);
+  }, [location.pathname, location.hash]);
+
+  useEffect(() => {
+    if (!open && !programsOpen) return;
+
+    const onEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setOpen(false);
+        setProgramsOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', onEscape);
+    return () => document.removeEventListener('keydown', onEscape);
+  }, [open, programsOpen]);
+
   const go = (id: string) => {
     setOpen(false);
     if (location.pathname !== '/') {
@@ -182,6 +201,7 @@ export const Navbar: React.FC = () => {
             className="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10 lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
+            aria-haspopup="menu"
             aria-label={open ? 'Close menu' : 'Open menu'}
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -191,9 +211,10 @@ export const Navbar: React.FC = () => {
 
       <div
         id="mobile-nav"
+        aria-hidden={!open}
         className={cn(
-          'overflow-hidden border-t border-white/10 bg-[#07080C]/95 backdrop-blur-xl transition-[max-height,opacity] duration-500 lg:hidden',
-          open ? 'max-h-[70vh] opacity-100' : 'max-h-0 opacity-0',
+          'overflow-y-auto border-t border-white/10 bg-[#07080C]/95 backdrop-blur-xl transition-[max-height,opacity] duration-500 lg:hidden',
+          open ? 'max-h-[calc(100dvh-72px)] opacity-100' : 'max-h-0 overflow-hidden opacity-0',
         )}
       >
         <ul className="container flex flex-col gap-1 py-5">

@@ -9,12 +9,9 @@ import Reveal from '@/components/w3bb/Reveal';
 import SectionHeading from '@/components/w3bb/SectionHeading';
 import { LAUNCHPAD } from '@/data/partnerships';
 import { usePageMeta } from '@/hooks/usePageMeta';
-import { useHashScroll } from '@/hooks/useHashScroll';
 
 const Launchpad: React.FC = () => {
   usePageMeta('Entrepreneur Launchpad', LAUNCHPAD.body);
-  useHashScroll();
-
   return (
     <PageShell>
       <ProgramHero

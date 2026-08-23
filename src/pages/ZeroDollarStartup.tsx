@@ -8,12 +8,9 @@ import IconCardGrid from '@/components/w3bb/IconCardGrid';
 import Reveal from '@/components/w3bb/Reveal';
 import { ZERO_DOLLAR } from '@/data/partnerships';
 import { usePageMeta } from '@/hooks/usePageMeta';
-import { useHashScroll } from '@/hooks/useHashScroll';
 
 const ZeroDollarStartup: React.FC = () => {
   usePageMeta('Zero-Dollar Startup Path', ZERO_DOLLAR.body);
-  useHashScroll();
-
   return (
     <PageShell>
       <ProgramHero

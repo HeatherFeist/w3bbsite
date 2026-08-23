@@ -2,6 +2,7 @@ import React from 'react';
 import Backdrop from '@/components/w3bb/Backdrop';
 import Navbar from '@/components/w3bb/Navbar';
 import Footer from '@/components/w3bb/Footer';
+import { useHashScroll } from '@/hooks/useHashScroll';
 
 interface PageShellProps {
   children: React.ReactNode;
@@ -9,6 +10,8 @@ interface PageShellProps {
 
 /** Shared chrome (backdrop, navbar, footer) for every route in the app. */
 export const PageShell: React.FC<PageShellProps> = ({ children }) => {
+  useHashScroll();
+
   return (
     <div className="relative min-h-screen w-full overflow-x-hidden text-white">
       <Backdrop />

@@ -7,12 +7,9 @@ import ProgramApplicationForm from '@/components/w3bb/ProgramApplicationForm';
 import IconCardGrid from '@/components/w3bb/IconCardGrid';
 import { AGENCY_PARTNER } from '@/data/partnerships';
 import { usePageMeta } from '@/hooks/usePageMeta';
-import { useHashScroll } from '@/hooks/useHashScroll';
 
 const AgencyPartnerProgram: React.FC = () => {
   usePageMeta('Agency Partner Program', AGENCY_PARTNER.body);
-  useHashScroll();
-
   return (
     <PageShell>
       <ProgramHero

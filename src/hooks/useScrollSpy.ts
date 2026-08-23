@@ -34,10 +34,11 @@ export function useScrollSpy(ids: string[], offset = 140): string {
 }
 
 /** Smoothly scrolls to a section id, accounting for the sticky navbar. */
-export function scrollToId(id: string) {
+export function scrollToId(id: string): boolean {
   const el = document.getElementById(id);
-  if (!el) return;
+  if (!el) return false;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const top = el.getBoundingClientRect().top + window.scrollY - 84;
   window.scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
+  return true;
 }
