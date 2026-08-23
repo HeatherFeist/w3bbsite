@@ -32,7 +32,7 @@ export interface Web3FormsSubmission {
  */
 export async function sendWeb3FormsNotification(input: Web3FormsSubmission): Promise<void> {
   try {
-    await fetch(WEB3FORMS_ENDPOINT, {
+    const res = await fetch(WEB3FORMS_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
@@ -50,7 +50,15 @@ export async function sendWeb3FormsNotification(input: Web3FormsSubmission): Pro
           : {}),
       }),
     });
-  } catch {
-    /* email must never break the page — the database record already has this submission */
+
+    const data = await res.json().catch(() => null);
+    if (!res.ok || !data?.success) {
+      // Surface this in the console rather than swallow it silently — a
+      // saved database record still exists either way, but this is the
+      // only trail we get if Web3Forms rejects or fails the request.
+      console.error('[web3forms] notification email was not sent:', res.status, data);
+    }
+  } catch (err) {
+    console.error('[web3forms] notification request failed:', err);
   }
 }
