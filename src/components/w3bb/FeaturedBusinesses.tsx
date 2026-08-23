@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Heart } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Heart } from 'lucide-react';
 import { SPONSORED_BUSINESSES } from '@/data/businesses';
 import { CDI_FULL_NAME } from '@/data/ecosystem';
 import Reveal from '@/components/w3bb/Reveal';
@@ -16,24 +16,42 @@ export const FeaturedBusinesses: React.FC = () => (
       />
 
       <ul className="mx-auto mt-14 grid max-w-4xl gap-5 sm:grid-cols-2">
-        {SPONSORED_BUSINESSES.map((business, i) => (
-          <Reveal as="li" key={business.slug} delay={i * 90}>
-            <Link
-              to={`/businesses/${business.slug}`}
-              className="glass glass-lift group flex h-full flex-col p-7"
-            >
+        {SPONSORED_BUSINESSES.map((business, i) => {
+          const cardClass = 'glass glass-lift group flex h-full flex-col p-7';
+          const cardContent = (
+            <>
               <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-violet/30 to-cyan/15 font-display text-lg font-bold text-white ring-1 ring-inset ring-white/10">
                 {business.name.charAt(0)}
               </span>
               <h3 className="mt-5 font-display text-lg font-bold text-white">{business.name}</h3>
               <p className="mt-2 flex-1 text-sm leading-relaxed text-white/60">{business.tagline}</p>
-              <span className="mt-5 inline-flex items-center gap-1.5 font-display text-sm font-semibold text-cyan">
-                View profile
-                <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
-              </span>
-            </Link>
-          </Reveal>
-        ))}
+              {business.website ? (
+                <span className="mt-5 inline-flex items-center gap-1.5 font-display text-sm font-semibold text-cyan">
+                  Visit website
+                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5" aria-hidden="true" />
+                </span>
+              ) : (
+                <span className="mt-5 inline-flex items-center gap-1.5 font-display text-sm font-semibold text-cyan">
+                  View profile
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+                </span>
+              )}
+            </>
+          );
+          return (
+            <Reveal as="li" key={business.slug} delay={i * 90}>
+              {business.website ? (
+                <a href={business.website} target="_blank" rel="noopener noreferrer" className={cardClass}>
+                  {cardContent}
+                </a>
+              ) : (
+                <Link to={`/businesses/${business.slug}`} className={cardClass}>
+                  {cardContent}
+                </Link>
+              )}
+            </Reveal>
+          );
+        })}
       </ul>
 
       <Reveal delay={140} className="mt-12 flex flex-col items-center gap-6 text-center">

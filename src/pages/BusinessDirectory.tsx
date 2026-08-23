@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Store, ShieldCheck, Heart } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Store, ShieldCheck, Heart } from 'lucide-react';
 import PageShell from '@/components/PageShell';
 import Reveal from '@/components/w3bb/Reveal';
 import SectionHeading from '@/components/w3bb/SectionHeading';
@@ -38,12 +38,10 @@ const BusinessDirectory: React.FC = () => {
       <section className="relative pb-16">
         <div className="container">
           <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {SPONSORED_BUSINESSES.map((business, i) => (
-              <Reveal as="li" key={business.slug} delay={i * 90}>
-                <Link
-                  to={`/businesses/${business.slug}`}
-                  className="glass glass-lift group flex h-full flex-col overflow-hidden p-7"
-                >
+            {SPONSORED_BUSINESSES.map((business, i) => {
+              const cardClass = 'glass glass-lift group flex h-full flex-col overflow-hidden p-7';
+              const cardContent = (
+                <>
                   <span className="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-violet/30 to-cyan/15 font-display text-lg font-bold text-white ring-1 ring-inset ring-white/10">
                     {business.name.charAt(0)}
                   </span>
@@ -70,13 +68,33 @@ const BusinessDirectory: React.FC = () => {
                     ) : null}
                   </div>
 
-                  <span className="mt-6 inline-flex items-center gap-1.5 font-display text-sm font-semibold text-cyan">
-                    View profile
-                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
+                  {business.website ? (
+                    <span className="mt-6 inline-flex items-center gap-1.5 font-display text-sm font-semibold text-cyan">
+                      Visit website
+                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5" aria-hidden="true" />
+                    </span>
+                  ) : (
+                    <span className="mt-6 inline-flex items-center gap-1.5 font-display text-sm font-semibold text-cyan">
+                      View profile
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+                    </span>
+                  )}
+                </>
+              );
+              return (
+                <Reveal as="li" key={business.slug} delay={i * 90}>
+                  {business.website ? (
+                    <a href={business.website} target="_blank" rel="noopener noreferrer" className={cardClass}>
+                      {cardContent}
+                    </a>
+                  ) : (
+                    <Link to={`/businesses/${business.slug}`} className={cardClass}>
+                      {cardContent}
+                    </Link>
+                  )}
+                </Reveal>
+              );
+            })}
           </ul>
         </div>
       </section>
