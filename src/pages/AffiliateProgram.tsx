@@ -7,7 +7,6 @@ import ProgramApplicationForm from '@/components/w3bb/ProgramApplicationForm';
 import IconCardGrid from '@/components/w3bb/IconCardGrid';
 import { AFFILIATE } from '@/data/partnerships';
 import { usePageMeta } from '@/hooks/usePageMeta';
-import { useHashScroll } from '@/hooks/useHashScroll';
 
 const CHANNEL_OPTIONS = [
   'Content creator',
@@ -23,8 +22,6 @@ const AffiliateProgram: React.FC = () => {
     'Affiliate Partnership Program',
     'Apply to become a W3BB Worldwide affiliate and earn recurring commissions for every entrepreneur you refer.',
   );
-  useHashScroll();
-
   return (
     <PageShell>
       <ProgramHero

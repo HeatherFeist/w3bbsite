@@ -10,7 +10,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { PARTNER_SERVICES, PROGRAMS, Check } from '@/data/partnerships';
 import { useLeadCapture } from '@/hooks/useLeadCapture';
 import { usePageMeta } from '@/hooks/usePageMeta';
-import { useHashScroll } from '@/hooks/useHashScroll';
 
 const fieldClass =
   'w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-base text-white placeholder:text-white/35 transition-colors duration-300 hover:border-white/20 focus:border-violet focus:bg-white/[0.06] focus:outline-none';
@@ -36,7 +35,6 @@ const PartnerServices: React.FC = () => {
     'A U.S. mailing address, U.S.-based customer support, returns handling, and marketplace compliance guidance for international sellers.',
   );
 
-  useHashScroll();
   const { status, error, submit, reset } = useLeadCapture();
   const [honeypot, setHoneypot] = useState('');
   const [consent, setConsent] = useState(false);

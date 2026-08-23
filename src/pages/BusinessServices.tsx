@@ -9,7 +9,6 @@ import IconCardGrid from '@/components/w3bb/IconCardGrid';
 import Reveal from '@/components/w3bb/Reveal';
 import { BUSINESS_SERVICES, Check } from '@/data/partnerships';
 import { usePageMeta } from '@/hooks/usePageMeta';
-import { useHashScroll } from '@/hooks/useHashScroll';
 
 const BusinessServices: React.FC = () => {
   const { service } = useParams<{ service?: string }>();
@@ -19,8 +18,6 @@ const BusinessServices: React.FC = () => {
     activeService ? activeService.title : 'Business Services',
     activeService ? activeService.description : BUSINESS_SERVICES.body,
   );
-  useHashScroll();
-
   const heroHeading = activeService ? (
     activeService.title
   ) : (

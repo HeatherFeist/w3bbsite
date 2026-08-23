@@ -1,6 +1,5 @@
 import React from 'react';
 import PageShell from '@/components/PageShell';
-import { useHashScroll } from '@/hooks/useHashScroll';
 import Hero from '@/components/w3bb/Hero';
 import About from '@/components/w3bb/About';
 import FeaturedBusinesses from '@/components/w3bb/FeaturedBusinesses';
@@ -16,8 +15,6 @@ import FinalCta from '@/components/w3bb/FinalCta';
 import Contact from '@/components/w3bb/Contact';
 
 const AppLayout: React.FC = () => {
-  useHashScroll();
-
   return (
     <PageShell>
       <Hero />

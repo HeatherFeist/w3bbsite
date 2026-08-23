@@ -6,12 +6,9 @@ import Reveal from '@/components/w3bb/Reveal';
 import ProgramApplicationForm from '@/components/w3bb/ProgramApplicationForm';
 import { COMMUNITY } from '@/data/community';
 import { usePageMeta } from '@/hooks/usePageMeta';
-import { useHashScroll } from '@/hooks/useHashScroll';
 
 const Community: React.FC = () => {
   usePageMeta('Community', COMMUNITY.body);
-  useHashScroll();
-
   return (
     <PageShell>
       <section className="relative scroll-mt-24 py-28 pt-36 sm:py-32 sm:pt-40">
