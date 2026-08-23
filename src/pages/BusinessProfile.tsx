@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ArrowRight, ArrowLeft, ShieldCheck, Heart, Clock } from 'lucide-react';
+import { ArrowRight, ArrowLeft, ArrowUpRight, ShieldCheck, Heart, Clock } from 'lucide-react';
 import PageShell from '@/components/PageShell';
 import Reveal from '@/components/w3bb/Reveal';
 import { SPONSORED_BUSINESSES } from '@/data/businesses';
@@ -87,6 +87,19 @@ const BusinessProfile: React.FC = () => {
                 ) : null}
               </div>
             </Reveal>
+            {business.website ? (
+              <Reveal delay={240} className="mt-8 flex justify-center">
+                <a
+                  href={business.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cta-primary group inline-flex items-center gap-2 rounded-full px-7 py-3.5 font-display text-sm font-semibold text-white"
+                >
+                  Visit {business.name}
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5" aria-hidden="true" />
+                </a>
+              </Reveal>
+            ) : null}
           </div>
         </div>
       </section>
@@ -101,7 +114,7 @@ const BusinessProfile: React.FC = () => {
                 </span>
                 <h2 className="font-display text-xl font-semibold text-white">Full profile coming soon</h2>
                 <p className="max-w-md text-sm leading-relaxed text-white/65">
-                  {business.name}'s founder, services, and links will appear here once their full profile is
+                  {business.name}'s founder and services will appear here once their full profile is
                   published.
                 </p>
               </div>

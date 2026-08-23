@@ -18,6 +18,9 @@ export interface SponsoredBusiness {
   supportedByCdi: boolean;
   /** Full profile content not published yet. */
   comingSoon: boolean;
+  /** The business's own live site, if it has one. When set, directory/home
+   *  cards link straight there instead of the internal placeholder profile. */
+  website?: string;
 }
 
 export const SPONSORED_BUSINESSES: SponsoredBusiness[] = [
@@ -28,6 +31,7 @@ export const SPONSORED_BUSINESSES: SponsoredBusiness[] = [
     certified: false,
     supportedByCdi: true,
     comingSoon: true,
+    website: 'https://whichcraft.shop',
   },
   {
     slug: 'webb-catchers-llc',
