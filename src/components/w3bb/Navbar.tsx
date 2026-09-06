@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, ArrowRight, ChevronDown, Globe2, Store, Users2, BookOpen } from 'lucide-react';
+import { Menu, X, ArrowRight, ChevronDown, Globe2, Store, Users2, BookOpen, KeyRound } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { NAV_LINKS, SECTION_IDS } from '@/data/site';
 import { useScrollSpy, scrollToId } from '@/hooks/useScrollSpy';
@@ -10,6 +10,7 @@ const ECOSYSTEM_MENU = [
   { to: '/businesses', label: 'Sponsored Businesses', icon: Store },
   { to: '/community', label: 'Community', icon: Users2 },
   { to: '/resources', label: 'Resources', icon: BookOpen },
+  { to: '/partner-network', label: 'Partner Network', icon: KeyRound },
 ] as const;
 
 export const Wordmark: React.FC<{ className?: string }> = ({ className }) => (
