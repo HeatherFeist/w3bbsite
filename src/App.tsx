@@ -28,6 +28,7 @@ import BusinessDirectory from "./pages/BusinessDirectory";
 import BusinessProfile from "./pages/BusinessProfile";
 import Community from "./pages/Community";
 import Resources from "./pages/Resources";
+import PartnerNetwork from "./pages/PartnerNetwork";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -70,6 +71,7 @@ const App = () => (
                 <Route path="/businesses/:slug" element={<BusinessProfile />} />
                 <Route path="/community" element={<Community />} />
                 <Route path="/resources" element={<Resources />} />
+                <Route path="/partner-network" element={<PartnerNetwork />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
