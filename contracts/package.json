@@ -7,7 +7,9 @@
     "compile": "hardhat compile",
     "test": "hardhat test",
     "deploy:amoy": "hardhat run scripts/deploy.ts --network polygonAmoy",
-    "deploy:polygon": "hardhat run scripts/deploy.ts --network polygon"
+    "deploy:polygon": "hardhat run scripts/deploy.ts --network polygon",
+    "deploy:coin:amoy": "hardhat run scripts/deployBusinessCoin.ts --network polygonAmoy",
+    "deploy:swap:amoy": "hardhat run scripts/deployCoinSwap.ts --network polygonAmoy"
   },
   "keywords": [],
   "author": "",
