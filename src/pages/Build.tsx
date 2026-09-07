@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ArrowRight, CheckCircle2, Loader2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, FileText, Loader2, Plus, Trash2 } from 'lucide-react';
 import PageShell from '@/components/PageShell';
 import HoneypotField from '@/components/HoneypotField';
 import ConsentCheckbox from '@/components/ConsentCheckbox';
@@ -10,6 +10,8 @@ import SectionHeading from '@/components/w3bb/SectionHeading';
 import { BUILDER, BUILD } from '@/data/site';
 import { useLeadCapture } from '@/hooks/useLeadCapture';
 import { usePageMeta } from '@/hooks/usePageMeta';
+import { createFranchiseBundle } from '@/lib/franchiseBundle';
+import type { FranchiseBundleAssetInput } from '@/types/franchiseBundle';
 
 const INDUSTRIES = [
   'Retail & E-commerce',
@@ -50,23 +52,79 @@ const Build: React.FC = () => {
     email: '',
   });
 
+  const newAssetRow = () => ({
+    key: `asset-${Math.random().toString(36).slice(2)}`,
+    name: '',
+    description: '',
+    cost: '',
+  });
+  const [assets, setAssets] = useState<{ key: string; name: string; description: string; cost: string }[]>([
+    newAssetRow(),
+  ]);
+  const [bundleId, setBundleId] = useState<string | null>(null);
+  const [bundleSaveError, setBundleSaveError] = useState('');
+
   const update = (key: keyof typeof form) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => setForm((prev) => ({ ...prev, [key]: e.target.value }));
 
+  const updateAsset = (key: string, field: 'name' | 'description' | 'cost') => (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) =>
+    setAssets((prev) => prev.map((asset) => (asset.key === key ? { ...asset, [field]: e.target.value } : asset)));
+
+  const addAssetRow = () => setAssets((prev) => [...prev, newAssetRow()]);
+  const removeAssetRow = (key: string) =>
+    setAssets((prev) => (prev.length > 1 ? prev.filter((asset) => asset.key !== key) : prev));
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (status === 'loading') return;
-    await submit({
+
+    setBundleSaveError('');
+    const itemizedAssets: FranchiseBundleAssetInput[] = assets
+      .filter((asset) => asset.name.trim())
+      .map((asset) => ({
+        name: asset.name.trim(),
+        description: asset.description.trim(),
+        cost: Number.parseFloat(asset.cost) || 0,
+        currency: 'USD',
+      }));
+
+    const submitted = await submit({
       name: form.name,
       email: form.email,
       organization: form.businessName,
       interest: activeItem ? activeItem.title : 'Building a business',
       source: 'w3bb-build-page',
       message: `Industry: ${form.industry}\n\n${form.description.trim()}`,
-      metadata: { businessName: form.businessName, industry: form.industry, category: activeItem?.slug ?? null },
+      metadata: {
+        businessName: form.businessName,
+        industry: form.industry,
+        category: activeItem?.slug ?? null,
+        assetCount: itemizedAssets.length,
+      },
       honeypot,
     });
+
+    if (submitted && !honeypot) {
+      try {
+        const id = await createFranchiseBundle({
+          businessName: form.businessName,
+          industry: form.industry,
+          description: form.description,
+          contactName: form.name,
+          contactEmail: form.email,
+          assets: itemizedAssets,
+        });
+        setBundleId(id);
+      } catch (err) {
+        // Never blocks the lead-capture success state above — the CRM
+        // submission already went through. This just means the itemized
+        // asset record didn't save, so surface it quietly.
+        setBundleSaveError(err instanceof Error ? err.message : 'Could not save your itemized asset list.');
+      }
+    }
   };
 
   return (
@@ -131,18 +189,43 @@ const Build: React.FC = () => {
                     {form.email}. Once your business is certified, you can mint it as a Business
                     NFT and list it on the Marketplace.
                   </p>
+                  {bundleId ? (
+                    <p className="mt-4 max-w-md text-sm leading-relaxed text-white/60">
+                      Your itemized asset list and operating plan are saved — you can present them
+                      to a lender any time from your{' '}
+                      <Link to={`/business-plan/${bundleId}`} className="text-cyan underline-offset-4 hover:underline">
+                        loan documentation page
+                      </Link>
+                      .
+                    </p>
+                  ) : bundleSaveError ? (
+                    <p className="mt-4 max-w-md text-sm leading-relaxed text-gold/90">{bundleSaveError}</p>
+                  ) : null}
                   <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                    <Link
-                      to="/mint"
-                      className="cta-primary group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-display text-sm font-semibold text-white"
-                    >
-                      Preview the Marketplace
-                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
-                    </Link>
+                    {bundleId ? (
+                      <Link
+                        to={`/business-plan/${bundleId}`}
+                        className="cta-primary group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-display text-sm font-semibold text-white"
+                      >
+                        <FileText className="h-4 w-4" aria-hidden="true" />
+                        View Loan Documentation
+                      </Link>
+                    ) : (
+                      <Link
+                        to="/mint"
+                        className="cta-primary group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-display text-sm font-semibold text-white"
+                      >
+                        Preview the Marketplace
+                        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+                      </Link>
+                    )}
                     <button
                       type="button"
                       onClick={() => {
                         setForm({ businessName: '', industry: INDUSTRIES[0], description: '', name: '', email: '' });
+                        setAssets([newAssetRow()]);
+                        setBundleId(null);
+                        setBundleSaveError('');
                         setConsent(false);
                         reset();
                       }}
@@ -203,6 +286,67 @@ const Build: React.FC = () => {
                       placeholder="A quick summary of the business you want to create."
                       className={`${fieldClass} mt-2 resize-y`}
                     />
+                  </div>
+
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className={labelClass}>Itemized business assets (optional)</span>
+                      <span className="text-xs text-white/40">For your loan documentation</span>
+                    </div>
+                    <p className="mt-1.5 text-xs leading-relaxed text-white/45">
+                      List real assets the business owns or plans to buy — equipment, inventory,
+                      fixtures — with a name and cost for each. This builds a structured record you
+                      can later present to a lender; it is not an investment or ownership offering.
+                    </p>
+                    <div className="mt-3 space-y-3">
+                      {assets.map((asset, i) => (
+                        <div key={asset.key} className="flex flex-col gap-2 sm:flex-row sm:items-start">
+                          <input
+                            value={asset.name}
+                            onChange={updateAsset(asset.key, 'name')}
+                            placeholder={`Asset ${i + 1} name (e.g. Espresso machine)`}
+                            className={`${fieldClass} sm:flex-[2]`}
+                            aria-label={`Asset ${i + 1} name`}
+                          />
+                          <input
+                            value={asset.description}
+                            onChange={updateAsset(asset.key, 'description')}
+                            placeholder="Short description (optional)"
+                            className={`${fieldClass} sm:flex-[2]`}
+                            aria-label={`Asset ${i + 1} description`}
+                          />
+                          <div className="flex gap-2">
+                            <input
+                              type="number"
+                              min="0"
+                              step="0.01"
+                              value={asset.cost}
+                              onChange={updateAsset(asset.key, 'cost')}
+                              placeholder="Cost (USD)"
+                              className={`${fieldClass} sm:w-32`}
+                              aria-label={`Asset ${i + 1} cost in US dollars`}
+                            />
+                            <button
+                              type="button"
+                              onClick={() => removeAssetRow(asset.key)}
+                              disabled={assets.length === 1}
+                              className="glass-soft grid h-[52px] w-[52px] shrink-0 place-items-center rounded-xl text-white/60 transition-colors hover:bg-white/[0.08] hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+                              aria-label={`Remove asset ${i + 1}`}
+                            >
+                              <Trash2 className="h-4 w-4" aria-hidden="true" />
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={addAssetRow}
+                      className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 px-4 py-2 text-sm font-medium text-white/70 transition-colors hover:border-white/25 hover:text-white"
+                    >
+                      <Plus className="h-3.5 w-3.5" aria-hidden="true" />
+                      Add another asset
+                    </button>
                   </div>
 
                   <div className="grid gap-5 sm:grid-cols-2">

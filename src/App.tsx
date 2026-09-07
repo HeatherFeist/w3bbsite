@@ -14,6 +14,7 @@ import Build from "./pages/Build";
 import Mint from "./pages/Mint";
 import AdminMint from "./pages/AdminMint";
 import CertificationPage from "./pages/CertificationPage";
+import BusinessPlan from "./pages/BusinessPlan";
 import EnterprisePage from "./pages/EnterprisePage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import PartnerServices from "./pages/PartnerServices";
@@ -56,6 +57,7 @@ const App = () => (
                 <Route path="/mint" element={<Mint />} />
                 <Route path="/admin/mint" element={<AdminMint />} />
                 <Route path="/certification" element={<CertificationPage />} />
+                <Route path="/business-plan/:bundleId" element={<BusinessPlan />} />
                 <Route path="/enterprise" element={<EnterprisePage />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/partner-services" element={<PartnerServices />} />
