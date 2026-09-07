@@ -3,6 +3,12 @@
 An ERC-721 contract representing certified W3BB Worldwide businesses as
 "Franchise Bundle" NFTs, deployed on Polygon.
 
+> This project also contains `W3BBBusinessCoin` and `W3BBCoinSwap` —
+> per-business ERC-20 coin and testnet-trading contracts that are
+> **technology-readiness work only, NOT cleared for real/mainnet launch**.
+> See [`BUSINESS_COIN_README.md`](./BUSINESS_COIN_README.md) before touching
+> those.
+
 ## How this contract works
 
 - **Minting is gated, not public.** Only wallets holding `MINTER_ROLE` can
@@ -24,9 +30,13 @@ An ERC-721 contract representing certified W3BB Worldwide businesses as
 
 ```
 contracts/
-  contracts/W3BBFranchiseBundle.sol   the contract
+  contracts/W3BBFranchiseBundle.sol   the NFT contract
+  contracts/W3BBBusinessCoin.sol      per-business ERC-20 coin (testnet-only, see BUSINESS_COIN_README.md)
+  contracts/W3BBCoinSwap.sol          escrow-based testnet trading contract (see BUSINESS_COIN_README.md)
   test/                               Hardhat test suite (run before ever deploying)
-  scripts/deploy.ts                   deployment script, reads params from .env
+  scripts/deploy.ts                   Franchise Bundle deployment script, reads params from .env
+  scripts/deployBusinessCoin.ts       Business Coin deployment script (testnet-only by default)
+  scripts/deployCoinSwap.ts           Coin Swap deployment script (testnet-only by default)
   hardhat.config.ts                   network + compiler config
 ```
 
