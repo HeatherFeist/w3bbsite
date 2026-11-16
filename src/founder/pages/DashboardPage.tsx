@@ -1,10 +1,24 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import CardLink from '@/components/w3bb/CardLink';
 import { BADGE_CATALOG, PATHWAYS } from '../catalog';
 import { FounderFrame, Meter, ScoreRing } from '../components';
 import { useFounder } from '../useFounder';
 import { matchFunding } from '../funding';
 import { completedPathwayCount, pathwayComplete } from '../gamification';
+
+const BADGE_TO: Record<string, string> = {
+  assessment_done: '/launch/results',
+  blueprint_created: '/launch/blueprint',
+  profile_complete: '/launch/profile',
+  pathway_complete: '/launch/certifications',
+};
+
+const SCORE_LINKS = [
+  ['founder-readiness', 'founderReadiness', 'Founder Readiness'],
+  ['business-launch', 'businessLaunch', 'Business Launch'],
+  ['funding-readiness', 'fundingReadiness', 'Funding Readiness'],
+] as const;
 
 const DashboardPage: React.FC = () => {
   const { state, xp, levelName, levelPercent, nextLevelName, credibility, profilePercent, toggleTask, addGoal, toggleGoal } = useFounder();
@@ -37,17 +51,16 @@ const DashboardPage: React.FC = () => {
 
       <div className="mt-8 grid gap-4 lg:grid-cols-3">
         {scores ? (
-          <>
-            <div className="glass flex justify-center p-5"><ScoreRing score={scores.founderReadiness} label="Founder Readiness" /></div>
-            <div className="glass flex justify-center p-5"><ScoreRing score={scores.businessLaunch} label="Business Launch" /></div>
-            <div className="glass flex justify-center p-5"><ScoreRing score={scores.fundingReadiness} label="Funding Readiness" /></div>
-          </>
+          SCORE_LINKS.map(([id, key, label]) => (
+            <CardLink key={id} to={`/launch/results#${id}`} className="flex justify-center p-5">
+              <ScoreRing score={scores[key]} label={label} />
+            </CardLink>
+          ))
         ) : (
-          <article className="glass p-5 lg:col-span-3">
+          <CardLink to="/launch/assess" className="p-5 lg:col-span-3">
             <h2 className="font-display text-xl font-semibold text-white">Assessment</h2>
-            <p className="mt-2 text-sm text-white/75">No scores yet. The assessment saves your place.</p>
-            <Link to="/launch/assess" className="mt-4 inline-flex text-sm font-semibold text-cyan">Continue the assessment</Link>
-          </article>
+            <p className="mt-2 text-sm text-white/75">No scores yet. The assessment saves your place. Continue the assessment.</p>
+          </CardLink>
         )}
       </div>
 
@@ -58,33 +71,25 @@ const DashboardPage: React.FC = () => {
       ) : null}
 
       <div className="mt-8 grid gap-4 lg:grid-cols-2">
-        <article className="glass p-5">
+        <CardLink to={state.blueprint ? '/launch/blueprint' : '/launch/matches'} className="p-5">
           <h2 className="font-display text-xl font-semibold text-white">Blueprint</h2>
           {state.blueprint ? (
             <>
               <p className="mt-2 text-sm text-white/80">{state.blueprint.chosenName} · {state.blueprint.modelName}</p>
-              <p className="mt-2 text-sm text-white/70">{state.blueprint.source === 'ai' ? 'Hosted advisor refined the narrative.' : 'On-device architect.'}</p>
-              <Link to="/launch/blueprint" className="mt-4 inline-flex text-sm font-semibold text-cyan">Open the blueprint</Link>
+              <p className="mt-2 text-sm text-white/70">{state.blueprint.source === 'ai' ? 'Hosted advisor refined the narrative.' : 'On-device architect. Open the blueprint.'}</p>
             </>
           ) : (
-            <>
-              <p className="mt-2 text-sm text-white/75">No blueprint yet.</p>
-              <Link to="/launch/matches" className="mt-4 inline-flex text-sm font-semibold text-cyan">Choose a model</Link>
-            </>
+            <p className="mt-2 text-sm text-white/75">No blueprint yet. Choose a model.</p>
           )}
-        </article>
+        </CardLink>
 
-        <article className="glass p-5">
+        <CardLink to="/launch/certifications" className="p-5">
           <h2 className="font-display text-xl font-semibold text-white">Certification pathways</h2>
           <div className="mt-3"><Meter value={credibility} label="Credibility from pathways" /></div>
-          <p className="mt-3 text-sm text-white/75">{pathwaysDone} of {PATHWAYS.length} new learning tracks complete. They lead up to Trust-Approved Certification. They do not grant it.</p>
-          <div className="mt-4 flex flex-wrap gap-3 text-sm">
-            <Link to="/launch/certifications" className="font-semibold text-cyan">Open pathways</Link>
-            <Link to="/certification" className="font-semibold text-cyan">Trust Certification capstone</Link>
-          </div>
-        </article>
+          <p className="mt-3 text-sm text-white/75">{pathwaysDone} of {PATHWAYS.length} new learning tracks complete. Open the pathways. They lead up to Trust-Approved Certification and do not grant it.</p>
+        </CardLink>
 
-        <article className="glass p-5">
+        <CardLink to={funding[0] ? `/launch/funding#${funding[0].id}` : '/launch/funding'} className="p-5">
           <h2 className="font-display text-xl font-semibold text-white">Funding practice</h2>
           <p className="mt-2 text-sm text-white/70">Sample records only. No real amounts or deadlines.</p>
           {funding.length ? (
@@ -96,16 +101,14 @@ const DashboardPage: React.FC = () => {
           ) : (
             <p className="mt-3 text-sm text-white/75">Finish the assessment to rank the sample list.</p>
           )}
-          <Link to="/launch/funding" className="mt-4 inline-flex text-sm font-semibold text-cyan">Open the funding hub</Link>
-        </article>
+        </CardLink>
 
-        <article className="glass p-5">
+        <CardLink to="/launch/coach" className="p-5">
           <h2 className="font-display text-xl font-semibold text-white">Coach</h2>
           <p className="mt-2 text-sm leading-relaxed text-white/75">
-            {latestCoach ? latestCoach.content.slice(0, 280) : 'No coach messages yet. The advisor can use your scores once the assessment is done.'}
+            {latestCoach ? latestCoach.content.slice(0, 280) : 'No coach messages yet. Open the coach after the assessment.'}
           </p>
-          <Link to="/launch/coach" className="mt-4 inline-flex text-sm font-semibold text-cyan">Open the coach</Link>
-        </article>
+        </CardLink>
       </div>
 
       <div className="mt-4 grid gap-4 lg:grid-cols-2">
@@ -118,11 +121,11 @@ const DashboardPage: React.FC = () => {
             {lowCapital ? <li><Link className="text-cyan underline decoration-cyan/30 underline-offset-4" to="/zero-dollar-startup">Zero-Dollar Startup Path</Link></li> : null}
           </ul>
         </article>
-        <article className="glass p-5">
+        <CardLink to="/launch/profile" className="p-5">
           <h2 className="font-display text-xl font-semibold text-white">Profile</h2>
           <div className="mt-3"><Meter value={profilePercent} label="Profile progress" /></div>
-          <Link to="/launch/profile" className="mt-4 inline-flex text-sm font-semibold text-cyan">Edit profile</Link>
-        </article>
+          <p className="mt-4 text-sm font-semibold text-cyan">Edit profile</p>
+        </CardLink>
       </div>
 
       <section className="mt-8 grid gap-4 lg:grid-cols-2">
@@ -132,10 +135,19 @@ const DashboardPage: React.FC = () => {
             <ul className="mt-3 space-y-2">
               {state.tasks.map((task) => (
                 <li key={task.id} className="flex items-start gap-3">
-                  <input id={`task-${task.id}`} type="checkbox" className="mt-1 h-4 w-4 accent-cyan" checked={task.done} onChange={() => toggleTask(task.id)} />
-                  <label htmlFor={`task-${task.id}`} className="text-sm text-white/85">
-                    {task.href ? <Link to={task.href} className="underline decoration-white/20 underline-offset-4">{task.title}</Link> : task.title}
-                  </label>
+                  <input
+                    id={`task-${task.id}`}
+                    type="checkbox"
+                    className="mt-1 h-4 w-4 accent-cyan"
+                    checked={task.done}
+                    aria-label={`Mark done: ${task.title}`}
+                    onChange={() => toggleTask(task.id)}
+                  />
+                  {task.href ? (
+                    <Link to={task.href} className="text-sm text-white/85 underline decoration-white/20 underline-offset-4">{task.title}</Link>
+                  ) : (
+                    <span className="text-sm text-white/85">{task.title}</span>
+                  )}
                 </li>
               ))}
             </ul>
@@ -173,10 +185,12 @@ const DashboardPage: React.FC = () => {
           {BADGE_CATALOG.map((badge) => {
             const earned = state.earnedBadgeIds.includes(badge.id);
             return (
-              <li key={badge.id} className={`rounded-2xl border p-4 ${earned ? 'border-gold/40 bg-gold/10' : 'border-white/10 bg-white/[0.03]'}`}>
-                <p className="font-display font-semibold text-white">{badge.name}</p>
-                <p className="mt-1 text-sm text-white/70">{badge.detail}</p>
-                <p className="mt-2 text-xs uppercase tracking-[0.14em] text-white/60">{earned ? 'Earned' : 'Not yet'}</p>
+              <li key={badge.id}>
+                <CardLink to={BADGE_TO[badge.id]} className={`rounded-2xl p-4 ${earned ? 'border-gold/40 bg-gold/10' : ''}`}>
+                  <p className="font-display font-semibold text-white">{badge.name}</p>
+                  <p className="mt-1 text-sm text-white/70">{badge.detail}</p>
+                  <p className="mt-2 text-xs uppercase tracking-[0.14em] text-white/60">{earned ? 'Earned' : 'Not yet'}</p>
+                </CardLink>
               </li>
             );
           })}
@@ -184,7 +198,7 @@ const DashboardPage: React.FC = () => {
       </section>
 
       <section className="mt-8 grid gap-4 lg:grid-cols-3">
-        <article className="glass p-5">
+        <CardLink to="/launch/blueprint" className="p-5">
           <h2 className="font-display text-lg font-semibold text-white">Milestone progress</h2>
           {state.profile.milestones.length === 0 && !state.blueprint ? (
             <p className="mt-2 text-sm text-white/75">Record a milestone on your profile, or generate a blueprint to see the 12-month plan.</p>
@@ -197,20 +211,19 @@ const DashboardPage: React.FC = () => {
           <p className="mt-3 text-xs text-white/60">
             Pathways marked complete: {PATHWAYS.filter((pathway) => pathwayComplete(state.certProgress, pathway.id)).map((pathway) => pathway.name).join(', ') || 'none yet'}.
           </p>
-        </article>
+        </CardLink>
         <article className="glass p-5">
           <h2 className="font-display text-lg font-semibold text-white">Revenue tracking</h2>
           <p className="mt-2 text-sm leading-relaxed text-white/75">
             Placeholder. No income is recorded here, and nothing is connected to payments or the marketplace in this release.
           </p>
         </article>
-        <article className="glass p-5">
+        <CardLink to="/community" className="p-5">
           <h2 className="font-display text-lg font-semibold text-white">Community activity</h2>
           <p className="mt-2 text-sm leading-relaxed text-white/75">
-            Placeholder. Community activity will connect later. The live community is already on the site.
+            Activity inside Launch is not counted yet. Open the W3BB community.
           </p>
-          <Link to="/community" className="mt-3 inline-flex text-sm font-semibold text-cyan">Go to community</Link>
-        </article>
+        </CardLink>
       </section>
     </FounderFrame>
   );

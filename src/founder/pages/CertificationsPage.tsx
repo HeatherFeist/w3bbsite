@@ -27,7 +27,7 @@ const CertificationsPage: React.FC = () => {
         {PATHWAYS.map((pathway, index) => {
           const done = pathwayComplete(state.certProgress, pathway.id);
           return (
-            <li key={pathway.id} className="glass p-5 sm:p-6">
+            <li id={pathway.id} key={pathway.id} className="glass scroll-mt-28 p-5 sm:p-6">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <h2 className="font-display text-2xl font-semibold text-white">{index + 1}. {pathway.name}</h2>
                 <span className="text-xs uppercase tracking-[0.14em] text-white/60">{done ? 'Pathway complete' : 'In progress'}</span>

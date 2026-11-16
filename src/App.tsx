@@ -11,6 +11,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { wagmiConfig } from "@/lib/wagmi";
 import Index from "./pages/Index";
 import Build from "./pages/Build";
+import BuilderStep from "./pages/BuilderStep";
 import Mint from "./pages/Mint";
 import AdminMint from "./pages/AdminMint";
 import CertificationPage from "./pages/CertificationPage";
@@ -67,6 +68,7 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/build" element={<Build />} />
                 <Route path="/build/:category" element={<Build />} />
+                <Route path="/builder/:slug" element={<BuilderStep />} />
                 <Route path="/mint" element={<Mint />} />
                 <Route path="/admin/mint" element={<AdminMint />} />
                 <Route path="/certification" element={<CertificationPage />} />

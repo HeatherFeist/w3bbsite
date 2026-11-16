@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { builderStepsInOrder } from '@/data/builderSteps';
 import { BUILDER } from '@/data/site';
 import Reveal from '@/components/w3bb/Reveal';
 import SectionHeading from '@/components/w3bb/SectionHeading';
@@ -16,9 +17,12 @@ export const BusinessBuilder: React.FC = () => (
           className="absolute left-[27px] top-4 bottom-4 w-px bg-gradient-to-b from-violet via-cyan to-gold opacity-60 sm:left-[35px]"
           aria-hidden="true"
         />
-        {BUILDER.steps.map((step, i) => (
+        {builderStepsInOrder().map((step, i) => (
           <Reveal as="li" key={step.n} delay={i * 70} className="relative block">
-            <div className="group flex items-center gap-5 py-3 sm:gap-8">
+            <Link
+              to={step.to}
+              className="group flex items-center gap-5 rounded-2xl py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-[#07080C] sm:gap-8"
+            >
               <span className="relative z-10 grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-white/10 bg-[#0B0D14] font-display text-base font-semibold text-white/80 transition-all duration-500 group-hover:border-cyan/50 group-hover:text-white sm:h-[72px] sm:w-[72px] sm:text-xl">
                 <span
                   className="absolute inset-0 rounded-2xl bg-gradient-to-br from-violet/25 to-cyan/15 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
@@ -26,12 +30,13 @@ export const BusinessBuilder: React.FC = () => (
                 />
                 <span className="relative">{step.n}</span>
               </span>
-              <div className="glass glass-lift flex-1 px-5 py-5 sm:px-8 sm:py-6">
+              <span className="glass glass-lift flex flex-1 items-center justify-between gap-4 px-5 py-5 sm:px-8 sm:py-6">
                 <h3 className="font-display text-lg font-semibold text-white sm:text-2xl">
                   {step.title}
                 </h3>
-              </div>
-            </div>
+                <ArrowRight className="h-5 w-5 shrink-0 text-cyan opacity-70 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+              </span>
+            </Link>
           </Reveal>
         ))}
       </ol>

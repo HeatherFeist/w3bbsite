@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import CardLink from '@/components/w3bb/CardLink';
 import { requestAdvisor } from '../ai';
 import { FounderFrame, PrimaryLink } from '../components';
 import { useFounder } from '../useFounder';
 
 const MatchesPage: React.FC = () => {
-  const navigate = useNavigate();
   const { state, selectModel } = useFounder();
   const [note, setNote] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -55,37 +54,37 @@ const MatchesPage: React.FC = () => {
         {state.matches.map((match, index) => {
           const selected = state.selectedModelId === match.id;
           return (
-            <li key={match.id} className={`glass p-5 sm:p-6 ${selected ? 'ring-1 ring-cyan/50' : ''}`}>
-              <div className="flex flex-wrap items-start justify-between gap-3">
-                <div>
-                  <p className="text-xs font-medium uppercase tracking-[0.18em] text-white/55">Match {index + 1}</p>
-                  <h2 className="mt-1 font-display text-2xl font-semibold text-white">{match.name}</h2>
-                </div>
-                <p className="font-display text-3xl font-semibold text-white" aria-label={`${match.name} match score ${match.matchScore} out of 100`}>
-                  {match.matchScore}
-                </p>
-              </div>
-              <p className="mt-3 text-sm leading-relaxed text-white/75">{match.summary}</p>
-              <ul className="mt-4 list-disc space-y-1 pl-5 text-sm text-white/80">
-                {match.reasons.map((reason) => <li key={reason}>{reason}</li>)}
-              </ul>
-              <dl className="mt-5 grid gap-3 text-sm sm:grid-cols-2">
-                <div><dt className="text-white/60">Difficulty</dt><dd className="text-white/90">{match.difficulty}</dd></div>
-                <div><dt className="text-white/60">Launch timeline</dt><dd className="text-white/90">{match.timeline}</dd></div>
-                <div><dt className="text-white/60">Budget</dt><dd className="text-white/90">{match.budgetBand}</dd></div>
-                <div><dt className="text-white/60">Revenue potential</dt><dd className="text-white/90">{match.revenuePotential}</dd></div>
-              </dl>
-              <button
-                type="button"
-                aria-pressed={selected}
-                className="mt-5 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-[#07080C]"
-                onClick={() => {
-                  selectModel(match.id);
-                  navigate('/launch/blueprint');
-                }}
+            <li key={match.id}>
+              <CardLink
+                to={`/launch/blueprint?model=${match.id}`}
+                onClick={() => selectModel(match.id)}
+                className={`p-5 sm:p-6 ${selected ? 'ring-1 ring-cyan/50' : ''}`}
               >
-                {selected ? 'Build this blueprint' : 'Choose and build a blueprint'}
-              </button>
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <p className="text-xs font-medium uppercase tracking-[0.18em] text-white/70">Match {index + 1}</p>
+                    <h2 className="mt-1 font-display text-2xl font-semibold text-white">{match.name}</h2>
+                  </div>
+                  <p className="font-display text-3xl font-semibold text-white">
+                    <span className="sr-only">{match.name} match score </span>
+                    {match.matchScore}
+                    <span className="sr-only"> out of 100</span>
+                  </p>
+                </div>
+                <p className="mt-3 text-sm leading-relaxed text-white/75">{match.summary}</p>
+                <ul className="mt-4 list-disc space-y-1 pl-5 text-sm text-white/80">
+                  {match.reasons.map((reason) => <li key={reason}>{reason}</li>)}
+                </ul>
+                <dl className="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+                  <div><dt className="text-white/70">Difficulty</dt><dd className="text-white/90">{match.difficulty}</dd></div>
+                  <div><dt className="text-white/70">Launch timeline</dt><dd className="text-white/90">{match.timeline}</dd></div>
+                  <div><dt className="text-white/70">Budget</dt><dd className="text-white/90">{match.budgetBand}</dd></div>
+                  <div><dt className="text-white/70">Revenue potential</dt><dd className="text-white/90">{match.revenuePotential}</dd></div>
+                </dl>
+                <span className="mt-5 inline-flex rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-[#07080C]">
+                  {selected ? 'Open this blueprint' : 'Choose and open the blueprint'}
+                </span>
+              </CardLink>
             </li>
           );
         })}
