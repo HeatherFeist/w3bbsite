@@ -181,7 +181,8 @@ Badges: assessment complete, blueprint created, profile complete, certification 
 5. For the hosted coach, set `AI_API_KEY` (or `OPENAI_API_KEY`) as a secret on Cloudflare Pages and/or as a Supabase function secret. Deploy `functions/api/founder-ai.ts` with the Pages project, or `supabase functions deploy founder-ai`. Never prefix the key with `VITE_`.
 6. Optional: `AI_BASE_URL` and `AI_MODEL` if you are not using the OpenAI default.
 7. Optional: enable pgvector and run the second migration. The MVP does not query embeddings.
-8. Build with `npm run build`. The existing Cloudflare static hosting keeps working. New routes are client-side, same as `/certification` and `/ecosystem`. This PR does not deploy.
+8. Build with `npm run build`. The build prerenders public routes into HTML (a full Chrome render when Chrome is installed, otherwise a title, description, and canonical shell) and writes `sitemap.xml`. `public/robots.txt` points crawlers at that sitemap. The existing Cloudflare static hosting keeps working.
+9. Analytics stays off until you set an env var. `VITE_CF_ANALYTICS_TOKEN` is a Cloudflare Web Analytics beacon token and records page views. `VITE_PLAUSIBLE_DOMAIN` is the domain configured in Plausible; `cta_click` and `form_submit` are sent there. Leave both blank and no tracker script loads.
 
 `npm test` runs the scoring, matching, blueprint, funding, and progression tests. `npm run lint` covers the app.
 

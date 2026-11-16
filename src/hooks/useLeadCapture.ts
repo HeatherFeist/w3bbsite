@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { track } from '@/lib/analytics';
 import { db } from '@/lib/db';
 import { sendWeb3FormsNotification } from '@/lib/web3forms';
 
@@ -64,11 +65,7 @@ export function useLeadCapture() {
         message: input.message?.trim() || null,
       });
 
-      try {
-        window.supercool?.track?.('form_submit', { form: input.source, interest: input.interest });
-      } catch {
-        /* analytics must never break the page */
-      }
+      track('form_submit', { form: input.source, interest: input.interest });
 
       // Notify the site owner by email, and auto-reply to the submitter if
       // that's enabled on the Web3Forms dashboard. Never blocks success —
