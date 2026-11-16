@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, ArrowRight, ChevronDown, Globe2, Store, Users2, BookOpen, KeyRound, Rocket } from 'lucide-react';
+import { track } from '@/lib/analytics';
 import { cn } from '@/lib/utils';
 import { NAV_LINKS, SECTION_IDS } from '@/data/site';
 import { useScrollSpy, scrollToId } from '@/hooks/useScrollSpy';
@@ -205,11 +206,14 @@ export const Navbar: React.FC = () => {
             Command Center
           </Link>
           <Link
-            to="/build"
-            onClick={() => setOpen(false)}
+            to="/launch/assess"
+            onClick={() => {
+              track('cta_click', { cta: 'Founder Assessment', location: 'nav' });
+              setOpen(false);
+            }}
             className="cta-primary hidden rounded-full px-5 py-2.5 text-sm font-semibold text-white sm:inline-flex items-center gap-2"
           >
-            Start Creating
+            Founder Assessment
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
           <button
@@ -305,11 +309,14 @@ export const Navbar: React.FC = () => {
           </li>
           <li className="mt-2">
             <Link
-              to="/build"
-              onClick={() => setOpen(false)}
+              to="/launch/assess"
+              onClick={() => {
+                track('cta_click', { cta: 'Founder Assessment', location: 'nav' });
+                setOpen(false);
+              }}
               className="cta-primary flex w-full items-center justify-center rounded-xl px-5 py-3.5 text-base font-semibold text-white"
             >
-              Start Creating
+              Founder Assessment
             </Link>
           </li>
         </ul>
