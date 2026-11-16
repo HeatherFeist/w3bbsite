@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { track } from '@/lib/analytics';
 import { FINAL_CTA, IMAGES } from '@/data/site';
 import Reveal from '@/components/w3bb/Reveal';
 
@@ -39,26 +40,30 @@ export const FinalCta: React.FC = () => (
             </h2>
 
             <Reveal delay={380}>
-              <Link
-                to="/build"
-                onClick={() => {
-                  try {
-                    window.supercool?.track?.('cta_click', {
-                      cta: FINAL_CTA.button,
-                      location: 'final',
-                    });
-                  } catch {
-                    /* no-op */
-                  }
-                }}
-                className="cta-primary group mt-12 inline-flex items-center gap-2.5 rounded-full px-10 py-5 font-display text-lg font-semibold text-white"
-              >
-                {FINAL_CTA.button}
-                <ArrowRight
-                  className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
-                  aria-hidden="true"
-                />
-              </Link>
+              <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                <Link
+                  to="/launch/assess"
+                  onClick={() => track('cta_click', { cta: FINAL_CTA.button, location: 'final' })}
+                  className="cta-primary group inline-flex items-center gap-2.5 rounded-full px-10 py-5 font-display text-lg font-semibold text-white"
+                >
+                  {FINAL_CTA.button}
+                  <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+                </Link>
+                <Link
+                  to="/launch"
+                  onClick={() => track('cta_click', { cta: 'Open Launch', location: 'final' })}
+                  className="glass-soft inline-flex items-center gap-2 rounded-full px-8 py-4 font-display text-base font-semibold text-white/85 hover:text-white"
+                >
+                  Open Launch
+                </Link>
+                <Link
+                  to="/build"
+                  onClick={() => track('cta_click', { cta: FINAL_CTA.secondaryButton, location: 'final' })}
+                  className="inline-flex items-center gap-2 font-display text-sm font-semibold text-white/75 hover:text-white"
+                >
+                  {FINAL_CTA.secondaryButton}
+                </Link>
+              </div>
             </Reveal>
 
             <Reveal delay={460}>

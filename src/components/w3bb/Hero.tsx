@@ -1,19 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Compass } from 'lucide-react';
+import { track } from '@/lib/analytics';
 import { HERO, IMAGES } from '@/data/site';
 import Icon from '@/components/w3bb/Icon';
 import Reveal from '@/components/w3bb/Reveal';
 
 export const Hero: React.FC = () => {
-  const track = (name: string, props: Record<string, string>) => {
-    try {
-      window.supercool?.track?.(name, props);
-    } catch {
-      /* analytics must never break the page */
-    }
-  };
-
   return (
     <section
       id="hero"
@@ -59,27 +52,15 @@ export const Hero: React.FC = () => {
           </h1>
 
           <Reveal delay={460}>
-            <p className="mx-auto mt-7 max-w-2xl font-display text-lg font-medium text-white/90 sm:text-2xl">
+            <p className="mx-auto mt-6 max-w-2xl font-display text-lg font-medium text-white/90 sm:text-2xl">
               {HERO.subheadline}
             </p>
           </Reveal>
 
           <Reveal delay={540}>
-            <p className="mx-auto mt-5 max-w-2xl text-[0.98rem] leading-relaxed text-white/65 sm:text-lg">
-              {HERO.body}
-            </p>
-          </Reveal>
-
-          <Reveal delay={620}>
-            <p className="mt-6 font-display text-base italic sm:text-lg">
-              <span className="gradient-text">{HERO.closing}</span>
-            </p>
-          </Reveal>
-
-          <Reveal delay={700}>
-            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
               <Link
-                to="/build"
+                to="/launch/assess"
                 onClick={() => track('cta_click', { cta: HERO.primaryCta, location: 'hero' })}
                 className="cta-primary group inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 font-display text-base font-semibold text-white sm:w-auto"
               >
@@ -87,30 +68,47 @@ export const Hero: React.FC = () => {
                 <ArrowRight
                   className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
                   aria-hidden="true"
-
                 />
               </Link>
               <Link
-                to="/mint"
+                to="/build"
                 onClick={() => track('cta_click', { cta: HERO.secondaryCta, location: 'hero' })}
                 className="glass-soft group inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 font-display text-base font-semibold text-white/85 transition-all duration-300 hover:border-cyan/50 hover:bg-white/[0.07] hover:text-white sm:w-auto"
               >
-                <Compass
-                  className="h-4 w-4 transition-transform duration-500 group-hover:rotate-45"
-
-                  aria-hidden="true"
-                  strokeWidth={1.5}
-                />
                 {HERO.secondaryCta}
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
             <Link
-              to="/launch/assess"
-              onClick={() => track('cta_click', { cta: 'Start Your Business', location: 'hero' })}
+              to="/launch"
+              onClick={() => track('cta_click', { cta: 'See how Launch works', location: 'hero' })}
               className="mt-5 inline-flex items-center gap-2 font-display text-sm font-semibold text-gold"
             >
-              Start Your Business
+              See how Launch works
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </Reveal>
+
+          <Reveal delay={620}>
+            <p className="mx-auto mt-6 max-w-2xl text-[0.98rem] leading-relaxed text-white/65 sm:text-lg">
+              {HERO.body}
+            </p>
+          </Reveal>
+
+          <Reveal delay={680}>
+            <p className="mt-4 font-display text-base italic sm:text-lg">
+              <span className="gradient-text">{HERO.closing}</span>
+            </p>
+          </Reveal>
+
+          <Reveal delay={740}>
+            <Link
+              to="/mint"
+              onClick={() => track('cta_click', { cta: HERO.marketplaceCta, location: 'hero' })}
+              className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-white/75 hover:text-white"
+            >
+              <Compass className="h-4 w-4" aria-hidden="true" strokeWidth={1.5} />
+              {HERO.marketplaceCta}
             </Link>
           </Reveal>
 

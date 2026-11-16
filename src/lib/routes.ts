@@ -10,6 +10,7 @@ export const APP_ROUTES = [
   '/business-plan/:bundleId',
   '/enterprise',
   '/privacy',
+  '/terms',
   '/partner-services',
   '/choose-your-path',
   '/launchpad',

@@ -19,9 +19,9 @@ export const ConsentCheckbox: React.FC<ConsentCheckboxProps> = ({ id, checked, o
     />
     <span>
       I agree to the{' '}
-      <Link to="/privacy" target="_blank" rel="noopener noreferrer" className="text-cyan underline-offset-4 hover:underline">
-        Privacy Policy
-      </Link>
+      <Link to="/terms" className="text-cyan underline-offset-4 hover:underline">Terms of Use</Link>
+      {' '}and{' '}
+      <Link to="/privacy" className="text-cyan underline-offset-4 hover:underline">Privacy Policy</Link>
       .
     </span>
   </label>

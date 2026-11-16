@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { track } from '@/lib/analytics';
 import { ENTERPRISE } from '@/data/site';
 import Icon from '@/components/w3bb/Icon';
 import Reveal from '@/components/w3bb/Reveal';
@@ -50,16 +51,7 @@ export const Enterprise: React.FC = () => (
           </p>
           <Link
             to="/enterprise"
-            onClick={() => {
-              try {
-                window.supercool?.track?.('cta_click', {
-                  cta: ENTERPRISE.cta,
-                  location: 'enterprise',
-                });
-              } catch {
-                /* no-op */
-              }
-            }}
+            onClick={() => track('cta_click', { cta: ENTERPRISE.cta, location: 'enterprise' })}
             className="cta-primary group inline-flex items-center gap-2 rounded-full px-8 py-4 font-display text-base font-semibold text-white"
           >
             {ENTERPRISE.cta}

@@ -63,8 +63,9 @@ export const HERO = {
   body:
     'W3BB Worldwide is a trust-backed digital business ecosystem that empowers anyone to build, mint, certify, and monetize fully packaged businesses. Create your brand, generate your assets, and launch your enterprise — all inside one unified platform.',
   closing: 'Entrepreneurship, simplified. Legacy, amplified.',
-  primaryCta: 'Start Creating Today',
-  secondaryCta: 'Explore the Marketplace',
+  primaryCta: 'Take the Founder Assessment',
+  secondaryCta: 'Start Creating',
+  marketplaceCta: 'Explore the Marketplace',
   stats: [
     { label: 'AI-Powered Creation', icon: 'sparkles' as IconName },
     { label: 'Blockchain Verified', icon: 'link' as IconName },
@@ -331,7 +332,8 @@ export const WHY = {
 
 export const FINAL_CTA = {
   lines: ['Build your business.', 'Mint your legacy.', 'Join the W3BB Worldwide economy.'],
-  button: 'Start Creating Today',
+  button: 'Take the Founder Assessment',
+  secondaryButton: 'Start Creating',
   subline: 'Entrepreneurship, simplified. Legacy, amplified.',
 };
 
@@ -341,7 +343,7 @@ export const CONTACT = {
   label: 'CONTACT',
   heading: 'Start the Conversation',
   paragraph:
-    'Tell us what you want to build. Join the waitlist and our team will reach out with early access to the W3BB Worldwide platform.',
+    'Tell us what you want to build. The founder assessment is open, and you can start a business blueprint today. Send a note if you want a person on the team to follow up.',
   interests: [
     'Building a business',
     'Buying a Franchise Bundle',
@@ -352,9 +354,9 @@ export const CONTACT = {
     'Press',
     'General Support',
   ],
-  successTitle: "You're on the list.",
+  successTitle: 'Message received.',
   successBody:
-    "Thank you — your details are with the W3BB Worldwide team. We'll be in touch shortly with your next steps.",
+    'Thank you — your note is with the W3BB Worldwide team. We will follow up with next steps.',
 };
 
 /* --------------------------------- 13. FOOTER ------------------------------- */
@@ -402,6 +404,7 @@ export const FOOTER_COLUMNS: { title: string; links: FooterLink[] }[] = [
       { label: 'Contact', id: 'contact' },
       { label: 'Choose Your Path', to: '/choose-your-path' },
       { label: 'Privacy Policy', to: '/privacy' },
+      { label: 'Terms of Use', to: '/terms' },
     ],
   },
 ];

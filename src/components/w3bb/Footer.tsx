@@ -1,16 +1,10 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Linkedin, Twitter, Github, Youtube, Mail } from 'lucide-react';
+import { Mail } from 'lucide-react';
+import { SOCIAL_LINKS } from '@/data/social';
 import { SITE, FOOTER_COLUMNS } from '@/data/site';
 import { scrollToId } from '@/hooks/useScrollSpy';
 import { Wordmark } from '@/components/w3bb/Navbar';
-
-const SOCIALS = [
-  { label: 'W3BB Worldwide on X', Icon: Twitter, href: 'https://x.com/w3bbworldwide' },
-  { label: 'W3BB Worldwide on LinkedIn', Icon: Linkedin, href: 'https://www.linkedin.com/company/w3bbworldwide' },
-  { label: 'W3BB Worldwide on YouTube', Icon: Youtube, href: 'https://www.youtube.com/@w3bbworldwide' },
-  { label: 'W3BB Worldwide on GitHub', Icon: Github, href: 'https://github.com/w3bbworldwide' },
-];
 
 export const Footer: React.FC = () => {
   const location = useLocation();
@@ -97,12 +91,16 @@ export const Footer: React.FC = () => {
       <div className="mt-8 flex flex-col-reverse items-center justify-between gap-6 sm:flex-row">
         <p className="text-center text-xs text-white/45 sm:text-left">
           {SITE.copyright} · {SITE.domain} ·{' '}
+          <Link to="/terms" className="transition-colors hover:text-white/70">
+            Terms
+          </Link>
+          {' · '}
           <Link to="/privacy" className="transition-colors hover:text-white/70">
-            Privacy Policy
+            Privacy
           </Link>
         </p>
         <ul className="flex items-center gap-3">
-          {SOCIALS.map(({ label, Icon: SocialIcon, href }) => (
+          {SOCIAL_LINKS.map(({ label, icon: SocialIcon, href }) => (
             <li key={label}>
               <a
                 href={href}
