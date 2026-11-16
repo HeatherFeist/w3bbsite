@@ -2,10 +2,41 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpen } from 'lucide-react';
 import PageShell from '@/components/PageShell';
+import CardLink from '@/components/w3bb/CardLink';
 import Reveal from '@/components/w3bb/Reveal';
 import SectionHeading from '@/components/w3bb/SectionHeading';
-import { RESOURCES } from '@/data/resources';
+import { RESOURCES, type ResourceCategory } from '@/data/resources';
 import { usePageMeta } from '@/hooks/usePageMeta';
+
+const LibraryCard: React.FC<{ item: ResourceCategory }> = ({ item }) => {
+  const body = (
+    <>
+      <span className="grid h-11 w-11 place-items-center rounded-xl bg-white/[0.06] ring-1 ring-inset ring-white/10">
+        <item.icon className="h-5 w-5 text-cyan" strokeWidth={1.5} aria-hidden="true" />
+      </span>
+      <h3 className="mt-5 font-display text-base font-semibold text-white">{item.title}</h3>
+      <p className="mt-2 flex-1 text-sm leading-relaxed text-white/60">{item.description}</p>
+      {item.to ? (
+        <span className="mt-4 inline-flex items-center gap-1 font-display text-sm font-semibold text-cyan">
+          {item.linkLabel}
+          <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+        </span>
+      ) : (
+        <p className="mt-4 font-display text-xs font-semibold uppercase tracking-[0.14em] text-white/40">Not published yet</p>
+      )}
+    </>
+  );
+
+  if (!item.to) {
+    return <div className="glass flex h-full flex-col p-6">{body}</div>;
+  }
+
+  return (
+    <CardLink to={item.to} className="flex flex-col p-6">
+      {body}
+    </CardLink>
+  );
+};
 
 const Resources: React.FC = () => {
   usePageMeta('Resources', RESOURCES.sub);
@@ -41,13 +72,7 @@ const Resources: React.FC = () => {
           <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {RESOURCES.library.map((item, i) => (
               <Reveal as="li" key={item.title} delay={(i % 4) * 80}>
-                <div className="glass relative h-full p-6">
-                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-white/[0.06] ring-1 ring-inset ring-white/10">
-                    <item.icon className="h-5 w-5 text-cyan" strokeWidth={1.5} aria-hidden="true" />
-                  </span>
-                  <h3 className="mt-5 font-display text-base font-semibold text-white">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/60">{item.description}</p>
-                </div>
+                <LibraryCard item={item} />
               </Reveal>
             ))}
           </ul>

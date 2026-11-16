@@ -1,8 +1,7 @@
 /**
- * Content for the /resources page. `library` entries are placeholder /
- * "Coming Soon" educational content. `growPrograms` links out to the
- * already-built partner and service pages, folded in here rather than
- * cluttering primary nav.
+ * Content for the /resources page. Library cards link to tools that
+ * already exist. A card without `to` is not published yet — do not invent
+ * a destination for it. `growPrograms` links to the partner and service pages.
  */
 import {
   BookOpen,
@@ -26,6 +25,9 @@ export interface ResourceCategory {
   icon: LucideIcon;
   title: string;
   description: string;
+  /** Existing route. Omit when the resource is not published yet. */
+  to?: string;
+  linkLabel?: string;
 }
 
 export interface GrowProgram {
@@ -40,15 +42,55 @@ export const RESOURCES = {
   heading: 'Resources',
   sub: 'Everything you need to learn, plan, and grow — beyond the Business Builder itself.',
   libraryHeading: 'The Resource Library',
-  libraryIntro: 'Guides, templates, and tools for every stage of building a business. New resources are added regularly.',
+  libraryIntro: 'These open the guides, plans, and tools already on the site. A card without a link is not published yet.',
   library: [
-    { icon: BookOpen, title: 'Guides', description: 'Step-by-step walkthroughs for every part of starting a business. Coming soon.' },
-    { icon: LayoutTemplate, title: 'Templates', description: 'Ready-to-use documents, plans, and layouts. Coming soon.' },
-    { icon: Cpu, title: 'AI Tools', description: 'AI-powered tools to help you build faster. Coming soon.' },
-    { icon: ClipboardList, title: 'Business Playbooks', description: 'Proven playbooks for common business models. Coming soon.' },
-    { icon: HandCoins, title: 'Funding Resources', description: 'Grants, funding paths, and financial resources. Coming soon.' },
-    { icon: Scale, title: 'Legal Basics', description: 'Plain-language guidance on business structure and compliance. Coming soon.' },
-    { icon: Palette, title: 'Branding Kits', description: 'Starter kits to build a professional brand identity. Coming soon.' },
+    {
+      icon: BookOpen,
+      title: 'Guides',
+      description: 'The Business Builder walks through naming, the offer, assets, customers, operations, and launch. Each step has its own page.',
+      to: '/build',
+      linkLabel: 'Open the builder',
+    },
+    {
+      icon: LayoutTemplate,
+      title: 'Templates',
+      description: 'The blueprint turns an assessment into a written plan, a 90-day outline, and a launch checklist.',
+      to: '/launch/blueprint',
+      linkLabel: 'Open the blueprint',
+    },
+    {
+      icon: Cpu,
+      title: 'AI Tools',
+      description: 'The launch coach answers with your assessment and the builder step you are on. It stays on this device until a server AI key is set.',
+      to: '/launch/coach',
+      linkLabel: 'Open the coach',
+    },
+    {
+      icon: ClipboardList,
+      title: 'Business Playbooks',
+      description: 'After the assessment, the rules engine ranks business models already in the catalog. You choose which one to build.',
+      to: '/launch/matches',
+      linkLabel: 'See model matches',
+    },
+    {
+      icon: HandCoins,
+      title: 'Funding Resources',
+      description: 'Practice matching against sample funding records. These are not live grants, and they have no award amounts or deadlines.',
+      to: '/launch/funding',
+      linkLabel: 'Open the funding hub',
+    },
+    {
+      icon: Scale,
+      title: 'Legal Basics',
+      description: 'Plain-language guidance on business structure is not published here yet.',
+    },
+    {
+      icon: Palette,
+      title: 'Branding Kits',
+      description: 'Start a brand kit in the builder: color, type, and a visual system that stays consistent.',
+      to: '/build/brand-kit',
+      linkLabel: 'Start a brand kit',
+    },
   ] satisfies ResourceCategory[],
   growHeading: 'Grow & Partner With Us',
   growIntro: 'Existing programs for entrepreneurs, agencies, affiliates, and international sellers — live today.',
