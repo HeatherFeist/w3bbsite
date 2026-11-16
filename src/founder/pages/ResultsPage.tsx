@@ -72,7 +72,10 @@ const ResultsPage: React.FC = () => {
       </div>
 
       <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-        <PrimaryLink to="/launch/matches">See business matches</PrimaryLink>
+        <PrimaryLink to="/launch/with-ai">Launch With AI</PrimaryLink>
+        <Link to="/launch/matches" className="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3 text-sm font-semibold text-white/85">
+          See business matches
+        </Link>
         <Link to="/launch/assess" className="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3 text-sm font-semibold text-white/85">
           Edit answers
         </Link>

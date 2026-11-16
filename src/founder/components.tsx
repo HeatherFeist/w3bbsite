@@ -11,6 +11,7 @@ const LINKS = [
   ['/launch', 'Overview'],
   ['/launch/assess', 'Assessment'],
   ['/launch/results', 'Results'],
+  ['/launch/with-ai', 'Launch With AI'],
   ['/launch/matches', 'Matches'],
   ['/launch/blueprint', 'Blueprint'],
   ['/launch/dashboard', 'Command Center'],

@@ -6,7 +6,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/theme-provider";
 import { FounderProvider } from "@/founder/context";
-
 const WalletShell = lazy(() => import("@/components/WalletShell"));
 
 const Index = lazy(() => import("./pages/Index"));
@@ -36,6 +35,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const LaunchHome = lazy(() => import("@/founder/pages/LaunchHome"));
 const AssessmentPage = lazy(() => import("@/founder/pages/AssessmentPage"));
 const ResultsPage = lazy(() => import("@/founder/pages/ResultsPage"));
+const LaunchWithAiPage = lazy(() => import("@/founder/pages/LaunchWithAiPage"));
 const MatchesPage = lazy(() => import("@/founder/pages/MatchesPage"));
 const BlueprintPage = lazy(() => import("@/founder/pages/BlueprintPage"));
 const ProfilePage = lazy(() => import("@/founder/pages/ProfilePage"));
@@ -97,6 +97,7 @@ const App = () => (
                 <Route path="/launch" element={<LaunchHome />} />
                 <Route path="/launch/assess" element={<AssessmentPage />} />
                 <Route path="/launch/results" element={<ResultsPage />} />
+                <Route path="/launch/with-ai" element={<LaunchWithAiPage />} />
                 <Route path="/launch/matches" element={<MatchesPage />} />
                 <Route path="/launch/blueprint" element={<BlueprintPage />} />
                 <Route path="/launch/profile" element={<ProfilePage />} />

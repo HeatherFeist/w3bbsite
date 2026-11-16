@@ -35,7 +35,7 @@ const LaunchHome: React.FC = () => (
     <Reveal delay={220}>
       <div className="mt-8 flex flex-col gap-3 sm:flex-row">
         <PrimaryLink to="/launch/assess">Take the founder assessment</PrimaryLink>
-        <QuietLink to="/launch/dashboard">Open the command center</QuietLink>
+        <QuietLink to="/launch/with-ai">Launch With AI</QuietLink>
       </div>
     </Reveal>
 
