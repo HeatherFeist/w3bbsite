@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import CardLink from '@/components/w3bb/CardLink';
 import { FactorList, FounderFrame, PrimaryLink, ScoreRing } from '../components';
 import { useFounder } from '../useFounder';
 
@@ -37,10 +38,16 @@ const ResultsPage: React.FC = () => {
         ))}
       </ul>
 
-      <div className="mt-10 grid gap-6 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:grid-cols-3">
-        <ScoreRing score={scores.founderReadiness} label="Founder Readiness" />
-        <ScoreRing score={scores.businessLaunch} label="Business Launch" />
-        <ScoreRing score={scores.fundingReadiness} label="Funding Readiness" />
+      <div className="mt-10 grid gap-6 sm:grid-cols-3">
+        <CardLink id="founder-readiness" to="/launch/results#score-breakdown" className="flex justify-center p-6">
+          <ScoreRing score={scores.founderReadiness} label="Founder Readiness" />
+        </CardLink>
+        <CardLink id="business-launch" to="/launch/results#score-breakdown" className="flex justify-center p-6">
+          <ScoreRing score={scores.businessLaunch} label="Business Launch" />
+        </CardLink>
+        <CardLink id="funding-readiness" to="/launch/results#score-breakdown" className="flex justify-center p-6">
+          <ScoreRing score={scores.fundingReadiness} label="Funding Readiness" />
+        </CardLink>
       </div>
       <p className="mt-4 max-w-3xl text-sm leading-relaxed text-white/70">
         Each score is 0–100. A factor contributes its weight times your signal. The weights are fixed, so the same answers always produce the same score. Nothing here is a promise of revenue or funding.
@@ -60,7 +67,7 @@ const ResultsPage: React.FC = () => {
           </button>
         ))}
       </div>
-      <div className="mt-5 glass p-5 sm:p-6" role="tabpanel">
+      <div id="score-breakdown" className="mt-5 glass p-5 sm:p-6" role="tabpanel">
         <FactorList factors={sections.find(([id]) => id === open)?.[2] ?? scores.readinessFactors} />
       </div>
 

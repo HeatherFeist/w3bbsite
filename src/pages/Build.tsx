@@ -7,6 +7,7 @@ import ConsentCheckbox from '@/components/ConsentCheckbox';
 import Icon from '@/components/w3bb/Icon';
 import Reveal from '@/components/w3bb/Reveal';
 import SectionHeading from '@/components/w3bb/SectionHeading';
+import { builderStepsInOrder } from '@/data/builderSteps';
 import { BUILDER, BUILD } from '@/data/site';
 import { useLeadCapture } from '@/hooks/useLeadCapture';
 import { usePageMeta } from '@/hooks/usePageMeta';
@@ -147,18 +148,22 @@ const Build: React.FC = () => {
               className="absolute left-[27px] top-4 bottom-4 w-px bg-gradient-to-b from-violet via-cyan to-gold opacity-60 sm:left-[35px]"
               aria-hidden="true"
             />
-            {BUILDER.steps.map((step, i) => (
+            {builderStepsInOrder().map((step, i) => (
               <Reveal as="li" key={step.n} delay={i * 60} className="relative block">
-                <div className="flex items-center gap-5 py-2.5 sm:gap-8">
+                <Link
+                  to={step.to}
+                  className="flex items-center gap-5 rounded-2xl py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-[#07080C] sm:gap-8"
+                >
                   <span className="relative z-10 grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-white/10 bg-[#0B0D14] font-display text-sm font-semibold text-white/70 sm:h-14 sm:w-14 sm:text-base">
                     {step.n}
                   </span>
-                  <div className="glass flex-1 px-5 py-4">
+                  <span className="glass flex flex-1 items-center justify-between gap-3 px-5 py-4 transition-colors hover:border-cyan/40">
                     <h3 className="font-display text-base font-semibold text-white sm:text-lg">
                       {step.title}
                     </h3>
-                  </div>
-                </div>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-cyan" aria-hidden="true" />
+                  </span>
+                </Link>
               </Reveal>
             ))}
           </ol>

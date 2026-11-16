@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import CardLink from '@/components/w3bb/CardLink';
+import { builderStepPath } from '@/data/builderSteps';
 import { FounderFrame, PrimaryLink } from '../components';
 import { useFounder } from '../useFounder';
 
 const BlueprintPage: React.FC = () => {
-  const { state, generateBlueprint } = useFounder();
+  const { state, generateBlueprint, selectModel } = useFounder();
+  const [params] = useSearchParams();
   const [busy, setBusy] = useState(false);
+  const requestedModel = params.get('model');
+
+  useEffect(() => {
+    if (!requestedModel || requestedModel === state.selectedModelId) return;
+    if (state.matches.some((match) => match.id === requestedModel)) selectModel(requestedModel);
+  }, [requestedModel, state.selectedModelId, state.matches, selectModel]);
   const [error, setError] = useState<string | null>(null);
   const blueprint = state.blueprint;
 
@@ -70,27 +79,45 @@ const BlueprintPage: React.FC = () => {
           <Section title="Competitive advantage" body={blueprint.competitiveAdvantage} />
           <ListSection title="Revenue streams" items={blueprint.revenueStreams} />
           <ListSection title="Marketing strategy" items={blueprint.marketingStrategy} />
-          <ListSection title="Launch checklist" items={blueprint.launchChecklist.map((item) => item.label)} />
-          <section className="glass p-6">
+          <section>
+            <h2 className="font-display text-xl font-semibold text-white">Launch checklist</h2>
+            <ul className="mt-4 grid gap-3">
+              {blueprint.launchChecklist.map((item) => (
+                <li key={item.id}>
+                  <CardLink to={item.href ?? '/build'} className="px-5 py-4 text-sm text-white/85">
+                    {item.label}
+                  </CardLink>
+                </li>
+              ))}
+            </ul>
+          </section>
+          <section className="grid gap-4">
             <h2 className="font-display text-xl font-semibold text-white">90-day plan</h2>
-            <ol className="mt-4 space-y-4">
-              {blueprint.plan90.map((phase) => (
+            <ol className="grid gap-4">
+              {blueprint.plan90.map((phase, index) => (
                 <li key={phase.phase}>
-                  <p className="text-xs font-medium uppercase tracking-[0.16em] text-cyan">{phase.phase}</p>
-                  <p className="mt-1 font-display text-lg text-white">{phase.title}</p>
-                  <p className="mt-1 text-sm leading-relaxed text-white/75">{phase.detail}</p>
+                  <CardLink to={index === 0 && phase.detail.includes('Launchpad') ? '/launchpad' : index === 2 ? '/certification' : '/build'} className="p-5">
+                    <p className="text-xs font-medium uppercase tracking-[0.16em] text-cyan">{phase.phase}</p>
+                    <p className="mt-1 font-display text-lg text-white">{phase.title}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-white/75">{phase.detail}</p>
+                  </CardLink>
                 </li>
               ))}
             </ol>
           </section>
-          <section className="glass p-6">
+          <section>
             <h2 className="font-display text-xl font-semibold text-white">12-month milestones</h2>
             <ol className="mt-4 grid gap-4 sm:grid-cols-2">
               {blueprint.milestones12.map((item) => (
-                <li key={item.phase} className="rounded-2xl border border-white/10 p-4">
-                  <p className="text-xs text-cyan">{item.phase}</p>
-                  <p className="mt-1 font-medium text-white">{item.title}</p>
-                  <p className="mt-1 text-sm text-white/75">{item.detail}</p>
+                <li key={item.phase}>
+                  <CardLink
+                    to={item.phase === 'Quarter 3' ? '/launch/certifications#financial-literacy' : item.phase === 'Quarter 4' ? '/certification' : '/build'}
+                    className="p-4"
+                  >
+                    <p className="text-xs text-cyan">{item.phase}</p>
+                    <p className="mt-1 font-medium text-white">{item.title}</p>
+                    <p className="mt-1 text-sm text-white/75">{item.detail}</p>
+                  </CardLink>
                 </li>
               ))}
             </ol>
@@ -102,12 +129,14 @@ const BlueprintPage: React.FC = () => {
             <p className="mt-2 text-sm text-white/75">These are the existing eight steps. Launch does not redo them.</p>
             <ol className="mt-4 space-y-3">
               {blueprint.builderHandoff.map((step) => (
-                <li key={step.phase} className="flex gap-3">
-                  <span className="font-mono text-sm text-cyan">{step.phase}</span>
-                  <span>
-                    <span className="block font-medium text-white">{step.title}</span>
-                    <span className="block text-sm text-white/75">{step.detail}</span>
-                  </span>
+                <li key={step.phase}>
+                  <CardLink to={builderStepPath(step.phase)} className="flex gap-3 px-4 py-3">
+                    <span className="font-mono text-sm text-cyan">{step.phase}</span>
+                    <span>
+                      <span className="block font-medium text-white">{step.title}</span>
+                      <span className="block text-sm text-white/75">{step.detail}</span>
+                    </span>
+                  </CardLink>
                 </li>
               ))}
             </ol>
