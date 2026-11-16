@@ -40,6 +40,7 @@ export interface FounderContextValue {
   selectModel: (id: string) => void;
   generateBlueprint: () => Promise<Blueprint | null>;
   updateProfile: (partial: Partial<FounderProfile>) => void;
+  setNotebookField: (slug: string, fieldId: string, value: string) => void;
   sendCoachMessage: (text: string) => Promise<void>;
   toggleTask: (id: string) => void;
   addGoal: (title: string) => void;
@@ -249,6 +250,10 @@ export const FounderProvider: React.FC<{ children: React.ReactNode }> = ({ child
       },
       updateProfile: (partial) => commit((draft) => {
         draft.profile = { ...draft.profile, ...partial };
+      }),
+      setNotebookField: (slug, fieldId, value) => commit((draft) => {
+        const current = draft.notebook ?? {};
+        draft.notebook = { ...current, [slug]: { ...current[slug], [fieldId]: value } };
       }),
       sendCoachMessage: async (text) => {
         const trimmed = text.trim();

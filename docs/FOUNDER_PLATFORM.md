@@ -58,6 +58,8 @@ CDI is the nonprofit backbone. W3BB is the digital hub. Sponsored businesses are
 
 The blueprint’s “Hand this to the Business Builder” list is generated from `BUILDER.steps` in `src/data/site.ts`, so the eight step titles stay the site’s own copy: naming and branding, product development, asset generation, business logic, customer journey design, operational structure, multimedia creation, and launch preparation.
 
+Each of those steps keeps a notebook on its page: the working name, the offer, how it earns, the customer, the weekly hour, the media, and the launch notes. The lines live in the founder record (`notebook` on the same snapshot as the blueprint). A saved blueprint can show as a draft until the founder edits the line. The Business Builder list on the homepage shows that line.
+
 There is no individual course catalog on the site today. The seven pathways are new self-checked tracks:
 
 1. Business Foundations

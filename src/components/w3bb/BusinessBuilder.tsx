@@ -2,11 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { builderStepsInOrder } from '@/data/builderSteps';
+import { notebookLine } from '@/founder/notebook';
+import { useFounder } from '@/founder/useFounder';
+import type { Blueprint, BuilderNotebook } from '@/founder/types';
 import { BUILDER } from '@/data/site';
 import Reveal from '@/components/w3bb/Reveal';
 import SectionHeading from '@/components/w3bb/SectionHeading';
 
-export const BusinessBuilder: React.FC = () => (
+export const BusinessBuilder: React.FC = () => {
+  const { state } = useFounder();
+  return (
   <section id="builder" className="relative scroll-mt-24 py-24 sm:py-32 lg:py-40">
     <div className="container">
       <SectionHeading label={BUILDER.label} heading={BUILDER.heading} intro={BUILDER.intro} />
@@ -31,9 +36,12 @@ export const BusinessBuilder: React.FC = () => (
                 <span className="relative">{step.n}</span>
               </span>
               <span className="glass glass-lift flex flex-1 items-center justify-between gap-4 px-5 py-5 sm:px-8 sm:py-6">
-                <h3 className="font-display text-lg font-semibold text-white sm:text-2xl">
-                  {step.title}
-                </h3>
+                <span className="min-w-0">
+                  <h3 className="font-display text-lg font-semibold text-white sm:text-2xl">
+                    {step.title}
+                  </h3>
+                  <NotebookLine slug={step.slug} notebook={state.notebook} blueprint={state.blueprint} />
+                </span>
                 <ArrowRight className="h-5 w-5 shrink-0 text-cyan opacity-70 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
               </span>
             </Link>
@@ -58,6 +66,20 @@ export const BusinessBuilder: React.FC = () => (
       </Reveal>
     </div>
   </section>
-);
+  );
+};
+
+const NotebookLine: React.FC<{ slug: string; notebook: BuilderNotebook; blueprint: Blueprint | null }> = ({
+  slug,
+  notebook,
+  blueprint,
+}) => {
+  const line = notebookLine(slug, notebook, blueprint);
+  return (
+    <p className={`mt-1 truncate text-sm ${line.fromBlueprint ? 'text-gold/80' : 'text-white/60'}`}>
+      {line.fromBlueprint ? `Blueprint draft: ${line.text}` : line.text}
+    </p>
+  );
+};
 
 export default BusinessBuilder;
