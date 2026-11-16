@@ -13,6 +13,7 @@ import {
   Scale,
   Palette,
   Rocket,
+  Compass,
   Sprout,
   Handshake,
   Share2,
@@ -52,6 +53,7 @@ export const RESOURCES = {
   growHeading: 'Grow & Partner With Us',
   growIntro: 'Existing programs for entrepreneurs, agencies, affiliates, and international sellers — live today.',
   growPrograms: [
+    { icon: Compass, title: 'Founder Launch Platform', description: 'Take the assessment, match a model, and carry a blueprint into the Business Builder.', to: '/launch' },
     { icon: Rocket, title: 'Entrepreneur Launchpad', description: 'Start your business from zero — no capital, no LLC, no barriers.', to: '/launchpad' },
     { icon: Sprout, title: 'Zero-Dollar Startup Path', description: 'Our signature method for launching with no money and no risk.', to: '/zero-dollar-startup' },
     { icon: Handshake, title: 'Agency Partner Program', description: 'Exclusive tools, referrals, and commissions through our GoDaddy partnership.', to: '/agency-partner-program' },
