@@ -104,6 +104,14 @@ export const Hero: React.FC = () => {
                 {HERO.secondaryCta}
               </Link>
             </div>
+            <Link
+              to="/launch/assess"
+              onClick={() => track('cta_click', { cta: 'Start Your Business', location: 'hero' })}
+              className="mt-5 inline-flex items-center gap-2 font-display text-sm font-semibold text-gold"
+            >
+              Start Your Business
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
           </Reveal>
 
           <Reveal delay={800}>

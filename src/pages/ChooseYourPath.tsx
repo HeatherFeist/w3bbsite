@@ -73,6 +73,16 @@ const ChooseYourPath: React.FC = () => {
             ))}
           </div>
 
+          <Reveal delay={100} className="mt-6">
+            <Link to="/launch/assess" className="glass glass-lift group flex items-center gap-4 p-7">
+              <Map className="h-7 w-7 shrink-0 text-gold" strokeWidth={1.5} aria-hidden="true" />
+              <div>
+                <h3 className="font-display text-lg font-bold text-white">Have an idea? Take the founder assessment</h3>
+                <p className="text-sm text-white/60">A guided plan that hands you to the Business Builder and, if you are starting from zero, the Launchpad.</p>
+              </div>
+              <ArrowRight className="ml-auto h-5 w-5 shrink-0 text-gold transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+            </Link>
+          </Reveal>
           <Reveal delay={120} className="mt-6">
             <Link to="/launchpad" className="glass glass-lift group flex items-center gap-4 p-7">
               <Rocket className="h-7 w-7 shrink-0 text-cyan" strokeWidth={1.5} aria-hidden="true" />

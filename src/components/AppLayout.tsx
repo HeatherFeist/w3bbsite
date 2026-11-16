@@ -1,6 +1,7 @@
 import React from 'react';
 import PageShell from '@/components/PageShell';
 import Hero from '@/components/w3bb/Hero';
+import FounderLaunchBand from '@/components/w3bb/FounderLaunchBand';
 import About from '@/components/w3bb/About';
 import FeaturedBusinesses from '@/components/w3bb/FeaturedBusinesses';
 import WhatYouCanBuild from '@/components/w3bb/WhatYouCanBuild';
@@ -18,6 +19,7 @@ const AppLayout: React.FC = () => {
   return (
     <PageShell>
       <Hero />
+      <FounderLaunchBand />
       <About />
       <FeaturedBusinesses />
       <WhatYouCanBuild />

@@ -372,6 +372,7 @@ export const FOOTER_COLUMNS: { title: string; links: FooterLink[] }[] = [
     title: 'Platform',
     links: [
       { label: 'About', id: 'about' },
+      { label: 'Start Your Business', to: '/launch' },
       { label: 'What You Can Build', id: 'build' },
       { label: 'Business Builder', id: 'builder' },
       { label: 'Sponsored Businesses', to: '/businesses' },

@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, ArrowRight, ChevronDown, Globe2, Store, Users2, BookOpen, KeyRound } from 'lucide-react';
+import { Menu, X, ArrowRight, ChevronDown, Globe2, Store, Users2, BookOpen, KeyRound, Rocket } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { NAV_LINKS, SECTION_IDS } from '@/data/site';
 import { useScrollSpy, scrollToId } from '@/hooks/useScrollSpy';
 
 const ECOSYSTEM_MENU = [
+  { to: '/launch', label: 'Start Your Business', icon: Rocket },
+  { to: '/launch/dashboard', label: 'Command Center', icon: Rocket },
   { to: '/ecosystem', label: 'The Ecosystem', icon: Globe2 },
   { to: '/businesses', label: 'Sponsored Businesses', icon: Store },
   { to: '/community', label: 'Community', icon: Users2 },
@@ -189,6 +191,20 @@ export const Navbar: React.FC = () => {
 
         <div className="flex items-center gap-2">
           <Link
+            to="/launch"
+            className={`hidden rounded-full px-4 py-2 text-sm font-medium md:inline-flex ${
+              location.pathname.startsWith('/launch') ? 'text-white' : 'text-white/75 hover:text-white'
+            }`}
+          >
+            Launch
+          </Link>
+          <Link
+            to="/launch/dashboard"
+            className="hidden rounded-full px-3 py-2 text-sm font-medium text-white/75 hover:text-white xl:inline-flex"
+          >
+            Command Center
+          </Link>
+          <Link
             to="/build"
             onClick={() => setOpen(false)}
             className="cta-primary hidden rounded-full px-5 py-2.5 text-sm font-semibold text-white sm:inline-flex items-center gap-2"
@@ -261,6 +277,29 @@ export const Navbar: React.FC = () => {
               className="flex items-center justify-between rounded-xl px-4 py-3 font-display text-lg font-medium text-white/70 transition-colors hover:bg-white/[0.04] hover:text-white"
             >
               Choose Your Path
+              <ArrowRight className="h-4 w-4 opacity-50" aria-hidden="true" />
+            </Link>
+          </li>
+          <li className="mt-3 px-4">
+            <span className="micro-label text-white/35">Launch</span>
+          </li>
+          <li>
+            <Link
+              to="/launch"
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-between rounded-xl px-4 py-3 font-display text-lg font-medium text-white/80 transition-colors hover:bg-white/[0.04] hover:text-white"
+            >
+              Start Your Business
+              <ArrowRight className="h-4 w-4 opacity-50" aria-hidden="true" />
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/launch/dashboard"
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-between rounded-xl px-4 py-3 font-display text-lg font-medium text-white/80 transition-colors hover:bg-white/[0.04] hover:text-white"
+            >
+              Command Center
               <ArrowRight className="h-4 w-4 opacity-50" aria-hidden="true" />
             </Link>
           </li>
