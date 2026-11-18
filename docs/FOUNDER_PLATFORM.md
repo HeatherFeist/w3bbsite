@@ -23,7 +23,7 @@ Lead capture, wallet minting, franchise bundles, and the existing program applic
 - Mobile: a Launch group in the menu links to the same two places.
 - Homepage: a gold **Start Your Business** button under the existing hero actions, plus a band directly under the hero.
 - Footer Platform column, Resources, and Choose Your Path each link in without removing the current destinations.
-- Inside Launch, a horizontal section nav covers overview, assessment, results, matches, blueprint, command center, coach, funding, pathways, and profile.
+- Inside Launch, a horizontal section nav covers overview, assessment, results, Launch With AI, matches, blueprint, command center, coach, funding, pathways, and profile.
 
 `/launchpad` remains the Entrepreneur Launchpad. `/launch` is this platform. They are different programs.
 
@@ -34,6 +34,7 @@ Lead capture, wallet minting, franchise bundles, and the existing program applic
 | `/launch` | Overview and the four-step journey |
 | `/launch/assess` | Multi-step assessment with a progress bar. Answers and the current step save as you go. |
 | `/launch/results` | Three scores, the archetype, and the weight breakdown |
+| `/launch/with-ai` | Launch With AI. Written when the assessment is finished: working name, unchecked domain spellings, logo concepts, landing copy, profile drafts, a first campaign, a business plan, and a funding note that is not submitted |
 | `/launch/matches` | Ranked business models. Rules are always visible. An optional advisor can explain the top three. |
 | `/launch/blueprint` | Saved blueprint, including the handoff into the 8 existing Business Builder steps |
 | `/launch/dashboard` | Command center |

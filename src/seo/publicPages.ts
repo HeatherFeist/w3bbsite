@@ -43,6 +43,7 @@ export function listPublicPages(): PublicPage[] {
     page('/launch', 'Start Your Business', 'Take the W3BB founder assessment, match a business model, and carry the plan into the Business Builder.'),
     page('/launch/assess', 'Founder Discovery Assessment', 'A saved, multi-step founder assessment covering skills, capital, time, and how you work.'),
     page('/launch/results', 'Founder scores', 'Transparent founder readiness, business launch, and funding readiness scores.'),
+    page('/launch/with-ai', 'Launch With AI', 'A launch draft from the founder assessment: name, domain spellings, logo concepts, landing copy, profile drafts, a first campaign, a business plan, and a funding note.'),
     page('/launch/matches', 'Business matches', 'Rules-based business model recommendations for W3BB founders.'),
     page('/launch/blueprint', 'Business blueprint', 'A saved business blueprint you can carry into the W3BB Business Builder.'),
     page('/launch/profile', 'Founder profile', 'Your W3BB founder profile, story, ventures, and progress.'),

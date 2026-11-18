@@ -71,6 +71,14 @@ const DashboardPage: React.FC = () => {
       ) : null}
 
       <div className="mt-8 grid gap-4 lg:grid-cols-2">
+        <CardLink to="/launch/with-ai" className="p-5">
+          <h2 className="font-display text-xl font-semibold text-white">Launch With AI</h2>
+          {state.launchKit ? (
+            <p className="mt-2 text-sm text-white/75">{state.launchKit.businessName} · name, copy, campaign, plan, and a funding draft.</p>
+          ) : (
+            <p className="mt-2 text-sm text-white/75">Finish the assessment and the launch draft is written for you.</p>
+          )}
+        </CardLink>
         <CardLink to={state.blueprint ? '/launch/blueprint' : '/launch/matches'} className="p-5">
           <h2 className="font-display text-xl font-semibold text-white">Blueprint</h2>
           {state.blueprint ? (

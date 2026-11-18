@@ -28,6 +28,7 @@ export const APP_ROUTES = [
   '/launch',
   '/launch/assess',
   '/launch/results',
+  '/launch/with-ai',
   '/launch/matches',
   '/launch/blueprint',
   '/launch/profile',

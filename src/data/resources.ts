@@ -61,9 +61,9 @@ export const RESOURCES = {
     {
       icon: Cpu,
       title: 'AI Tools',
-      description: 'The launch coach answers with your assessment and the builder step you are on. It stays on this device until a server AI key is set.',
-      to: '/launch/coach',
-      linkLabel: 'Open the coach',
+      description: 'After the assessment, Launch With AI writes a name, landing copy, a campaign, a plan, and a funding draft. The coach is still there if you want to talk it through.',
+      to: '/launch/with-ai',
+      linkLabel: 'Open Launch With AI',
     },
     {
       icon: ClipboardList,

@@ -40,7 +40,7 @@ const AssessmentPage: React.FC = () => {
 
   const finish = () => {
     completeAssessment();
-    navigate('/launch/results');
+    navigate('/launch/with-ai');
   };
 
   return (
@@ -137,7 +137,7 @@ const AssessmentPage: React.FC = () => {
         </button>
         {review ? (
           <button type="button" className="cta-primary rounded-full px-6 py-3 text-sm font-semibold text-white" onClick={finish}>
-            {state.assessment.status === 'complete' ? 'Update my scores' : 'See my scores'}
+            {state.assessment.status === 'complete' ? 'Update Launch With AI' : 'Launch With AI'}
           </button>
         ) : (
           <button

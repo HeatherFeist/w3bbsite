@@ -10,6 +10,7 @@ describe('public pages for search', () => {
     expect(new Set(paths).size).toBe(paths.length);
     expect(paths).toContain('/');
     expect(paths).toContain('/launch');
+    expect(paths).toContain('/launch/with-ai');
     expect(paths).toContain('/build');
     expect(paths).toContain('/builder/naming-branding');
     expect(paths).toContain('/terms');

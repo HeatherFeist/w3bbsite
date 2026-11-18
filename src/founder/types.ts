@@ -103,6 +103,72 @@ export interface PlanPhase {
   detail: string;
 }
 
+export interface LogoConcept {
+  name: string;
+  mark: string;
+  colors: string;
+  type: string;
+}
+
+export interface SocialDraft {
+  label: string;
+  name: string;
+  text: string;
+}
+
+export interface LandingCopy {
+  headline: string;
+  subhead: string;
+  body: string;
+  callToAction: string;
+}
+
+export interface LaunchCampaign {
+  name: string;
+  channel: string;
+  message: string;
+  steps: string[];
+}
+
+export interface LaunchPlan {
+  summary: string;
+  offer: string;
+  customer: string;
+  plan90: string[];
+  risks: string[];
+}
+
+export interface FundingDraft {
+  title: string;
+  body: string;
+  disclaimer: string;
+}
+
+export interface DomainSuggestion {
+  host: string;
+  note: string;
+}
+
+/** Drafts written after the assessment. Nothing here is registered, posted, or submitted. */
+export interface LaunchKit {
+  id: string;
+  modelId: string;
+  modelName: string;
+  source: 'rules' | 'ai';
+  aiTried: boolean;
+  businessName: string;
+  nameOptions: string[];
+  domains: DomainSuggestion[];
+  logos: LogoConcept[];
+  landing: LandingCopy;
+  socials: SocialDraft[];
+  campaign: LaunchCampaign;
+  businessPlan: LaunchPlan;
+  fundingDraft: FundingDraft;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface Blueprint {
   id: string;
   modelId: string;

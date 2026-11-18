@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { FounderContext } from './useFounder';
 import { requestAdvisor } from './ai';
 import { applyAiBlueprint, buildBlueprint } from './blueprint';
+import { applyAiLaunchKit, buildLaunchKit, launchKitAiMessages } from './launchKit';
 import { blueprintAiMessages, coachAiMessages, coachReply } from './coach';
 import { matchBusinesses } from './matching';
 import { scoreAssessment } from './scoring';
@@ -21,6 +22,29 @@ import { loadLocalState, mergeTasks, saveLocalState, starterTasks, uid } from '.
 import { mergeStates, pullFounderState, pushFounderState } from './sync';
 import type { Answers, Blueprint, ChatMessage, CoachContext, FounderProfile, FounderState, ScoreReport } from './types';
 
+function syncLaunchKit(draft: FounderState, now = new Date().toISOString()) {
+  const model = draft.matches.find((match) => match.id === draft.selectedModelId) ?? draft.matches[0];
+  if (!draft.scores || !model) return;
+  const blueprint = draft.blueprint?.modelId === model.id
+    ? draft.blueprint
+    : buildBlueprint({
+        answers: draft.assessment.answers,
+        scores: draft.scores,
+        model,
+        profileName: draft.profile.displayName,
+        ventureName: draft.profile.ventures[0]?.name,
+        now,
+      });
+  if (!draft.blueprint) draft.blueprint = blueprint;
+  draft.launchKit = buildLaunchKit({
+    answers: draft.assessment.answers,
+    scores: draft.scores,
+    model,
+    blueprint,
+    now,
+  });
+}
+
 export interface FounderContextValue {
   ready: boolean;
   supabaseConfigured: boolean;
@@ -39,6 +63,8 @@ export interface FounderContextValue {
   completeAssessment: () => ScoreReport;
   selectModel: (id: string) => void;
   generateBlueprint: () => Promise<Blueprint | null>;
+  refineLaunchKit: () => Promise<void>;
+  ensureLaunchKit: () => void;
   updateProfile: (partial: Partial<FounderProfile>) => void;
   setNotebookField: (slug: string, fieldId: string, value: string) => void;
   sendCoachMessage: (text: string) => Promise<void>;
@@ -202,12 +228,17 @@ export const FounderProvider: React.FC<{ children: React.ReactNode }> = ({ child
           if (!draft.profile.skills.length) draft.profile.skills = [...(draft.assessment.answers.skills ?? [])];
           if (!draft.profile.interests.length) draft.profile.interests = [...(draft.assessment.answers.interests ?? [])];
           draft.tasks = mergeTasks(draft.tasks, starterTasks(draft.assessment.answers));
-          draft.coachMemory = `${scored.archetype.name}. Top model pending review.`;
+          syncLaunchKit(draft);
+          const kit = draft.launchKit;
+          draft.coachMemory = kit
+            ? `${scored.archetype.name}. Launch With AI draft: ${kit.businessName} (${kit.modelName}).`
+            : `${scored.archetype.name}. Top model pending review.`;
         });
         return report;
       },
       selectModel: (id) => commit((draft) => {
         draft.selectedModelId = id;
+        syncLaunchKit(draft);
       }),
       generateBlueprint: async () => {
         const model = state.matches.find((match) => match.id === state.selectedModelId) ?? state.matches[0];
@@ -247,6 +278,24 @@ export const FounderProvider: React.FC<{ children: React.ReactNode }> = ({ child
         const blueprint = aiText ? applyAiBlueprint(rules, aiText) : rules;
         if (aiText) saveBlueprint(blueprint);
         return blueprint;
+      },
+      ensureLaunchKit: () => {
+        if (state.launchKit || !state.scores) return;
+        commit((draft) => syncLaunchKit(draft));
+      },
+      refineLaunchKit: async () => {
+        const current = state.launchKit;
+        if (!current || current.aiTried) return;
+        commit((draft) => {
+          if (draft.launchKit) draft.launchKit = { ...draft.launchKit, aiTried: true };
+        });
+        const aiText = await requestAdvisor(launchKitAiMessages(current));
+        if (!aiText) return;
+        const next = applyAiLaunchKit(current, aiText);
+        commit((draft) => {
+          if (!draft.launchKit || draft.launchKit.id !== current.id) return;
+          draft.launchKit = { ...next, aiTried: true };
+        });
       },
       updateProfile: (partial) => commit((draft) => {
         draft.profile = { ...draft.profile, ...partial };
