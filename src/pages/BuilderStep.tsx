@@ -8,6 +8,7 @@ import {
   builderStepPath,
   builderStepTitle,
 } from '@/data/builderSteps';
+import NotebookForm from '@/founder/NotebookForm';
 import { useFounder } from '@/founder/useFounder';
 import { usePageMeta } from '@/hooks/usePageMeta';
 
@@ -95,6 +96,7 @@ const BuilderStep: React.FC = () => {
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[1.3fr_0.7fr]">
           <div className="space-y-6">
+            <NotebookForm slug={step.slug} />
             <section className="glass p-6 sm:p-8" aria-labelledby="why-it-matters">
               <h2 id="why-it-matters" className="font-display text-2xl font-semibold text-white">Why this step matters</h2>
               <p className="mt-3 text-sm leading-relaxed text-white/80 sm:text-base">{step.why}</p>

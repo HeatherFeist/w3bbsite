@@ -236,6 +236,9 @@ export interface XpEvent {
   at: string;
 }
 
+/** Saved answers for each Business Builder step, keyed by step slug then field id. */
+export type BuilderNotebook = Record<string, Record<string, string>>;
+
 export interface FounderState {
   version: 1;
   updatedAt: string | null;
@@ -245,7 +248,7 @@ export interface FounderState {
   matches: ModelMatch[];
   selectedModelId: string | null;
   blueprint: Blueprint | null;
-  launchKit: LaunchKit | null;
+  notebook: BuilderNotebook;
   messages: ChatMessage[];
   coachMemory: string;
   tasks: TaskItem[];

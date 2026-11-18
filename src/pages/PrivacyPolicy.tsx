@@ -35,7 +35,7 @@ const PrivacyPolicy: React.FC = () => {
           <div className="mx-auto mt-4 max-w-3xl">
             <Section title="Information we collect">
               <p>When you use a form on this site — Contact, Business Builder, Certification, or Enterprise — we collect what you submit: your name, email, organization (if given), and message content.</p>
-              <p>If you take the founder assessment, we collect your answers and the scores calculated from them. A founder profile can include your name, story, skills, a photo you upload, and a video URL. The launch coach stores the messages you send and the replies you receive.</p>
+              <p>If you take the founder assessment, we collect your answers and the scores calculated from them. A founder profile can include your name, story, skills, a photo you upload, and a video URL. The launch coach stores the messages you send and the replies you receive. The Business Builder notebook stores the choices you write for each step.</p>
               <p>When you connect a wallet on the Marketplace / mint page, we collect your public wallet address and the network (chain) it's connected to. We never ask for or have access to your private keys or seed phrase — wallet connections happen entirely in your own wallet software.</p>
               <p>We do not currently use third-party advertising trackers or sell any data to advertisers.</p>
             </Section>
@@ -45,13 +45,13 @@ const PrivacyPolicy: React.FC = () => {
                 <li>To respond to your enquiry or application.</li>
                 <li>To follow up about your Business Builder progress, certification status, or enterprise inquiry.</li>
                 <li>To notify a connected wallet address when Franchise Bundle minting opens.</li>
-                <li>To show your assessment, blueprint, and coach history back to you.</li>
+                <li>To show your assessment, blueprint, builder notebook, and coach history back to you.</li>
                 <li>To improve the site and understand which pages and flows people actually use, if analytics is configured.</li>
               </ul>
             </Section>
 
             <Section title="How we store and share it">
-              <p>Form submissions are stored in our managed database (Supabase) and are accessible to the {SITE.fullName} team. Founder accounts, when you sign in, are stored in that same Supabase project: profile fields, assessment answers, blueprint, and coach messages.</p>
+              <p>Form submissions are stored in our managed database (Supabase) and are accessible to the {SITE.fullName} team. Founder accounts, when you sign in, are stored in that same Supabase project: profile fields, assessment answers, blueprint, builder notebook, and coach messages.</p>
               <p>If you stay in demo mode, that founder material is stored in this browser’s local storage. It is not sent to Supabase until you create or sign in to a founder account. Clearing the site data in your browser removes the demo copy.</p>
               <p>When a server-side AI key is configured, coach and blueprint requests are sent to an AI provider (an OpenAI-compatible API) so it can write a reply. The request includes the conversation and a summary of your assessment and blueprint. It does not include your profile photo. If no key is configured, the coach answers on your device and that text is not sent to an AI provider.</p>
               <p>We don't sell personal information to third parties. We may share information with service providers who help us operate the site (database, hosting, and, when enabled, analytics or an AI provider), bound to use it to provide those services.</p>

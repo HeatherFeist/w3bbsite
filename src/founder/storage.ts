@@ -1,3 +1,4 @@
+import { cleanNotebook } from './notebook';
 import type { Answers, FounderState, TaskItem } from './types';
 
 const KEY = 'w3bb.founder.v1';
@@ -31,7 +32,7 @@ export function createEmptyState(): FounderState {
     matches: [],
     selectedModelId: null,
     blueprint: null,
-    launchKit: null,
+    notebook: {},
     messages: [],
     coachMemory: '',
     tasks: [],
@@ -68,7 +69,7 @@ export function normalizeState(input: unknown): FounderState {
     matches: Array.isArray(raw.matches) ? raw.matches : [],
     selectedModelId: raw.selectedModelId ?? null,
     blueprint: raw.blueprint ?? null,
-    launchKit: raw.launchKit ?? null,
+    notebook: cleanNotebook(raw.notebook),
     messages: Array.isArray(raw.messages) ? raw.messages : [],
     coachMemory: typeof raw.coachMemory === 'string' ? raw.coachMemory : '',
     tasks: Array.isArray(raw.tasks) ? raw.tasks : [],
