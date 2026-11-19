@@ -403,6 +403,7 @@ export const FOOTER_COLUMNS: { title: string; links: FooterLink[] }[] = [
     links: [
       { label: 'Contact', id: 'contact' },
       { label: 'Choose Your Path', to: '/choose-your-path' },
+      { label: 'Remote Viewer', to: '/viewing' },
       { label: 'Privacy Policy', to: '/privacy' },
       { label: 'Terms of Use', to: '/terms' },
     ],

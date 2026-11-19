@@ -39,6 +39,8 @@ export function listPublicPages(): PublicPage[] {
     page('/businesses', 'Sponsored Businesses', BUSINESS_DIRECTORY.intro),
     page('/community', 'Community', COMMUNITY.body),
     page('/resources', 'Resources', RESOURCES.sub),
+    page('/viewing', 'Remote Viewer', 'A private memorial page for a service people can attend from anywhere.'),
+    page('/viewing/host', 'Host a memorial', 'Create a private memorial, add the obituary and schedule, and copy a link for the family.'),
     page('/partner-network', 'Partner Network', 'Private updates and resources for W3BB Franchise Bundle holders.'),
     page('/launch', 'Start Your Business', 'Take the W3BB founder assessment, match a business model, and carry the plan into the Business Builder.'),
     page('/launch/assess', 'Founder Discovery Assessment', 'A saved, multi-step founder assessment covering skills, capital, time, and how you work.'),
