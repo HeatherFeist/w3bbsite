@@ -19,7 +19,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-  <footer className="relative border-t border-white/10 bg-[#07080C]/80 pt-16 pb-10">
+  <footer className="relative bg-[#100d15] pt-16 pb-10" style={{ borderTop: '1px solid transparent', borderImage: 'linear-gradient(90deg, transparent 4%, rgba(212,162,74,0.4) 50%, transparent 96%) 1' }}>
     <div className="container">
       <div className="grid gap-12 lg:grid-cols-[1.1fr_2.4fr]">
         <div>
@@ -33,7 +33,7 @@ export const Footer: React.FC = () => {
             aria-label="W3BB Worldwide — back to top"
           >
             <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-violet via-cyan to-gold p-[1px]">
-              <span className="grid h-full w-full place-items-center rounded-[11px] bg-[#07080C] font-display text-[0.7rem] font-bold text-white">
+              <span className="grid h-full w-full place-items-center rounded-[11px] bg-[#16141a] font-display text-[0.7rem] font-bold text-white">
                 W3
               </span>
             </span>
@@ -58,7 +58,7 @@ export const Footer: React.FC = () => {
         <nav className="grid grid-cols-2 gap-8 sm:grid-cols-4" aria-label="Footer">
           {FOOTER_COLUMNS.map((column) => (
             <div key={column.title}>
-              <h2 className="micro-label text-white/40">{column.title}</h2>
+              <h2 className="micro-label text-gold">{column.title}</h2>
               <ul className="mt-5 space-y-3">
                 {column.links.map((link) => (
                   <li key={link.label}>

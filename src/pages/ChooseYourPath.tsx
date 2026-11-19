@@ -62,7 +62,7 @@ const ChooseYourPath: React.FC = () => {
                   <Link
                     to={path.to}
                     className={`relative mt-7 inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-display text-sm font-semibold transition-colors ${
-                      path.tone === 'gold' ? 'bg-gold text-[#07080C] hover:bg-gold/90' : 'cta-primary text-white'
+                      path.tone === 'gold' ? 'bg-gold text-[#16141a] hover:bg-gold/90' : 'cta-primary text-white'
                     }`}
                   >
                     {path.cta}

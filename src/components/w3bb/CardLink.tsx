@@ -11,7 +11,7 @@ interface CardLinkProps {
 }
 
 const focusClass =
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-[#07080C]';
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-[#16141a]';
 
 /** Whole-card link. External URLs open in a new tab. Internal routes use the router. */
 export const CardLink: React.FC<CardLinkProps> = ({ to, className, children, onClick, id }) => {

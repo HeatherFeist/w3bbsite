@@ -49,7 +49,7 @@ const KitView: React.FC<{ kit: LaunchKit }> = ({ kit }) => (
       <h3 className="font-display text-3xl font-semibold text-white">{kit.landing.headline}</h3>
       <p className="text-white/85">{kit.landing.subhead}</p>
       <p>{kit.landing.body}</p>
-      <p className="inline-flex rounded-full bg-white px-4 py-2 font-semibold text-[#07080C]">{kit.landing.callToAction}</p>
+      <p className="inline-flex rounded-full bg-white px-4 py-2 font-semibold text-[#16141a]">{kit.landing.callToAction}</p>
     </Section>
 
     <Section title="Social media profiles">

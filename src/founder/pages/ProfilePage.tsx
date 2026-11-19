@@ -41,7 +41,7 @@ const ProfilePage: React.FC = () => {
 
       <form className="mt-10 grid gap-8 lg:grid-cols-[240px_1fr]" onSubmit={(event) => event.preventDefault()}>
         <div>
-          <div className="grid h-48 w-48 place-items-center overflow-hidden rounded-3xl border border-white/10 bg-[#0B0D14]">
+          <div className="grid h-48 w-48 place-items-center overflow-hidden rounded-3xl border border-white/10 bg-[#1e1b24]">
             {profile.imageDataUrl ? (
               <img src={profile.imageDataUrl} alt={profile.displayName ? `${profile.displayName} profile photo` : 'Founder profile photo'} className="h-full w-full object-cover" />
             ) : (
@@ -122,7 +122,7 @@ const ProfilePage: React.FC = () => {
           <input id="venture-name" className={fieldClass} value={ventureName} placeholder="Venture name" onChange={(event) => setVentureName(event.target.value)} />
           <button
             type="button"
-            className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#07080C]"
+            className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#16141a]"
             onClick={() => {
               if (!ventureName.trim()) return;
               updateProfile({ ventures: [...profile.ventures, { id: uid('venture'), name: ventureName.trim(), status: 'Idea', summary: '' }] });
@@ -149,7 +149,7 @@ const ProfilePage: React.FC = () => {
           <input id="milestone-title" className={fieldClass} value={milestoneTitle} placeholder="Milestone" onChange={(event) => setMilestoneTitle(event.target.value)} />
           <button
             type="button"
-            className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#07080C]"
+            className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#16141a]"
             onClick={() => {
               if (!milestoneTitle.trim()) return;
               updateProfile({ milestones: [...profile.milestones, { id: uid('mile'), title: milestoneTitle.trim(), note: '', date: '' }] });
@@ -176,7 +176,7 @@ const ProfilePage: React.FC = () => {
           <input id="achievement" className={fieldClass} value={achievement} placeholder="Achievement" onChange={(event) => setAchievement(event.target.value)} />
           <button
             type="button"
-            className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#07080C]"
+            className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#16141a]"
             onClick={() => {
               if (!achievement.trim()) return;
               updateProfile({ achievements: [...profile.achievements, achievement.trim()] });

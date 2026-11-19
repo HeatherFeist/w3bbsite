@@ -44,7 +44,7 @@ export const WhatYouCanBuild: React.FC = () => (
 
       <Reveal delay={120}>
         <div className="grad-border glass mt-14 overflow-hidden rounded-[1.6rem] p-[1px]">
-          <div className="relative flex flex-col items-center gap-5 rounded-[1.55rem] bg-[#0B0D14]/70 px-6 py-10 text-center sm:flex-row sm:gap-7 sm:px-10 sm:text-left">
+          <div className="relative flex flex-col items-center gap-5 rounded-[1.55rem] bg-[#1e1b24]/70 px-6 py-10 text-center sm:flex-row sm:gap-7 sm:px-10 sm:text-left">
             <span
               className="pointer-events-none absolute inset-0 opacity-60"
               style={{

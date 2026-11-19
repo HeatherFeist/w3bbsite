@@ -124,7 +124,7 @@ const AssessmentPage: React.FC = () => {
         </fieldset>
       )}
 
-      <div className="sticky bottom-4 z-20 mt-8 flex flex-col-reverse gap-3 rounded-2xl border border-white/10 bg-[#07080C]/90 p-3 backdrop-blur sm:flex-row sm:justify-between">
+      <div className="sticky bottom-4 z-20 mt-8 flex flex-col-reverse gap-3 rounded-2xl border border-white/10 bg-[#16141a]/90 p-3 backdrop-blur sm:flex-row sm:justify-between">
         <button
           type="button"
           className="rounded-full border border-white/15 px-5 py-3 text-sm font-semibold text-white/85 hover:border-white/30"

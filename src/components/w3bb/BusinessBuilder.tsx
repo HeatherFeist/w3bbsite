@@ -26,9 +26,9 @@ export const BusinessBuilder: React.FC = () => {
           <Reveal as="li" key={step.n} delay={i * 70} className="relative block">
             <Link
               to={step.to}
-              className="group flex items-center gap-5 rounded-2xl py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-[#07080C] sm:gap-8"
+              className="group flex items-center gap-5 rounded-2xl py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-[#16141a] sm:gap-8"
             >
-              <span className="relative z-10 grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-white/10 bg-[#0B0D14] font-display text-base font-semibold text-white/80 transition-all duration-500 group-hover:border-cyan/50 group-hover:text-white sm:h-[72px] sm:w-[72px] sm:text-xl">
+              <span className="relative z-10 grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-white/10 bg-[#1e1b24] font-display text-base font-semibold text-white/80 transition-all duration-500 group-hover:border-cyan/50 group-hover:text-white sm:h-[72px] sm:w-[72px] sm:text-xl">
                 <span
                   className="absolute inset-0 rounded-2xl bg-gradient-to-br from-violet/25 to-cyan/15 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                   aria-hidden="true"

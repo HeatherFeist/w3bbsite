@@ -10,13 +10,13 @@ export const Hero: React.FC = () => {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[100svh] items-center overflow-hidden pt-28 pb-20 sm:pt-32"
+      className="relative flex min-h-[92svh] items-end overflow-hidden pb-16 pt-28 sm:pb-24"
     >
       <img
         src={IMAGES.heroAura}
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 w-[130%] max-w-none -translate-x-1/2 -translate-y-1/2 opacity-45 mix-blend-screen sm:w-[110%]"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[center_30%]"
         loading="eager"
         decoding="async"
       />
@@ -24,27 +24,23 @@ export const Hero: React.FC = () => {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(60% 50% at 50% 45%, rgba(7,8,12,0.35), rgba(7,8,12,0.85) 78%)',
+            'radial-gradient(120% 90% at 70% 20%, rgba(107,78,158,0.35), transparent 55%), linear-gradient(180deg, rgba(22,20,26,0.55) 0%, rgba(22,20,26,0.3) 30%, rgba(22,20,26,0.82) 72%, #16141a 100%)',
         }}
         aria-hidden="true"
       />
 
       <div className="container relative">
-        <div className="mx-auto max-w-4xl text-center">
+        <div className="max-w-3xl text-left">
           <Reveal>
-            <span className="glass-soft inline-flex items-center gap-2.5 rounded-full px-4 py-2">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan opacity-75" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan" />
-              </span>
-              <span className="micro-label text-white/75">{HERO.eyebrow}</span>
+            <span className="micro-label inline-flex items-center gap-3 text-gold before:h-px before:w-6 before:bg-gold before:opacity-70">
+              {HERO.eyebrow}
             </span>
           </Reveal>
 
-          <h1 className="mt-8 font-display font-semibold leading-[0.92] tracking-[-0.045em] text-white">
+          <h1 className="mt-6 font-display uppercase leading-[1.02] text-white">
             {HERO.headlineLines.map((line, i) => (
               <Reveal key={line} delay={120 + i * 110} as="span" className="block">
-                <span className="block text-[3.4rem] sm:text-[5.5rem] lg:text-[7.5rem]">
+                <span className="block text-[3.2rem] sm:text-[5rem] lg:text-[6.2rem]">
                   {i === 2 ? <span className="gradient-text">{line}</span> : line}
                 </span>
               </Reveal>
@@ -52,17 +48,17 @@ export const Hero: React.FC = () => {
           </h1>
 
           <Reveal delay={460}>
-            <p className="mx-auto mt-6 max-w-2xl font-display text-lg font-medium text-white/90 sm:text-2xl">
+            <p className="mt-6 max-w-xl font-sans text-lg font-medium text-white sm:text-2xl">
               {HERO.subheadline}
             </p>
           </Reveal>
 
           <Reveal delay={540}>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+            <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-4">
               <Link
                 to="/launch/assess"
                 onClick={() => track('cta_click', { cta: HERO.primaryCta, location: 'hero' })}
-                className="cta-primary group inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 font-display text-base font-semibold text-white sm:w-auto"
+                className="cta-primary group inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 font-sans text-base font-bold sm:w-auto"
               >
                 {HERO.primaryCta}
                 <ArrowRight
@@ -73,7 +69,7 @@ export const Hero: React.FC = () => {
               <Link
                 to="/build"
                 onClick={() => track('cta_click', { cta: HERO.secondaryCta, location: 'hero' })}
-                className="glass-soft group inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 font-display text-base font-semibold text-white/85 transition-all duration-300 hover:border-cyan/50 hover:bg-white/[0.07] hover:text-white sm:w-auto"
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-8 py-4 font-sans text-base font-bold text-white/85 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:text-gold sm:w-auto"
               >
                 {HERO.secondaryCta}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -82,7 +78,7 @@ export const Hero: React.FC = () => {
             <Link
               to="/launch"
               onClick={() => track('cta_click', { cta: 'See how Launch works', location: 'hero' })}
-              className="mt-5 inline-flex items-center gap-2 font-display text-sm font-semibold text-gold"
+              className="mt-5 inline-flex items-center gap-2 font-sans text-sm font-bold text-gold"
             >
               See how Launch works
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -90,13 +86,13 @@ export const Hero: React.FC = () => {
           </Reveal>
 
           <Reveal delay={620}>
-            <p className="mx-auto mt-6 max-w-2xl text-[0.98rem] leading-relaxed text-white/65 sm:text-lg">
+            <p className="mt-6 max-w-xl text-[1.05rem] leading-relaxed text-white/80 sm:text-lg">
               {HERO.body}
             </p>
           </Reveal>
 
           <Reveal delay={680}>
-            <p className="mt-4 font-display text-base italic sm:text-lg">
+            <p className="mt-4 font-display text-2xl uppercase text-gold sm:text-3xl">
               <span className="gradient-text">{HERO.closing}</span>
             </p>
           </Reveal>
@@ -113,7 +109,7 @@ export const Hero: React.FC = () => {
           </Reveal>
 
           <Reveal delay={800}>
-            <ul className="mx-auto mt-12 flex max-w-3xl flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+            <ul className="mt-10 flex max-w-3xl flex-wrap items-center gap-2.5 sm:gap-3">
               {HERO.stats.map((stat) => (
                 <li
                   key={stat.label}

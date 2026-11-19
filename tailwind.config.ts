@@ -27,18 +27,19 @@ export default {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         ink: {
-          DEFAULT: '#07080C',
-          soft: '#0B0D14',
+          DEFAULT: '#16141a',
+          soft: '#1e1b24',
         },
         violet: {
-          DEFAULT: '#7C4DFF',
-          soft: '#B9A6FF',
+          DEFAULT: '#6b4e9e',
+          soft: '#9a7cd0',
         },
         cyan: {
-          DEFAULT: '#22D3EE',
+          DEFAULT: '#f0c674',
         },
         gold: {
-          DEFAULT: '#F5C451',
+          DEFAULT: '#d4a24a',
+          bright: '#f0c674',
         },
         primary: {
           DEFAULT: 'hsl(var(--primary))',
@@ -81,8 +82,8 @@ export default {
       },
       fontFamily: {
         mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['Space Grotesk', 'Inter', 'ui-sans-serif', 'sans-serif'],
+        sans: ['Archivo', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['Anton', 'Archivo', 'ui-sans-serif', 'sans-serif'],
       },
       borderRadius: {
         lg: 'calc(var(--radius) + 2px)',

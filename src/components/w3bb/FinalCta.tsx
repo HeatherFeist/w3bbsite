@@ -9,7 +9,7 @@ export const FinalCta: React.FC = () => (
   <section className="relative py-20 sm:py-28">
     <div className="container">
       <div className="grad-border relative overflow-hidden rounded-[2rem] p-[1.5px]">
-        <div className="relative overflow-hidden rounded-[1.95rem] bg-[#0B0D14] px-6 py-20 text-center sm:px-12 sm:py-28">
+        <div className="relative overflow-hidden rounded-[1.95rem] bg-[#1e1b24] px-6 py-20 text-center sm:px-12 sm:py-28">
           <img
             src={IMAGES.ribbon}
             alt=""

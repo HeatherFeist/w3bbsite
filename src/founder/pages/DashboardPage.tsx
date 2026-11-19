@@ -174,7 +174,7 @@ const DashboardPage: React.FC = () => {
           >
             <label htmlFor="weekly-goal" className="sr-only">Weekly goal</label>
             <input id="weekly-goal" className="w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white" value={goal} onChange={(event) => setGoal(event.target.value)} placeholder="One goal for this week" />
-            <button type="submit" className="rounded-full bg-white px-4 py-3 text-sm font-semibold text-[#07080C]">Add</button>
+            <button type="submit" className="rounded-full bg-white px-4 py-3 text-sm font-semibold text-[#16141a]">Add</button>
           </form>
           <ul className="mt-3 space-y-2">
             {weekGoals.length === 0 ? <li className="text-sm text-white/70">No goal for this week yet.</li> : weekGoals.map((item) => (

@@ -81,7 +81,7 @@ const MatchesPage: React.FC = () => {
                   <div><dt className="text-white/70">Budget</dt><dd className="text-white/90">{match.budgetBand}</dd></div>
                   <div><dt className="text-white/70">Revenue potential</dt><dd className="text-white/90">{match.revenuePotential}</dd></div>
                 </dl>
-                <span className="mt-5 inline-flex rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-[#07080C]">
+                <span className="mt-5 inline-flex rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-[#16141a]">
                   {selected ? 'Open this blueprint' : 'Choose and open the blueprint'}
                 </span>
               </CardLink>

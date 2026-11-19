@@ -17,7 +17,7 @@ export const PageShell: React.FC<PageShellProps> = ({ children }) => {
       <Backdrop />
       <a
         href="#main"
-        className="sr-only rounded-full bg-white px-4 py-2 font-display text-sm font-semibold text-[#07080C] focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60]"
+        className="sr-only rounded-full bg-white px-4 py-2 font-display text-sm font-semibold text-[#16141a] focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60]"
       >
         Skip to content
       </a>

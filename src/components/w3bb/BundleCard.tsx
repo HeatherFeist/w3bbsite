@@ -10,7 +10,7 @@ interface BundleCardProps {
  */
 export const BundleCard: React.FC<BundleCardProps> = ({ statusLabel = 'Minted' }) => (
   <div className="grad-border relative mx-auto w-full max-w-sm rounded-[1.75rem] p-[1.5px]">
-    <div className="glass relative overflow-hidden rounded-[1.7rem] bg-[#0B0D14]/85 p-6 sm:p-7">
+    <div className="glass relative overflow-hidden rounded-[1.7rem] bg-[#1e1b24]/85 p-6 sm:p-7">
       <span
         className="pointer-events-none absolute -left-16 -top-16 h-52 w-52 rounded-full bg-violet/30 blur-3xl"
         aria-hidden="true"
@@ -40,9 +40,9 @@ export const BundleCard: React.FC<BundleCardProps> = ({ statusLabel = 'Minted' }
         >
           <defs>
             <linearGradient id="w3bb-hex" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#7C4DFF" />
-              <stop offset="55%" stopColor="#22D3EE" />
-              <stop offset="100%" stopColor="#F5C451" />
+              <stop offset="0%" stopColor="#6b4e9e" />
+              <stop offset="55%" stopColor="#f0c674" />
+              <stop offset="100%" stopColor="#d4a24a" />
             </linearGradient>
             <filter id="w3bb-glow" x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur stdDeviation="6" result="b" />
