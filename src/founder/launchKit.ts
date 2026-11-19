@@ -17,7 +17,7 @@ const MARK: Record<string, string> = {
   sustainability: 'a canopy curve',
 };
 
-const PALETTE = 'Ink #07080C, violet #7C4DFF, cyan #22D3EE, and gold #F5C451 — the palette already used on this site.';
+const PALETTE = 'Ink #16141a, violet #6b4e9e, cyan #f0c674, and gold #d4a24a — the palette already used on this site.';
 
 function slug(name: string): string {
   const compact = name.toLowerCase().replace(/[^a-z0-9]+/g, '');

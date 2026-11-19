@@ -157,7 +157,7 @@ export const Contact: React.FC = () => {
                       }}
                     >
                       {CONTACT.interests.map((option) => (
-                        <option key={option} value={option} className="bg-[#0B0D14] text-white">
+                        <option key={option} value={option} className="bg-[#1e1b24] text-white">
                           {option}
                         </option>
                       ))}

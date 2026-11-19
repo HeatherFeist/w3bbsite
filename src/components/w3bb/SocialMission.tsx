@@ -18,7 +18,7 @@ export const SocialMission: React.FC = () => (
       className="pointer-events-none absolute inset-0"
       style={{
         background:
-          'linear-gradient(to bottom, #07080C 0%, rgba(7,8,12,0.55) 40%, rgba(7,8,12,0.75) 70%, #07080C 100%)',
+          'linear-gradient(to bottom, #16141a 0%, rgba(7,8,12,0.55) 40%, rgba(7,8,12,0.75) 70%, #16141a 100%)',
       }}
       aria-hidden="true"
     />

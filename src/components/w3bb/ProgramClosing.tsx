@@ -27,7 +27,7 @@ export const ProgramClosing: React.FC<ProgramClosingProps> = ({
           to={ctaHref}
           className={
             accent === 'gold'
-              ? 'group mt-9 inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 font-display text-sm font-semibold text-[#07080C] transition-colors hover:bg-gold/90'
+              ? 'group mt-9 inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 font-display text-sm font-semibold text-[#16141a] transition-colors hover:bg-gold/90'
               : 'cta-primary group mt-9 inline-flex items-center gap-2 rounded-full px-7 py-3.5 font-display text-sm font-semibold text-white'
           }
         >

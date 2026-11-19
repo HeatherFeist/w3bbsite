@@ -147,7 +147,7 @@ const PartnerServices: React.FC = () => {
                   className={`glass relative h-full p-7 ${pkg.tone === 'gold' ? 'ring-2 ring-gold/40' : ''} ${pkg.tone === 'featured' ? 'rounded-[calc(1.25rem-1.5px)]' : ''}`}
                 >
                   {pkg.tone === 'featured' ? (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-cyan px-3 py-1 font-display text-[0.65rem] font-bold uppercase tracking-wide text-[#07080C]">
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-cyan px-3 py-1 font-display text-[0.65rem] font-bold uppercase tracking-wide text-[#16141a]">
                       Most Popular
                     </span>
                   ) : null}
@@ -172,7 +172,7 @@ const PartnerServices: React.FC = () => {
                       pkg.tone === 'default'
                         ? 'glass-soft text-white/85 hover:text-white'
                         : pkg.tone === 'gold'
-                          ? 'bg-gold text-[#07080C] hover:bg-gold/90'
+                          ? 'bg-gold text-[#16141a] hover:bg-gold/90'
                           : 'cta-primary text-white'
                     }`}
                   >
@@ -311,7 +311,7 @@ const PartnerServices: React.FC = () => {
                         style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff88' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")" }}
                       >
                         {PLAN_OPTIONS.map((option) => (
-                          <option key={option} value={option} className="bg-[#0B0D14] text-white">{option}</option>
+                          <option key={option} value={option} className="bg-[#1e1b24] text-white">{option}</option>
                         ))}
                       </select>
                     </div>

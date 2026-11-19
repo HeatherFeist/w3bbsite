@@ -63,7 +63,7 @@ export function FounderNav() {
           className={({ isActive }) =>
             cn(
               'shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-colors',
-              isActive ? 'bg-white text-[#07080C]' : 'border border-white/10 text-white/75 hover:border-white/25 hover:text-white',
+              isActive ? 'bg-white text-[#16141a]' : 'border border-white/10 text-white/75 hover:border-white/25 hover:text-white',
             )
           }
         >
@@ -121,9 +121,9 @@ export function ScoreRing({ score, label }: { score: number; label: string }) {
         </text>
         <defs>
           <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#7C4DFF" />
-            <stop offset="55%" stopColor="#22D3EE" />
-            <stop offset="100%" stopColor="#F5C451" />
+            <stop offset="0%" stopColor="#6b4e9e" />
+            <stop offset="55%" stopColor="#f0c674" />
+            <stop offset="100%" stopColor="#d4a24a" />
           </linearGradient>
         </defs>
       </svg>

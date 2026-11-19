@@ -18,7 +18,7 @@ export const TrustBadge: React.FC = () => (
       <defs>
         <linearGradient id="w3bb-gold" x1="0" y1="0" x2="0.4" y2="1">
           <stop offset="0%" stopColor="#FFE9AC" />
-          <stop offset="45%" stopColor="#F5C451" />
+          <stop offset="45%" stopColor="#d4a24a" />
           <stop offset="100%" stopColor="#B98A22" />
         </linearGradient>
         <linearGradient id="w3bb-shield-fill" x1="0" y1="0" x2="1" y2="1">

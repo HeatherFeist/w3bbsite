@@ -48,7 +48,7 @@ const AccountPage = lazy(() => import("@/founder/pages/AccountPage"));
 const queryClient = new QueryClient();
 
 function PageFallback() {
-  return <div className="min-h-screen bg-[#07080C]" role="status" aria-live="polite" aria-label="Loading page" />;
+  return <div className="min-h-screen bg-[#16141a]" role="status" aria-live="polite" aria-label="Loading page" />;
 }
 
 function WalletPage({ children }: { children: ReactNode }) {

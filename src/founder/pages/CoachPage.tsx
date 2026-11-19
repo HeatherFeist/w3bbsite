@@ -61,7 +61,7 @@ const CoachPage: React.FC = () => {
           <p className="glass px-5 py-4 text-sm text-white/75">No messages yet. Try one of the prompts, or ask what to do next.</p>
         ) : (
           state.messages.map((message) => (
-            <article key={message.id} className={`max-w-3xl rounded-2xl px-5 py-4 ${message.role === 'user' ? 'ml-auto bg-white text-[#07080C]' : 'glass text-white'}`}>
+            <article key={message.id} className={`max-w-3xl rounded-2xl px-5 py-4 ${message.role === 'user' ? 'ml-auto bg-white text-[#16141a]' : 'glass text-white'}`}>
               <p className="text-xs font-medium uppercase tracking-[0.14em] opacity-70">
                 {message.role === 'user' ? 'You' : message.source === 'ai' ? 'Hosted advisor' : 'On-device advisor'}
               </p>

@@ -43,7 +43,7 @@ export const WhyW3bb: React.FC = () => (
               <React.Fragment key={stage}>
                 <li className="group flex items-center">
                   <span
-                    className="flex items-center gap-2 rounded-full border border-white/10 bg-[#0B0D14] px-3.5 py-2 transition-all duration-500 hover:border-cyan/50 hover:bg-white/[0.06] sm:px-4 sm:py-2.5"
+                    className="flex items-center gap-2 rounded-full border border-white/10 bg-[#1e1b24] px-3.5 py-2 transition-all duration-500 hover:border-cyan/50 hover:bg-white/[0.06] sm:px-4 sm:py-2.5"
                     style={{
                       boxShadow: `0 0 26px -12px rgba(${
                         i < 3 ? '124,77,255' : i < 5 ? '34,211,238' : '245,196,81'
@@ -53,7 +53,7 @@ export const WhyW3bb: React.FC = () => (
                     <span
                       className="h-1.5 w-1.5 rounded-full"
                       style={{
-                        background: i < 3 ? '#7C4DFF' : i < 5 ? '#22D3EE' : '#F5C451',
+                        background: i < 3 ? '#6b4e9e' : i < 5 ? '#f0c674' : '#d4a24a',
                       }}
                       aria-hidden="true"
                     />

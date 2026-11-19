@@ -83,7 +83,7 @@ const Ecosystem: React.FC = () => {
             {ECOSYSTEM.flow.map((step, i) => (
               <Reveal as="li" key={step} delay={i * 60} className="relative block">
                 <div className="flex items-center gap-5 py-2">
-                  <span className="relative z-10 grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/10 bg-[#0B0D14] font-display text-sm font-semibold text-white/70">
+                  <span className="relative z-10 grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/10 bg-[#1e1b24] font-display text-sm font-semibold text-white/70">
                     {i + 1}
                   </span>
                   <div className="glass flex-1 px-5 py-3.5">

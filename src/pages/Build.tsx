@@ -152,9 +152,9 @@ const Build: React.FC = () => {
               <Reveal as="li" key={step.n} delay={i * 60} className="relative block">
                 <Link
                   to={step.to}
-                  className="flex items-center gap-5 rounded-2xl py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-[#07080C] sm:gap-8"
+                  className="flex items-center gap-5 rounded-2xl py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-[#16141a] sm:gap-8"
                 >
-                  <span className="relative z-10 grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-white/10 bg-[#0B0D14] font-display text-sm font-semibold text-white/70 sm:h-14 sm:w-14 sm:text-base">
+                  <span className="relative z-10 grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-white/10 bg-[#1e1b24] font-display text-sm font-semibold text-white/70 sm:h-14 sm:w-14 sm:text-base">
                     {step.n}
                   </span>
                   <span className="glass flex flex-1 items-center justify-between gap-3 px-5 py-4 transition-colors hover:border-cyan/40">
@@ -272,7 +272,7 @@ const Build: React.FC = () => {
                       }}
                     >
                       {INDUSTRIES.map((option) => (
-                        <option key={option} value={option} className="bg-[#0B0D14] text-white">
+                        <option key={option} value={option} className="bg-[#1e1b24] text-white">
                           {option}
                         </option>
                       ))}

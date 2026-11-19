@@ -13,7 +13,7 @@ import { useFounder } from '@/founder/useFounder';
 import { usePageMeta } from '@/hooks/usePageMeta';
 
 const focus =
-  'rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-[#07080C]';
+  'rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-[#16141a]';
 
 function useChecklist(slug: string, idList: string) {
   const key = `w3bb.builder-check.${slug}`;

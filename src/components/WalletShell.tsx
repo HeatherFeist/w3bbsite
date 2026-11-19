@@ -5,7 +5,7 @@ import { WagmiProvider } from 'wagmi';
 import { wagmiConfig } from '@/lib/wagmi';
 
 const rainbowKitTheme = darkTheme({
-  accentColor: '#7C4DFF',
+  accentColor: '#6b4e9e',
   accentColorForeground: '#FFFFFF',
   borderRadius: 'large',
   overlayBlur: 'small',
