@@ -95,10 +95,8 @@ export const Navbar: React.FC = () => {
   return (
     <header
       className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-all duration-500',
-        scrolled
-          ? 'border-b border-white/10 bg-[#07080C]/80 backdrop-blur-xl supports-[backdrop-filter]:bg-[#07080C]/65'
-          : 'border-b border-transparent bg-transparent',
+        'fixed inset-x-0 top-0 z-50 border-b bg-[#16141a] transition-colors duration-300',
+        scrolled ? 'border-white/10' : 'border-white/[0.06]',
       )}
     >
       <nav
@@ -115,7 +113,7 @@ export const Navbar: React.FC = () => {
           aria-label="W3BB Worldwide — home"
         >
           <span className="relative grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-violet via-cyan to-gold p-[1px]">
-            <span className="grid h-full w-full place-items-center rounded-[11px] bg-[#07080C] font-display text-[0.7rem] font-bold tracking-tight text-white">
+            <span className="grid h-full w-full place-items-center rounded-[11px] bg-[#16141a] font-display text-[0.7rem] font-bold tracking-tight text-white">
               W3
             </span>
           </span>
@@ -136,7 +134,7 @@ export const Navbar: React.FC = () => {
                   aria-current={isActive ? 'true' : undefined}
                   className={cn(
                     'relative rounded-full px-4 py-2 text-sm font-medium transition-colors duration-300',
-                    isActive ? 'text-white' : 'text-white/60 hover:text-white',
+                    isActive ? 'text-gold' : 'text-white/60 hover:text-gold',
                   )}
                 >
                   {link.label}
@@ -163,7 +161,7 @@ export const Navbar: React.FC = () => {
             </button>
             <div
               className={cn(
-                'absolute left-0 top-full mt-3 w-72 origin-top-left rounded-2xl border border-white/10 bg-[#0B0D14]/95 p-2 shadow-2xl backdrop-blur-xl transition-all duration-200',
+                'absolute left-0 top-full mt-3 w-72 origin-top-left rounded-xl border border-white/10 border-t-2 border-t-gold bg-[#1e1b24] p-2 shadow-2xl transition-all duration-200',
                 programsOpen ? 'visible scale-100 opacity-100' : 'invisible scale-95 opacity-0',
               )}
             >
@@ -234,7 +232,7 @@ export const Navbar: React.FC = () => {
         id="mobile-nav"
         aria-hidden={!open}
         className={cn(
-          'overflow-y-auto border-t border-white/10 bg-[#07080C]/95 backdrop-blur-xl transition-[max-height,opacity] duration-500 lg:hidden',
+          'overflow-y-auto border-t border-white/10 bg-[#16141a]/95 backdrop-blur-xl transition-[max-height,opacity] duration-500 lg:hidden',
           open ? 'max-h-[calc(100dvh-72px)] opacity-100' : 'max-h-0 overflow-hidden opacity-0',
         )}
       >

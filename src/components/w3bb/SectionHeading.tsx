@@ -15,7 +15,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   label,
   heading,
   intro,
-  align = 'center',
+  align = 'left',
   className,
   headingClassName,
 }) => {
@@ -24,15 +24,14 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
     <div className={cn('max-w-3xl', centered && 'mx-auto text-center', className)}>
       <Reveal>
         <div className={cn('flex items-center gap-3', centered && 'justify-center')}>
-          <span className="h-px w-8 gradient-rule" aria-hidden="true" />
-          <span className="micro-label gradient-text">{label}</span>
-          <span className="h-px w-8 gradient-rule" aria-hidden="true" />
+          <span className="h-px w-6 bg-gold opacity-70" aria-hidden="true" />
+          <span className="micro-label text-gold">{label}</span>
         </div>
       </Reveal>
       <Reveal delay={80}>
         <h2
           className={cn(
-            'mt-5 text-[2rem] leading-[1.08] sm:text-5xl lg:text-[3.4rem] font-semibold text-white text-balance',
+            'mt-3 text-[2.1rem] uppercase leading-[1.02] text-white sm:text-5xl lg:text-[3.4rem] text-balance',
             headingClassName,
           )}
         >
