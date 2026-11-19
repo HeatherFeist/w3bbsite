@@ -44,6 +44,9 @@ const DashboardPage = lazy(() => import("@/founder/pages/DashboardPage"));
 const FundingPage = lazy(() => import("@/founder/pages/FundingPage"));
 const CertificationsPage = lazy(() => import("@/founder/pages/CertificationsPage"));
 const AccountPage = lazy(() => import("@/founder/pages/AccountPage"));
+const ViewingHome = lazy(() => import("@/viewing/pages/ViewingHome"));
+const HostDashboard = lazy(() => import("@/viewing/pages/HostDashboard"));
+const MemorialPage = lazy(() => import("@/viewing/pages/MemorialPage"));
 
 const queryClient = new QueryClient();
 
@@ -106,6 +109,9 @@ const App = () => (
                 <Route path="/launch/funding" element={<FundingPage />} />
                 <Route path="/launch/certifications" element={<CertificationsPage />} />
                 <Route path="/launch/account" element={<AccountPage />} />
+                <Route path="/viewing" element={<ViewingHome />} />
+                <Route path="/viewing/host" element={<HostDashboard />} />
+                <Route path="/viewing/:code" element={<MemorialPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

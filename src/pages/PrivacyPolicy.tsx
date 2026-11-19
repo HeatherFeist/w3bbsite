@@ -36,6 +36,7 @@ const PrivacyPolicy: React.FC = () => {
             <Section title="Information we collect">
               <p>When you use a form on this site — Contact, Business Builder, Certification, or Enterprise — we collect what you submit: your name, email, organization (if given), and message content.</p>
               <p>If you take the founder assessment, we collect your answers and the scores calculated from them. A founder profile can include your name, story, skills, a photo you upload, and a video URL. The launch coach stores the messages you send and the replies you receive. The Business Builder notebook stores the choices you write for each step.</p>
+              <p>If you host or visit a Remote Viewer memorial, we store the obituary, schedule, condolence messages, photos you upload, links to video or audio, and notes written in the rooms. Anyone with the private link can read that memorial.</p>
               <p>When you connect a wallet on the Marketplace / mint page, we collect your public wallet address and the network (chain) it's connected to. We never ask for or have access to your private keys or seed phrase — wallet connections happen entirely in your own wallet software.</p>
               <p>We do not currently use third-party advertising trackers or sell any data to advertisers.</p>
             </Section>

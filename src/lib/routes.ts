@@ -37,6 +37,9 @@ export const APP_ROUTES = [
   '/launch/funding',
   '/launch/certifications',
   '/launch/account',
+  '/viewing',
+  '/viewing/host',
+  '/viewing/:code',
 ] as const;
 
 export function pathnameOf(href: string): string {
