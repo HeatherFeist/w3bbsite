@@ -78,7 +78,7 @@ const PartnerServices: React.FC = () => {
               </span>
             </Reveal>
             <Reveal delay={80}>
-              <h1 className="mt-7 font-display text-4xl font-semibold leading-[1.05] tracking-[-0.03em] text-white sm:text-6xl">
+              <h1 className="mt-7 font-display text-4xl font-semibold leading-[1.05] text-white sm:text-6xl">
                 Your U.S. Presence, <span className="gradient-text">Powered by W3BB</span>
               </h1>
             </Reveal>
