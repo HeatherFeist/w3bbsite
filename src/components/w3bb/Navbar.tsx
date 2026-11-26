@@ -19,7 +19,7 @@ const ECOSYSTEM_MENU = [
 export const Wordmark: React.FC<{ className?: string }> = ({ className }) => (
   <span
     className={cn(
-      'font-display text-2xl font-bold tracking-[-0.04em] leading-none',
+      'font-display text-2xl font-bold tracking-[-0.01em] leading-none',
       className,
     )}
   >

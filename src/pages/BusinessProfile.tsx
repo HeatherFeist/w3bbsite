@@ -62,7 +62,7 @@ const BusinessProfile: React.FC = () => {
               </span>
             </Reveal>
             <Reveal delay={120}>
-              <h1 className="mt-6 font-display text-4xl font-semibold leading-[1.05] tracking-[-0.03em] text-white sm:text-5xl">
+              <h1 className="mt-6 font-display text-4xl font-semibold leading-[1.05] text-white sm:text-5xl">
                 {business.name}
               </h1>
             </Reveal>

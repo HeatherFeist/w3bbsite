@@ -29,7 +29,7 @@ export const FinalCta: React.FC = () => (
           <div className="mesh-grid mesh-fade pointer-events-none absolute inset-0 opacity-50" />
 
           <div className="relative mx-auto max-w-3xl">
-            <h2 className="font-display text-[2.1rem] font-semibold leading-[1.06] tracking-[-0.04em] text-white sm:text-6xl lg:text-[4.25rem]">
+            <h2 className="font-display text-[2.1rem] font-semibold leading-[1.06] text-white sm:text-6xl lg:text-[4.25rem]">
               {FINAL_CTA.lines.map((line, i) => (
                 <Reveal key={line} as="span" delay={i * 110} className="block">
                   <span className="block">

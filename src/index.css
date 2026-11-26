@@ -90,7 +90,7 @@
   }
 
   h1, h2 {
-    @apply font-display uppercase tracking-tight;
+    @apply font-display uppercase;
     font-weight: 400;
     line-height: 1.02;
   }
@@ -160,7 +160,7 @@
 
   .gradient-text {
     color: #f0c674;
-    text-shadow: 0 0 18px rgba(240, 198, 116, 0.45);
+    text-shadow: 0 0 2px rgba(240, 198, 116, 0.25);
   }
 
   .gradient-text-gold {

@@ -21,7 +21,7 @@ const NotFound: React.FC = () => {
               <Compass className="h-4 w-4 text-cyan" strokeWidth={1.5} aria-hidden="true" />
               <span className="micro-label text-white/75">404</span>
             </span>
-            <h1 className="mt-8 font-display text-4xl font-semibold tracking-[-0.03em] text-white sm:text-6xl">
+            <h1 className="mt-8 font-display text-4xl font-semibold text-white sm:text-6xl">
               This page hasn't been <span className="gradient-text">built</span> yet.
             </h1>
             <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-white/65 sm:text-lg">
